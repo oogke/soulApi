@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('adven_acts', function (Blueprint $table) {
+            $table->id();
+            $table->string('name'); 
+            $table->foreignId('district_id')->constrained()->onDelete('cascade')->onUpdate('cascade');  
+            $table->text('description'); 
+            $table->decimal('price', 8, 2); 
+            $table->decimal('duration', 5, 2); 
+            $table->json('requirements')->nullable();
+            $table->json('images')->nullable();
+            $table->boolean('is_seasonal')->default(false);
+            $table->string('best_season')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('adven_acts');
+    }
+};
