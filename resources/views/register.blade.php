@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <title>Register</title>
+  <style>
+    #register-popup {
+      width: 300px;
+      height: 300px;
+      margin: auto;
+      flex-direction: column;
+      border-radius: 5px;
+      padding: 20px 50px 50px 25px;
+      position: fixed;
+      left: 35%;
+      top: 110px;
+      outline: none;
+      font-family: 'Arial', sans-serif;
+      border: 2px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0px 0px 30px rgba(227, 228, 237, 0.37);
+      backdrop-filter: blur(10px);
+    }
+
+    .registerBtn {
+      width: 100%;
+      height: 40px;
+      background-color: blue;
+      color: white;
+      font-size: 24px;
+      margin-bottom: 15px;
+      outline: none;
+      border-radius: 10px;
+    }
+
+
+    .popup input {
+      width: 100%;
+      margin-bottom: 27px;
+      background-color: transparent;
+      border: none;
+      border-bottom: 1px solid #30475e;
+      border-radius: 0px;
+      padding: 2px 0;
+      font-size: 12px;
+
+    }
+
+    .popup input::placeholder {
+      font-size: 20px;
+    }
+
+
+    .popup h2 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      color: #30475e;
+      border: none;
+      background-color: transparent;
+      outline: none;
+      font-size: 18px;
+      font-weight: 550;
+
+    }
+
+    .reset-heading {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .popup-heading {
+      font-size: 30px;
+    }
+
+    .register input::placeholder {
+      color: black;
+      font-family: 'Arial', sans-serif;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      letter-spacing: 1px;
+      opacity: 0.5;
+      text-indent: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="register popup" id="register-popup">
+
+    <h2 class="reset-heading">
+      <span class="popup-heading">Register</span>
+    </h2>
+    <input type="text" placeholder="firstname" id="fname" name="firstname">
+    <input type="text" placeholder="lastname" id="lname" name="lastname">
+    <input type="email" placeholder="email" id="email" name="email">
+    <input type="password" placeholder="Password" id="password" name="password">
+    <button class="registerBtn" name="register" id="register-btn">Register</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
+    <script>
+ 
+
+const register=document.getElementById('register-btn');
+register.addEventListener('click',function(event)
+{
+  event.preventDefault();
+const firstnameValue=document.getElementById('fname').value;
+const lastnameValue=document.getElementById('lname').value;
+const emailValue=document.getElementById('email').value;
+const passwordValue=document.getElementById('password').value;
+const registerData= {
+  firstname:firstnameValue,
+  lastname:lastnameValue,
+  email:emailValue,
+  password:passwordValue
+};
+
+fetch('/api/register',{
+  method: "POST",
+  body: JSON.stringify(registerData),
+  headers:{
+    'Content-Type':'application/json'
+  }
+}).then(response=>{
+return response.json();
+
+}).then(data=>
+{ 
+//     console.log(data);
+// //   if(data.status == true && data.message =="User Created Successfully")
+// // {
+  window.location.href="/loginView";
+// }
+} ).catch(err=>{
+  console.log(err);
+})
+});
+    </script>
+</body>
+
+</html>

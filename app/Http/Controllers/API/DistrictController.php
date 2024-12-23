@@ -40,7 +40,7 @@ class DistrictController extends BaseController
      */
     public function update(Request $request, string $id)
     {
-        //
+        
     }
 
     /**
@@ -48,6 +48,6 @@ class DistrictController extends BaseController
      */
     public function destroy(string $id)
     {
-        //
+        
     }
 }
