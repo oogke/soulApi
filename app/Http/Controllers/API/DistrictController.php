@@ -3,16 +3,19 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\District;
 use Illuminate\Http\Request;
 
-class DistrictController extends Controller
+
+class DistrictController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $data= District::all();
+        return $this->sendResponse($data,"all Districts");
     }
 
     /**
@@ -20,15 +23,16 @@ class DistrictController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $district)
     {
-        //
+        $district =District::all()->where('name',$district);
+        return $this->sendResponse($district,'Single District');
     }
 
     /**
