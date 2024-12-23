@@ -44,12 +44,7 @@ $validateData = Validator::make(
     );
     if($validateData->fails())
     {
-        return response()->json([
-'status' => false,
-'message' => 'Validation Error',
-'errors' => $validateData->errors()->all()
-        ]
-    ,401);
+     return $this->sendError('Validation Error', $validateData->errors()->all(),307);
     } 
     
     
