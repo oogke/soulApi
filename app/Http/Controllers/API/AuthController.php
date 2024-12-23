@@ -10,78 +10,78 @@ class AuthController extends BaseController
 {
     public function signup(Request $request)
     {
-$validateData=Validator::make(
-    $request->all(),[
-        'firstname' => 'required|alpha',
-        'lastname' => 'required|alpha',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:6'
+        $validateData = Validator::make(
+            $request->all(),
+            [
+                'firstname' => 'required|alpha',
+                'lastname' => 'required|alpha',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:6'
 
-    ]);
-    if($validateData->fails())
-    {   
-  return $this->sendError("Validation Error",$validateData->errors()->all(),307);
-    }
-$user =User::create([
-'firstname'=>$request->firstname,
-'lastname'=>$request->lastname,
-'email'=>$request->email,
-'password'=>$request->password
-]);
+            ]
+        );
+        if ($validateData->fails()) {
+            return $this->sendError("Validation Error", $validateData->errors()->all(), 307);
+        }
+        $user = User::create([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
 
-return $this->sendResponse($user,'user registered successfully');
+        return $this->sendResponse($user, 'user registered successfully');
     }
 
 
     public function login(Request $request)
     {
-   
-$validateData = Validator::make(
-    $request->all(),[
-'email' =>'required|email',
-'password' => 'required|min:6'
-    ]
-    );
-    if($validateData->fails())
-    {
-     return $this->sendError('Validation Error', $validateData->errors()->all(),307);
-    } 
-    
-    
-    if(Auth::attempt(['email'=>$request->email,'password'=>$request->password]))
-    {
-$authuser =Auth::user();
-return response()->json(
-    [
-'status' => true,
-'message'=> 'Login successful',
-'token'=>$authuser->createToken("api_token")->plainTextToken,
-'token_type'=>'bearer'
-    ],200
-);
-    }
-    else{
-        return response()->json([
-'status' => false,
-'message'=> 'Email or Password wrong',
 
-        ],404);
-    }
+        $validateData = Validator::make(
+            $request->all(),
+            [
+                'email' => 'required|email',
+                'password' => 'required|min:6'
+            ]
+        );
+        if ($validateData->fails()) {
+            return $this->sendError('Validation Error', $validateData->errors()->all(), 307);
+        }
+
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $authuser = Auth::user();
+            return response()->json(
+                [
+                    'status' => true,
+                    'message' => 'Login successful',
+                    'token' => $authuser->createToken("api_token")->plainTextToken,
+                    'token_type' => 'bearer'
+                ],
+                200
+            );
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Email or Password wrong',
+
+            ], 404);
+        }
 
     }
 
-   
+
 
     public function logout(Request $request)
     {
-$user= $request->user();
-$user->tokens()->delete();
+        $user = $request->user();
+        $user->tokens()->delete();
 
-return response()->json([
-    'status' => true,
-    'message'=> 'Logged out successful',
-    'user'=> $user
-],200);
+        return response()->json([
+            'status' => true,
+            'message' => 'Logged out successful',
+            'user' => $user
+        ], 200);
 
 
 
