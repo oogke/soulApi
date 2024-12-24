@@ -22,27 +22,57 @@
            margin-bottom: 20px;
         
         }
+        #exampleInputCategory
+        {
+          margin-right: 20px;
+        }
     </style>
 </head>
 <body>
     
 <form>
     <h1>Insert District</h1>
-  <div class="mb-3" id="formDiv">
-    <label for="exampleInputDistricts" class="form-label">District</label>
-    <input type="email" class="form-control" id="exampleInputDistricts" aria-describedby="emailHelp">
+    <div class="mb-3">
+    <label for="exampleInputName" class="form-label">Name</label>
+    <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp">
   </div>
-
-  <div class="mb-3">
-    <label for="exampleInputProvince" class="form-label">Province</label>
-    <input type="password" class="form-control" id="exampleInputProvince">
-  </div>
-  <div class="mb-3">
+  <div class="mb-3" >
     <label for="exampleInputDescription" class="form-label">Description</label>
-    <input type="password" class="form-control" id="exampleInputDescription">
+    <input type="text" class="form-control" id="exampleInputDescription" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3" >
+    <label for="exampleInputLocation" class="form-label">Location</label>
+    <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3" id="categoryCheckbox">
+    <h4>Category</h4>
+    <label for="exampleInputCategory" class="form-label">Picnic Spot</label>
+    <input  type="checkbox" class="form-check-input" id="exampleInputCategory" aria-describedby="emailHelp">
+    <label for="exampleInputCategory" class="form-label">Temple</label>
+    <input  type="checkbox" class="form-check-input" id="exampleInputCategory" aria-describedby="emailHelp">
+  </div>
+   <div class="mb-3">
+    <label for="exampleImages" class="form-label">Images</label>
+    <input type="file" class="form-control" id="exampleImages" aria-describedby="emailHelp">
   </div>
   <button type="submit" class="btn btn-success">Submit</button>
 </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script>
+      $categoryData=` <h4>Category</h4>`;
+      const categoryDiv= document.getElementById("categoryCheckbox");
+      const token =localStorage.getItem('token');
+      function loadData()
+      {
+
+        fetch('/api/category',{
+           method: "GET",
+          headers:{
+            "Authorization" : `Bearer ${token}`
+          }
+        }).then(response=>{return response.json();}).then(data=>console.log(data));
+      }
+loadData();
+    </script>
 </body>
 </html>

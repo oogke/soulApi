@@ -28,56 +28,56 @@
     
 <form>
     <h1>Insert District</h1>
-    <div class="mb-3" id="formDiv">
+    <div class="mb-3">
     <label for="exampleInputName" class="form-label">Name</label>
     <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputDescription" class="form-label">Description</label>
     <input type="text" class="form-control" id="exampleInputDescription" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputLocation" class="form-label">Location</label>
     <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputCategory" class="form-label">Category</label>
     <input type="text" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputOrganizer" class="form-label">Organizer</label>
     <input type="text" class="form-control" id="exampleInputOrganizer" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputTicketPrice" class="form-label">Ticket Price</label>
     <input type="text" class="form-control" id="exampleInputTicketPrice" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputSdate" class="form-label">Start Date</label>
     <input type="date" class="form-control" id="exampleInputSdate" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputEdate" class="form-label">End Date</label>
     <input type="date" class="form-control" id="exampleInputEdate" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputStime" class="form-label">Start Time</label>
     <input type="time" class="form-control" id="exampleInputStime" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputEtime" class="form-label">End Time</label>
     <input type="time" class="form-control" id="exampleInputEtime" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputPhone" class="form-label">Phone</label>
     <input type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputEmail" class="form-label">Email</label>
     <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
   </div>
 
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleImages" class="form-label">Images</label>
     <input type="file" class="form-control" id="exampleImages" aria-describedby="emailHelp">
   </div>

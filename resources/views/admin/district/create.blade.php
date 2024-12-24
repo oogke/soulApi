@@ -28,7 +28,7 @@
     
 <form>
     <h1>Insert District</h1>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputDistricts" class="form-label">District</label>
     <input type="email" class="form-control" id="exampleInputDistricts" aria-describedby="emailHelp">
   </div>

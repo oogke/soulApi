@@ -28,52 +28,52 @@
     
 <form>
     <h1>Insert adventure</h1>
-    <div class="mb-3" id="formDiv">
+    <div class="mb-3">
     <label for="exampleInputName" class="form-label">Name</label>
     <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputDescription" class="form-label">Description</label>
     <input type="text" class="form-control" id="exampleInputDescription" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputLocation" class="form-label">Location</label>
     <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputPhone" class="form-label">Phone</label>
     <input type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputPhone" class="form-label">Price</label>
     <input type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputPhone" class="form-label">Duration</label>
     <input type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputPhone" class="form-label">Requirements</label>
     <input type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputPhone" class="form-label">Is_seasonal</label>
     <input type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputPhone" class="form-label">Best Season</label>
     <input type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp">
   </div>
 
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputEmail" class="form-label">Email</label>
     <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputWebsites" class="form-label">Websites</label>
     <input type="text" class="form-control" id="exampleInputWebsites" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleImages" class="form-label">Images</label>
     <input type="file" class="form-control" id="exampleImages" aria-describedby="emailHelp">
   </div>

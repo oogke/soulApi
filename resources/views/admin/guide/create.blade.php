@@ -28,60 +28,60 @@
     
 <form>
     <h1>Insert Guides Details</h1>
-    <div class="mb-3" id="formDiv">
+    <div class="mb-3">
     <label for="exampleInputFirstname" class="form-label">First Name</label>
     <input type="text" class="form-control" id="exampleInputFirstname" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputLastname" class="form-label">Last Name</label>
     <input type="text" class="form-control" id="exampleInputLastname" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputAddress" class="form-label">Address</label>
     <input type="text" class="form-control" id="exampleInputAddress" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputPhone" class="form-label">Phone</label>
     <input type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputdob" class="form-label">Date of Birth</label>
     <input type="text" class="form-control" id="exampleInputdob" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputCountry" class="form-label">Country</label>
     <input type="text" class="form-control" id="exampleInputCountry" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputLanguages" class="form-label">Languages</label>
     <input type="text" class="form-control" id="exampleInputLanguages" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputEmail" class="form-label">Email</label>
     <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputWebsites" class="form-label">Websites</label>
     <input type="text" class="form-control" id="exampleInputWebsites" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleProfile" class="form-label">Profile</label>
     <input type="file" class="form-control" id="exampleProfile" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleCV" class="form-label">CV</label>
     <input type="file" class="form-control" id="exampleCV" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="Citizenship card" class="form-label">Citizenship Card</label>
     <input type="file" class="form-control mb-3" id="exampleFront" aria-describedby="emailHelp">
     <input type="file" class="form-control" id="exampleBack" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleCertificates" class="form-label">Certificates</label>
     <input type="file" class="form-control" id="exampleCertificates" aria-describedby="emailHelp">
   </div>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleTourismCertificate" class="form-label">Tourism Certificate</label>
     <input type="file" class="form-control" id="exampleTourismCertificate" aria-describedby="emailHelp">
   </div>

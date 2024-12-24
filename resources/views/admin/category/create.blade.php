@@ -28,7 +28,7 @@
     
 <form>
     <h1>Insert category</h1>
-  <div class="mb-3" id="formDiv">
+  <div class="mb-3">
     <label for="exampleInputCategory" class="form-label">Category</label>
     <input type="email" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp">
   </div>
