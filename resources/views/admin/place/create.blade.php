@@ -24,7 +24,7 @@
         }
         #exampleInputCategory
         {
-          margin-right: 20px;
+          margin-right: 12px;
         }
     </style>
 </head>
@@ -45,22 +45,20 @@
     <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp">
   </div>
   <div class="mb-3" id="categoryCheckbox">
-    <h4>Category</h4>
-    <label for="exampleInputCategory" class="form-label">Picnic Spot</label>
-    <input  type="checkbox" class="form-check-input" id="exampleInputCategory" aria-describedby="emailHelp">
-    <label for="exampleInputCategory" class="form-label">Temple</label>
-    <input  type="checkbox" class="form-check-input" id="exampleInputCategory" aria-describedby="emailHelp">
+   
+   
   </div>
    <div class="mb-3">
     <label for="exampleImages" class="form-label">Images</label>
     <input type="file" class="form-control" id="exampleImages" aria-describedby="emailHelp">
   </div>
-  <button type="submit" class="btn btn-success">Submit</button>
+  <button type="submit" class="btn btn-success" id="submitBtn">Submit</button>
 </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script>
-      $categoryData=` <h4>Category</h4>`;
+      let categoryData=` <h4>Category</h4>`;
       const categoryDiv= document.getElementById("categoryCheckbox");
+      const submitBtn= document.getElementById("submitBtn");
       const token =localStorage.getItem('token');
       function loadData()
       {
@@ -70,9 +68,50 @@
           headers:{
             "Authorization" : `Bearer ${token}`
           }
-        }).then(response=>{return response.json();}).then(data=>console.log(data));
+        }).then(response=>{return response.json();}).then(data=>
+        {
+        const categoryArray= data.data;
+        for(category of categoryArray)
+        {
+         let categoryName=category.category;
+        
+         categoryData+=`
+           <label for="exampleInputCategory" class="form-label">${categoryName}</label>
+    <input type="checkbox" class="form-check-input" id="exampleInputCategory" aria-describedby="emailHelp" name="category[]" value="${categoryName}">
+         `;
+        }
+        categoryDiv.innerHTML=categoryData;
+          });
       }
 loadData();
+
+
+submitBtn.addEventListener("click",function(event)
+{
+const token =localStorage.getItem('token');
+event.preventDefault();
+const checkedBox=document.querySelectorAll('#categoryCheckbox input:checked');
+const nameValue=document.getElementById("exampleInputName").value;
+const descriptionValue=document.getElementById("exampleInputDescription").value;
+const locationValue=document.getElementById("exampleInputLocation").value;
+let category= new Array();
+for(input of checkedBox){
+  category.push(input.value);
+}
+const placeData={
+  name: nameValue,
+  description: descriptionValue,
+  location: locationValue,
+  category: category
+}
+fetch('/api/places',{
+  method:"POST",
+  headers:{
+    "Authorization":`Bearer ${token}`
+  }
+}).then(response=>console.log(response););
+});
+
     </script>
 </body>
 </html>
