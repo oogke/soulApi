@@ -24,12 +24,13 @@ class PlaceController extends BaseController
      */
     public function store(Request $request)
     {
-       
+      
         $validatePlace=Validator::make($request->all(),[
            'name' =>'required',
             'description' =>'required',
             'location'=>'required',
-            'category'=>'required|array'
+            'category'=>'required|array',
+            'district'=> 'required'
         ]);
         if($validatePlace->fails())
         {
@@ -41,7 +42,8 @@ $places= Place::create([
 'name' => $request->name,
 'description'=> $request->description,
 'location' => $request->location,
-'category'=> json_encode($request->category)
+'category'=> json_encode($request->category),
+'district'=> $request->district
 ]);
 
 return $this->sendResponse($places,"Your logic work");

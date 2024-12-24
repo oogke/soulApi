@@ -44,6 +44,10 @@
     <label for="exampleInputLocation" class="form-label">Location</label>
     <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp">
   </div>
+  <div class="mb-3">
+    <label for="exampleInputDistrict" class="form-label">District</label>
+    <input type="text" class="form-control" id="exampleInputDistrict" aria-describedby="emailHelp">
+  </div>
   <div class="mb-3" id="categoryCheckbox">
    
    
@@ -94,6 +98,7 @@ const checkedBox=document.querySelectorAll('#categoryCheckbox input:checked');
 const nameValue=document.getElementById("exampleInputName").value;
 const descriptionValue=document.getElementById("exampleInputDescription").value;
 const locationValue=document.getElementById("exampleInputLocation").value;
+const DistrictValue=document.getElementById("exampleInputDistrict").value;
 let category= new Array();
 for(input of checkedBox){
   category.push(input.value);
@@ -103,7 +108,7 @@ const placeData={
   description: descriptionValue,
   location: locationValue,
   category: category,
-  district_id: 3
+  district:DistrictValue
 }
 
 console.log(JSON.stringify(placeData));
@@ -115,11 +120,14 @@ fetch('/api/places',{
 
   },
   body:JSON.stringify(placeData)
-}).then(response=>{console.log(response);});
-// return response.json();
-// .then(data=>{
-//   console.log(data);
-// });
+}).then(response=>{return response.json();})
+
+.then(data=>{
+ if(data.status==true)
+ {
+  window.location.href="/";
+ }
+});
 });
 
     </script>
