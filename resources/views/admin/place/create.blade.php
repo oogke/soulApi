@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/c5a4938a4c.js" crossorigin="anonymous"></script>  
+
     <title>District Create</title>
     <style>
         form
@@ -25,6 +27,12 @@
         #exampleInputCategory
         {
           margin-right: 12px;
+        }
+        #addImageInput{
+          margin-left: 20px;
+          cursor: pointer;
+          font-size: 25px;
+          margin-top: 10px;
         }
     </style>
 </head>
@@ -50,23 +58,33 @@
   </div>
   <div class="mb-3" id="categoryCheckbox">
    
-   
+    
   </div>
    <div class="mb-3">
-    <label for="exampleImages" class="form-label">Images</label>
-    <input type="file" class="form-control" id="exampleImages" aria-describedby="emailHelp">
+    <label for="exampleImages" class="form-label">Images</label><i class="fa-regular fa-images" id="addImageInput"></i>
+    <div  id="imageinput">
+    </div>
+ 
   </div>
   <button type="submit" class="btn btn-success" id="submitBtn">Submit</button>
 </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script>
+    
+const addImage =document.getElementById("addImageInput");
+const imageinputDiv =document.getElementById("imageinput");
+addImage.addEventListener("click",function(event){
+event.preventDefault();
+imageinputDiv.innerHTML+=`
+<input type="file" class="form-control mb-3" id="exampleImages" aria-describedby="emailHelp" name="image[]"> 
+`;
+});
       let categoryData=` <h4>Category</h4>`;
       const categoryDiv= document.getElementById("categoryCheckbox");
       const submitBtn= document.getElementById("submitBtn");
       const token =localStorage.getItem('token');
       function loadData()
       {
-
         fetch('/api/category',{
            method: "GET",
           headers:{
@@ -87,8 +105,6 @@
         categoryDiv.innerHTML=categoryData;
           });
       }
-loadData();
-
 
 submitBtn.addEventListener("click",function(event)
 {
@@ -99,37 +115,48 @@ const nameValue=document.getElementById("exampleInputName").value;
 const descriptionValue=document.getElementById("exampleInputDescription").value;
 const locationValue=document.getElementById("exampleInputLocation").value;
 const DistrictValue=document.getElementById("exampleInputDistrict").value;
-let category= new Array();
-for(input of checkedBox){
-  category.push(input.value);
-}
-const placeData={
-  name: nameValue,
-  description: descriptionValue,
-  location: locationValue,
-  category: category,
-  district:DistrictValue
+const imageSent= document.querySelectorAll('input[name="image[]"]');
+const imageValue=new Array();
+
+const formData= new FormData();
+for(let imageInput of imageSent)
+{
+  formData.append("image[]",imageInput.files[0]);
 }
 
-console.log(JSON.stringify(placeData));
+
+let category= new Array();
+for(input of checkedBox){
+  formData.append("category[]",input.value);
+}
+// const placeData={
+//   name: nameValue,
+//   description: descriptionValue,
+//   location: locationValue,
+//   category: category,
+//   district:DistrictValue,
+//   image:imageValue
+// }
+
+formData.append("name",nameValue);
+formData.append("description",descriptionValue);
+formData.append("location",locationValue);
+
+formData.append("district",DistrictValue);
 fetch('/api/places',{
   method:"POST",
   headers:{
     "Authorization":`Bearer ${token}`,
-     "Content-Type": "application/json"
-
   },
-  body:JSON.stringify(placeData)
-}).then(response=>{return response.json();})
+  body:formData
+}).then(response=>{console.log(response)});
 
-.then(data=>{
- if(data.status==true)
- {
-  window.location.href="/";
- }
-});
+// .then(data=>{
+
+// });
 });
 
+loadData();
     </script>
 </body>
 </html>

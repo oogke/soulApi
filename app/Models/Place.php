@@ -10,6 +10,6 @@ class Place extends Model
         'name', 
         'description', 
         'location', 
-        'category','district'
+        'category','district','image'
     ];
 }
