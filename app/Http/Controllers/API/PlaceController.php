@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Place;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
+use Illuminate\Support\Facades\Validator;
 
-class PlaceController extends Controller
+class PlaceController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $places = Place::all();
+        return $this->sendResponse($places,"All places");
     }
 
     /**
@@ -20,7 +24,28 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+        $validatePlace=Validator::make($request->all(),[
+           'name' =>'required',
+            'description' =>'required',
+            'location'=>'required',
+            'category'=>'required|array'
+        ]);
+        if($validatePlace->fails())
+        {
+           
+            return $this->sendError("Validation Error",$validatePlace->errors()->all(),);
+        }
+
+$places= Place::create([
+'name' => $request->name,
+'description'=> $request->description,
+'location' => $request->location,
+'category'=> json_encode($request->category)
+]);
+
+return $this->sendResponse($places,"Your logic work");
+
     }
 
     /**

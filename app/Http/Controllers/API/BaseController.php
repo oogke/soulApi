@@ -17,7 +17,7 @@ $response=
 ];
 return response()->json($response,200);
     }
-    public function sendError($error,$errorMessage=[],$code=305)
+    public function sendError($error,$errorMessage=[],$code=422)
     {
         $response =
         [

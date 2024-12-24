@@ -66,7 +66,7 @@
         fetch('/api/category',{
            method: "GET",
           headers:{
-            "Authorization" : `Bearer ${token}`
+            "Authorization" : `Bearer ${token}`,
           }
         }).then(response=>{return response.json();}).then(data=>
         {
@@ -102,14 +102,24 @@ const placeData={
   name: nameValue,
   description: descriptionValue,
   location: locationValue,
-  category: category
+  category: category,
+  district_id: 3
 }
+
+console.log(JSON.stringify(placeData));
 fetch('/api/places',{
   method:"POST",
   headers:{
-    "Authorization":`Bearer ${token}`
-  }
-}).then(response=>console.log(response););
+    "Authorization":`Bearer ${token}`,
+     "Content-Type": "application/json"
+
+  },
+  body:JSON.stringify(placeData)
+}).then(response=>{console.log(response);});
+// return response.json();
+// .then(data=>{
+//   console.log(data);
+// });
 });
 
     </script>
