@@ -3,16 +3,19 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\VehicleHub;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class VehicleHubController extends Controller
+class VehicleHubController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $vehiclehubs= VehicleHub::all();
+        return $this->sendResponse($vehiclehubs,"All the vehiclehubs");
     }
 
     /**

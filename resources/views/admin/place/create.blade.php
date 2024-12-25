@@ -71,18 +71,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script>
     
-const addImage =document.getElementById("addImageInput");
-const imageinputDiv =document.getElementById("imageinput");
-addImage.addEventListener("click",function(event){
-event.preventDefault();
-imageinputDiv.innerHTML+=`
-<input type="file" class="form-control mb-3" id="exampleImages" aria-describedby="emailHelp" name="image[]"> 
-`;
-});
+
       let categoryData=` <h4>Category</h4>`;
       const categoryDiv= document.getElementById("categoryCheckbox");
       const submitBtn= document.getElementById("submitBtn");
       const token =localStorage.getItem('token');
+      console.log(token);
       function loadData()
       {
         fetch('/api/category',{
@@ -105,10 +99,19 @@ imageinputDiv.innerHTML+=`
         categoryDiv.innerHTML=categoryData;
           });
       }
-
+loadData();
+const addImage =document.getElementById("addImageInput");
+const imageinputDiv =document.getElementById("imageinput");
+addImage.addEventListener("click",function(event){
+event.preventDefault();
+imageinputDiv.innerHTML+=`
+<input type="file" class="form-control mb-3" id="exampleImages" aria-describedby="emailHelp" name="image[]"> 
+`;
+});
 submitBtn.addEventListener("click",function(event)
 {
 const token =localStorage.getItem('token');
+console.log(token);
 event.preventDefault();
 const checkedBox=document.querySelectorAll('#categoryCheckbox input:checked');
 const nameValue=document.getElementById("exampleInputName").value;
@@ -129,14 +132,6 @@ let category= new Array();
 for(input of checkedBox){
   formData.append("category[]",input.value);
 }
-// const placeData={
-//   name: nameValue,
-//   description: descriptionValue,
-//   location: locationValue,
-//   category: category,
-//   district:DistrictValue,
-//   image:imageValue
-// }
 
 formData.append("name",nameValue);
 formData.append("description",descriptionValue);
@@ -156,7 +151,7 @@ fetch('/api/places',{
 // });
 });
 
-loadData();
+
     </script>
 </body>
 </html>

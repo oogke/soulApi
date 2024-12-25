@@ -115,7 +115,7 @@
                 const token = data.token;
                 localStorage.setItem('token', token);
                 if (localStorage.getItem('token')) {
-        window.location.href = "/";  // Redirect to the homepage
+        window.location.href = "/";  
     } else {
         console.log("User is not logged in.");
     }

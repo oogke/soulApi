@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Hotel;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class HotelController extends Controller
+
+class HotelController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $hotels = Hotel::all();
+        return $this->sendResponse($hotels,"All the Hotels");
     }
 
     /**

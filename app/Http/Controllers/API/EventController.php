@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class EventController extends Controller
+
+class EventController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $events = Event::all();
+        return $this->sendResponse($events,"All the events occuring now");
     }
 
     /**

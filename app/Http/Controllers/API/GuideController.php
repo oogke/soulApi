@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Guide;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class GuideController extends Controller
+
+class GuideController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $guides= Guide::all();
+        return $this->sendResponse($guides,"All the guides datas");
     }
 
     /**

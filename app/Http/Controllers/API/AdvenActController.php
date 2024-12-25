@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdvenAct;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class AdvenActController extends Controller
+
+class AdvenActController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-       
+       $advenActs= AdvenAct::all();
+       return $this->sendResponse($advenActs,"All adventure");
     }
 
     /**

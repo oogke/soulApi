@@ -3,16 +3,19 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cafe;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class CafeController extends Controller
+class CafeController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+    $cafes= Cafe::all();
+    return $this->sendResponse($cafes,"All the cafes");
     }
 
     /**
@@ -20,7 +23,7 @@ class CafeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
     }
 
     /**

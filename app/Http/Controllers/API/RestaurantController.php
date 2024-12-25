@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class RestaurantController extends Controller
+
+class RestaurantController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $restaurants=Restaurant::all();
+        return $this->sendResponse($restaurants,"Atll the Restaurants");
     }
 
     /**

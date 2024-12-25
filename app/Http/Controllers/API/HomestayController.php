@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Homestay;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
 
-class HomestayController extends Controller
+
+class HomestayController extends BaseController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $homestays= Homestay::all();
+        return $this->sendResponse($homestays,"All the homestays");
     }
 
     /**
