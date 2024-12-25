@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\AdvenActController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\CafeController;
 use App\Http\Controllers\API\CategoryController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\API\HomestayController;
 use App\Http\Controllers\API\HotelController;
 use App\Http\Controllers\API\PlaceController;
 use App\Http\Controllers\API\RestaurantController;
+use App\Http\Controllers\API\VehicleHubController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +31,16 @@ Route::apiResource('/homestays',HomestayController::class)->except(['show']);
 Route::apiResource('/hotels',HotelController::class)->except(['show']);
 Route::apiResource('/events',EventController::class)->except(['show']);
 Route::apiResource('/guides',GuideController::class)->except(['show']);
+Route::apiResource('/vehicleHubs',VehicleHubController::class)->except(['show']);
+Route::apiResource('/advenacts',AdvenActController::class)->except(['show']);
+Route::get('/places/{placename}',[PlaceController::class,'show']);
+Route::get('/cafes/{cafeName}',[CafeController::class,'show']);
+Route::get('/restaurants/{restaurantName}',[RestaurantController::class,'show']);
+Route::get('/hotels/{hotelName}',[RestaurantController::class,'show']);
+Route::get('/homestays/{homestayName}',[RestaurantController::class,'show']);
+Route::get('/advenacts/{advenactName}',[RestaurantController::class,'show']);
+Route::get('/events/{eventName}',[RestaurantController::class,'show']);
+Route::get('/guides/{guideName}',[RestaurantController::class,'show']);
+Route::get('/categories/{categoryName}',[RestaurantController::class,'show']);
 
 });

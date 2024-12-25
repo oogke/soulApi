@@ -30,9 +30,10 @@ class EventController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $event)
     {
-        //
+        $event=Event::all()->where('name',$event);
+        return $this->sendResponse($event,"Requested Event");
     }
 
     /**

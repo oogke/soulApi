@@ -56,9 +56,10 @@ return $this->sendResponse($places,"Your logic work");
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $place)
     {
-        //
+        $place= Place::all()->where('name',$place);
+        return $this->sendResponse($place,"Requested Place");
     }
 
     /**

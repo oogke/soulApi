@@ -30,9 +30,10 @@ class RestaurantController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $restaurant)
     {
-        //
+        $restaurant= Restaurant::all()->where('name',$restaurant);
+        return $this->sendResponse($restaurant,"Requested Restaurant");
     }
 
     /**

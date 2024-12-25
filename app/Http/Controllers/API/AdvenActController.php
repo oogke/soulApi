@@ -30,9 +30,10 @@ class AdvenActController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $advenact)
     {
-        //
+        $advenact=AdvenAct::all()->where('name',$advenact);
+        return $this->sendResponse($advenact,"Requested data");
     }
 
     /**

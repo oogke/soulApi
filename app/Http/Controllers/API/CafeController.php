@@ -29,9 +29,10 @@ class CafeController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $cafe)
     {
-        //
+        $cafe= Cafe::all()->where('name',$cafe);
+        return $this->sendResponse($cafe,"Requested Cafe");
     }
 
     /**

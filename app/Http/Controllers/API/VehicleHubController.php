@@ -29,9 +29,10 @@ class VehicleHubController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $vehiclehub)
     {
-        //
+        $vehiclehub= VehicleHub::all()->where('name',$vehiclehub);
+        return $this->sendResponse($vehiclehub,"Requested vehicleHub");
     }
 
     /**

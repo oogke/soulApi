@@ -30,9 +30,10 @@ class HotelController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $hotel)
     {
-        //
+        $hotel= Hotel::all()->where('name',$hotel);
+        return $this->sendResponse($hotel,"Requested Hotel");
     }
 
     /**

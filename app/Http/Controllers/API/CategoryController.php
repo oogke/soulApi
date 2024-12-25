@@ -29,9 +29,10 @@ class CategoryController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $category)
     {
-        //
+        $category= Category::all()->where('category',$category);
+        return $this->sendResponse($category,"Requested category");
     }
 
     /**

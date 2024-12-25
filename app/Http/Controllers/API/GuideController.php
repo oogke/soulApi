@@ -30,9 +30,10 @@ class GuideController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $guide)
     {
-        //
+        $guide= Guide::all()->where('firstname',$guide);
+        return $this->sendResponse($guide,"Requested Guide");
     }
 
     /**

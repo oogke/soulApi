@@ -30,9 +30,10 @@ class HomestayController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $homestay)
     {
-        //
+        $homestay= Homestay::all()->where('name',$homestay);
+        return $this->sendResponse($homestay,"Requested homestay");
     }
 
     /**
