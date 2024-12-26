@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmailverifyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -35,3 +36,4 @@ Route::view( '/createAdventureActs','admin.advenAct.create')->name('createAdvent
 Route::view( '/createUsers','admin.user.create')->name('createUsers');
 Route::view( '/createHomestay','admin.homestay.create')->name('createHomestay');
 
+Route::get('/sendEmail',[EmailverifyController::class,'EmailVerify'])->name("emailVerify");

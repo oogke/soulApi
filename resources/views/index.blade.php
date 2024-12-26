@@ -17,6 +17,7 @@ margin-left: 40px;
 <a href="{{ route('registerView')}}"><button class="btn  btn-warning a">Register</button></a>
     <a href="{{ route('loginView')}}"><button class="btn  btn-dark a">Login</button></a>
    <button class="btn  btn-danger a" id="logout-btn">logout</button>
+   <a href="{{route('emailVerify')}}">Send Email</a>
    <hr>
    
  
