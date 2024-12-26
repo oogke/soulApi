@@ -63,6 +63,7 @@
    <div class="mb-3">
     <label for="exampleImages" class="form-label">Images</label><i class="fa-regular fa-images" id="addImageInput"></i>
     <div  id="imageinput">
+    <input type="file" class="form-control mb-3" id="exampleImages" aria-describedby="emailHelp" name="image[]" multiple> 
     </div>
  
   </div>
@@ -100,55 +101,47 @@
           });
       }
 loadData();
-const addImage =document.getElementById("addImageInput");
-const imageinputDiv =document.getElementById("imageinput");
-addImage.addEventListener("click",function(event){
-event.preventDefault();
-imageinputDiv.innerHTML+=`
-<input type="file" class="form-control mb-3" id="exampleImages" aria-describedby="emailHelp" name="image[]"> 
-`;
-});
 submitBtn.addEventListener("click",function(event)
 {
 const token =localStorage.getItem('token');
-console.log(token);
 event.preventDefault();
 const checkedBox=document.querySelectorAll('#categoryCheckbox input:checked');
 const nameValue=document.getElementById("exampleInputName").value;
 const descriptionValue=document.getElementById("exampleInputDescription").value;
 const locationValue=document.getElementById("exampleInputLocation").value;
 const DistrictValue=document.getElementById("exampleInputDistrict").value;
-const imageSent= document.querySelectorAll('input[name="image[]"]');
-const imageValue=new Array();
+const files = document.getElementById('exampleImages').files;
 
 const formData= new FormData();
-for(let imageInput of imageSent)
-{
-  formData.append("image[]",imageInput.files[0]);
+if (files.length === 0) {
+    alert('No images selected!');
+    return; // Prevent form submission
 }
 
+for (let i = 0; i < files.length; i++) {
+        formData.append('images[]', files[i]); 
+    }
 
 let category= new Array();
 for(input of checkedBox){
   formData.append("category[]",input.value);
 }
-
 formData.append("name",nameValue);
 formData.append("description",descriptionValue);
 formData.append("location",locationValue);
-
 formData.append("district",DistrictValue);
+console.log(formData);
 fetch('/api/places',{
   method:"POST",
   headers:{
     "Authorization":`Bearer ${token}`,
   },
   body:formData
-}).then(response=>{console.log(response)});
+}).then(response=>{return response.json();})
 
-// .then(data=>{
-
-// });
+.then(data=>{
+console.log(data);
+});
 });
 
 

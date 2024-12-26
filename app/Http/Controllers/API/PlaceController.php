@@ -25,28 +25,41 @@ class PlaceController extends BaseController
      */
     public function store(Request $request)
     {
-      dd($request);
+        
         $validatePlace=Validator::make($request->all(),[
            'name' =>'required',
             'description' =>'required',
             'location'=>'required',
             'category'=>'required|array',
-            'district'=> 'required',
-            'image'=> 'required|array'
+            'district'=> 'required|required',
+            'image'=> 'array'
+            ,'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         if($validatePlace->fails())
         {
            
             return $this->sendError("Validation Error",$validatePlace->errors()->all(),);
         }
-
+        if ($request->hasFile('images')) {
+            $images = $request->file('images'); 
+            $path=public_path('uploads');
+            $newname=[];
+            foreach($images as $image)
+            {
+              $ext=  $image->getClientOriginalExtension();
+              $newname[]=uniqid(time(), true).'.'.$ext;
+              $image->move($path, $newname[count($newname)-1]); 
+            }
+          
+        }
+      $encodedImages=json_encode($newname);
 $places= Place::create([
 'name' => $request->name,
 'description'=> $request->description,
 'location' => $request->location,
 'category'=> json_encode($request->category),
 'district'=> $request->district,
-'images'=>json_encode($request->image)
+'img'=>$encodedImages
 ]);
 
 return $this->sendResponse($places,"Your logic work");
