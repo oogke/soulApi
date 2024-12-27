@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/c5a4938a4c.js" crossorigin="anonymous"></script>  
+
     <title>District Create</title>
     <style>
         form
@@ -27,7 +29,7 @@
 <body>
     
 <form>
-    <h1>Insert District</h1>
+    <h1>Insert user</h1>
   <div class="mb-3" id="formDiv">
     <label for="exampleInputDistricts" class="form-label">District</label>
     <input type="email" class="form-control" id="exampleInputDistricts" aria-describedby="emailHelp">

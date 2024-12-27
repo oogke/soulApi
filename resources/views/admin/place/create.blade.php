@@ -39,7 +39,7 @@
 <body>
     
 <form>
-    <h1>Insert District</h1>
+    <h1>Insert places</h1>
     <div class="mb-3">
     <label for="exampleInputName" class="form-label">Name</label>
     <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp">
@@ -65,7 +65,26 @@
     <div  id="imageinput">
     <input type="file" class="form-control mb-3" id="exampleImages" aria-describedby="emailHelp" name="image[]" multiple> 
     </div>
- 
+    <!-- <div class="mb-3">
+    <label for="exampleImage1" class="form-label">Image1</label>
+    <input type="file" class="form-control" id="exampleImage1" aria-describedby="emailHelp" name="image1">
+  </div>
+  <div class="mb-3">
+    <label for="exampleImages" class="form-label">Image2</label>
+    <input type="file" class="form-control" id="exampleImage2" aria-describedby="emailHelp" name="image2">
+  </div>
+  <div class="mb-3">
+    <label for="exampleImage3" class="form-label">Image3</label>
+    <input type="file" class="form-control" id="exampleImage3" aria-describedby="emailHelp" name="image3">
+  </div>
+  <div class="mb-3">
+    <label for="exampleImage4" class="form-label">Image4</label>
+    <input type="file" class="form-control" id="exampleImage4" aria-describedby="emailHelp" name="image4">
+  </div>
+  <div class="mb-3">
+    <label for="exampleImage5" class="form-label">Image5</label>
+    <input type="file" class="form-control" id="exampleImage5" aria-describedby="emailHelp" name="image5">
+  </div> -->
   </div>
   <button type="submit" class="btn btn-success" id="submitBtn">Submit</button>
 </form>

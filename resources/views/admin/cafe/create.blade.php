@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/c5a4938a4c.js" crossorigin="anonymous"></script>  
     <title>District Create</title>
     <style>
         form
@@ -27,10 +28,14 @@
 <body>
     
 <form>
-    <h1>Insert District</h1>
+    <h1>Insert Cafes</h1>
     <div class="mb-3">
     <label for="exampleInputName" class="form-label">Name</label>
     <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputDistrict" class="form-label">District</label>
+    <input type="text" class="form-control" id="exampleInputDistrict" aria-describedby="emailHelp" name="district">
   </div>
   <div class="mb-3">
     <label for="exampleInputDescription" class="form-label">Description</label>
@@ -49,12 +54,28 @@
     <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
   </div>
   <div class="mb-3">
-    <label for="exampleInputWebsites" class="form-label">Websites</label>
-    <input type="text" class="form-control" id="exampleInputWebsites" aria-describedby="emailHelp">
+    <label for="exampleInputWebsites" class="form-label">Website</label>
+    <input type="text" class="form-control" id="exampleInputWebsites" aria-describedby="emailHelp" name="website">
   </div>
   <div class="mb-3">
-    <label for="exampleImages" class="form-label">Images</label>
-    <input type="file" class="form-control" id="exampleImages" aria-describedby="emailHelp">
+    <label for="exampleImage1" class="form-label">Image1</label>
+    <input type="file" class="form-control" id="exampleImage1" aria-describedby="emailHelp" name="image1">
+  </div>
+  <div class="mb-3">
+    <label for="exampleImages" class="form-label">Image2</label>
+    <input type="file" class="form-control" id="exampleImage2" aria-describedby="emailHelp" name="image2">
+  </div>
+  <div class="mb-3">
+    <label for="exampleImage3" class="form-label">Image3</label>
+    <input type="file" class="form-control" id="exampleImage3" aria-describedby="emailHelp" name="image3">
+  </div>
+  <div class="mb-3">
+    <label for="exampleImage4" class="form-label">Image4</label>
+    <input type="file" class="form-control" id="exampleImage4" aria-describedby="emailHelp" name="image4">
+  </div>
+  <div class="mb-3">
+    <label for="exampleImage5" class="form-label">Image5</label>
+    <input type="file" class="form-control" id="exampleImage5" aria-describedby="emailHelp" name="image5">
   </div>
   <button type="submit" class="btn btn-success">Submit</button>
 </form>
