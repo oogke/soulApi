@@ -17,7 +17,7 @@ margin-left: 40px;
 <a href="{{ route('registerView')}}"><button class="btn  btn-warning a">Register</button></a>
     <a href="{{ route('loginView')}}"><button class="btn  btn-dark a">Login</button></a>
    <button class="btn  btn-danger a" id="logout-btn">logout</button>
-   <a href="{{route('emailVerify')}}">Send Email</a>
+   <a href="{{route('registerVerify')}}">Send Email</a>
    <hr>
    
  
@@ -36,6 +36,30 @@ margin-left: 40px;
 <br><a href="{{ route('manageHomestay')}}"><button class="btn  btn-success a">Homestay</button></a>
 
 </div>
+<td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#codemodal" >view</a></td>
+
+
+<div class="modal fade" id="codemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="CodemodalLabel" aria-hidden="true">
+        <h2>Check Your Email and Enter your Verification code here</h2>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="CodemodalLabel">Enter verification code</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                <div id="codeInput">
+      <input type="text" placeholder="Enter here">
+      <button class="btn btn-primary" id="code-submit">Submit</button>
+    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 

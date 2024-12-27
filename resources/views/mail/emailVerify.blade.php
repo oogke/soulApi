@@ -45,18 +45,20 @@
 </head>
 <body>
     <div id="content">
-        <h1>Hi </h1>
-<div>Subject: {{$subject}}</div>
+        <h1>Hi {{$fname}}</h1>
+
 <div>
-    this is the msg
-    {{$message}}
+   {{$msg}}
 </div>
         <div class="code">
-            {{ $verifcode }}
+            <strong><B>
+               {{ $verifcode }}  
+            </B></strong>
+           
         </div>
 
         <footer>
-            You are receiving this email because you are registering your account on SoulAPI.
+            {{$footer}}
         </footer>
     </div>
 

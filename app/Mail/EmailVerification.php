@@ -13,22 +13,21 @@ class EmailVerification extends Mailable
 {
     use Queueable, SerializesModels;
 
-// public $username;
-    public $message;
-    public $subject;
-    public $verifcode;
+public $msg;
+public $verifcode;
+public $footer;
+public $fname;
+   
     
     /**
      * Create a new message instance.
      */
-    public function __construct($message,$subject,$verifcode)
+    public function __construct($fname,$msg,$verifcode,$footer)
     {
-        $this->message =$message;
-        $this->subject= $subject;
+        $this->msg =$msg;
         $this->verifcode= $verifcode;
-        // $this->username= $username;
-
-
+        $this->fname= $fname;
+        $this->footer= $footer;
     }
 
     /**
@@ -37,7 +36,7 @@ class EmailVerification extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->subject
+        
         );
     }
 
@@ -47,13 +46,7 @@ class EmailVerification extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.email'
-            // with: [
-            //     'message' => $this->message,   // Pass the message property
-            //     'subject' => $this->subject,   // Pass the subject property
-            //     'verifcode' => $this->verifcode, // Pass the verification code
-            //     'username' => $this->username  // Pass the username
-            // ]
+            view: 'mail.emailVerify'
         );
     }
 

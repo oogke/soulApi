@@ -1,13 +1,26 @@
 <?php
 
 namespace App\Http\Controllers\API;
+use App\Mail\EmailVerification;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\API\BaseController as BaseController;
 class AuthController extends BaseController
 {
+
+    public function emailVerify(Request $request)
+    {
+$toEmail=$request->email;
+$fname=$request->firstname;
+$msg= "Thanks for signing up to The SoulAPI. Before we can continue, we need to validate your email address.";
+$verifcode=rand(100000,999999);
+$footer="Please Do not share this email";
+Mail::to($toEmail)->send(new EmailVerification($fname,$msg,$verifcode,$footer));
+return $this->sendResponse($verifcode,"The email hasbeen sent");
+    }
     public function signup(Request $request)
     {
         $validateData = Validator::make(

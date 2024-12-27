@@ -102,9 +102,27 @@
     <input type="text" placeholder="lastname" id="lname" name="lastname">
     <input type="email" placeholder="email" id="email" name="email">
     <input type="password" placeholder="Password" id="password" name="password">
-    <button class="registerBtn" name="register" id="register-btn">Register</button>
+    <button class="registerBtn" name="register" id="register-btn" data-bs-toggle="modal" data-bs-target="#codemodal">Register</button>
   </div>
 
+  <div class="modal fade" id="codemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="CodemodalLabel" aria-hidden="true">
+      
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="CodemodalLabel">Enter verification code</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                <div id="codeInput">
+      <input type="text" placeholder="Enter here" name="verifcodeUser" id="code">
+      <button class="btn btn-primary" id="code-submit">Submit</button>
+    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
     crossorigin="anonymous"></script>
@@ -114,17 +132,48 @@
 const register=document.getElementById('register-btn');
 register.addEventListener('click',function(event)
 {
+  let verifcode;
   event.preventDefault();
 const firstnameValue=document.getElementById('fname').value;
 const lastnameValue=document.getElementById('lname').value;
 const emailValue=document.getElementById('email').value;
 const passwordValue=document.getElementById('password').value;
-const registerData= {
+
+const emailVer={
+  firstname:firstnameValue,
+   lastname:lastnameValue,
+  email:emailValue
+}
+
+async function sendEmailVerification()
+{
+const response= await fetch('/api/emailverify',{
+  method: "POST",
+  headers:{
+   'Content-Type': 'application/json'
+  },
+  body:JSON.stringify(emailVer)
+}
+);
+const data= await response.json();
+ verifcode= data.data;
+ console.log(verifcode);
+
+const CodeSubmit= document.getElementById('code-submit');
+CodeSubmit.addEventListener("click",function(event){
+  event.preventDefault();
+  const verifcodeUser= document.getElementById('code').value;
+if(verifcode==verifcodeUser)
+{
+
+
+    const registerData= {
   firstname:firstnameValue,
   lastname:lastnameValue,
   email:emailValue,
   password:passwordValue
 };
+
 
 fetch('/api/register',{
   method: "POST",
@@ -137,15 +186,69 @@ return response.json();
 
 }).then(data=>
 { 
-//     console.log(data);
-// //   if(data.status == true && data.message =="User Created Successfully")
-// // {
+    console.log(data);
+   if(data.status == true)
+ {
   window.location.href="/loginView";
-// }
+}
 } ).catch(err=>{
   console.log(err);
 })
+}
 });
+}
+
+sendEmailVerification();
+});
+
+// function openmodal(VerificationData)
+// {
+//  
+//   
+//   const modalbody= document.getElementById('modalBody');
+
+//   const CodeSubmit= document.getElementById('code-submit');
+//   const verifcode=VerificationData;
+
+//   CodeSubmit.addEventListener('click',function(event)
+// {
+//   event.preventDefault();
+  
+// const verifcodeUser= 
+// })
+// }
+
+
+
+//database ma halna
+//  // const registerData= {
+//   firstname:firstnameValue,
+//   lastname:lastnameValue,
+//   email:emailValue,
+//   password:passwordValue
+// };
+// fetch('/api/register',{
+//   method: "POST",
+//   body: JSON.stringify(registerData),
+//   headers:{
+//     'Content-Type':'application/json'
+//   }
+// }).then(response=>{
+// return response.json();
+
+// }).then(data=>
+// { 
+// //     console.log(data);
+// // //   if(data.status == true && data.message =="User Created Successfully")
+// // // {
+//   window.location.href="/loginView";
+// // }
+// } ).catch(err=>{
+//   console.log(err);
+// })
+
+//database ma halna 
+
     </script>
 </body>
 
