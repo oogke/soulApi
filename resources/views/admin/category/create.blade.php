@@ -32,7 +32,7 @@
     <h1>Insert category</h1>
   <div class="mb-3">
     <label for="exampleInputCategory" class="form-label">Category</label>
-    <input type="email" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp">
+    <input type="email" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp" name="category">
   </div>
   <button type="submit" class="btn btn-success">Submit</button>
 </form>

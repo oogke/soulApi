@@ -40,7 +40,7 @@
   </div>
   <div class="mb-3" id="formDiv">
     <label for="exampleInputDescription" class="form-label">Description</label>
-    <input type="text" class="form-control" id="exampleInputDescription" aria-describedby="emailHelp">
+    <input type="text" class="form-control" id="exampleInputDescription" aria-describedby="emailHelp" name="description">>
   </div>
   <div class="mb-3" id="formDiv">
     <label for="exampleInputLocation" class="form-label">Location</label>

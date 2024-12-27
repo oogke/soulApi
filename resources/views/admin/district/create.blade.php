@@ -37,11 +37,11 @@
 
   <div class="mb-3">
     <label for="exampleInputProvince" class="form-label">Province</label>
-    <input type="password" class="form-control" id="exampleInputProvince">
+    <input type="password" class="form-control" id="exampleInputProvince" name="district">
   </div>
   <div class="mb-3">
     <label for="exampleInputDescription" class="form-label">Description</label>
-    <input type="password" class="form-control" id="exampleInputDescription">
+    <input type="password" class="form-control" id="exampleInputDescription" name="description">
   </div>
   <button type="submit" class="btn btn-success">Submit</button>
 </form>

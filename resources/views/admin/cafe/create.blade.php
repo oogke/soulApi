@@ -31,7 +31,7 @@
     <h1>Insert Cafes</h1>
     <div class="mb-3">
     <label for="exampleInputName" class="form-label">Name</label>
-    <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp">
+    <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp"  name="name">
   </div>
   <div class="mb-3">
     <label for="exampleInputDistrict" class="form-label">District</label>
@@ -39,19 +39,19 @@
   </div>
   <div class="mb-3">
     <label for="exampleInputDescription" class="form-label">Description</label>
-    <input type="text" class="form-control" id="exampleInputDescription" aria-describedby="emailHelp">
+    <input type="text" class="form-control" id="exampleInputDescription" aria-describedby="emailHelp" name="description">
   </div>
   <div class="mb-3">
     <label for="exampleInputLocation" class="form-label">Location</label>
-    <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp">
+    <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp" name="location">
   </div>
   <div class="mb-3">
     <label for="exampleInputPhone" class="form-label">Phone</label>
-    <input type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp">
+    <input type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp" name="phone">
   </div>
   <div class="mb-3">
     <label for="exampleInputEmail" class="form-label">Email</label>
-    <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp">
+    <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" name="email">
   </div>
   <div class="mb-3">
     <label for="exampleInputWebsites" class="form-label">Website</label>
