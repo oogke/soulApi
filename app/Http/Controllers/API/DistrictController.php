@@ -31,6 +31,10 @@ class DistrictController extends BaseController
             'province' => 'required|string|max:255',
             'description' => 'required|string|max:500',  // Adjust max length as needed
         ]);
+        if($validate->fails())
+        {
+            return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
+        }
     }
 
     /**

@@ -45,6 +45,10 @@ class GuideController extends BaseController
             'experiences' => 'required|array',
             'experiences.*' => 'string|max:255',
         ]);
+        if($validate->fails())
+        {
+            return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
+        }
     }
 
     /**

@@ -27,6 +27,10 @@ class CategoryController extends BaseController
         $validate = Validator::make($request->all(), [
             'category' => 'required|string|max:255',
         ]);
+        if($validate->fails())
+        {
+            return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
+        }
     }
 
     /**

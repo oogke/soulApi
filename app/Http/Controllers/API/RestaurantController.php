@@ -25,7 +25,7 @@ class RestaurantController extends BaseController
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validate = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'district' => 'required|string|max:255',
             'description' => 'required|string|max:1000',
@@ -39,6 +39,10 @@ class RestaurantController extends BaseController
             'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image5' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+        if($validate->fails())
+        {
+            return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
+        }
         
     }
 

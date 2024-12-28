@@ -45,6 +45,10 @@ class EventController extends BaseController
             'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image5' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        if($validate->fails())
+        {
+            return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
+        }
     }
 
     /**

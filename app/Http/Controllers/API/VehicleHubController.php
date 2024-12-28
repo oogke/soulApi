@@ -24,7 +24,7 @@ class VehicleHubController extends BaseController
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validate = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'district' => 'required|string|max:255',
             'description' => 'required|string|max:1000',
@@ -40,6 +40,10 @@ class VehicleHubController extends BaseController
             'vehicles' => 'required|array|min:1', // Ensure at least one vehicle
             'vehicles.*' => 'required|string|max:255', // Each vehicle should be a string and not empty
         ]);
+        if($validate->fails())
+        {
+            return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
+        }
     
     }
 
