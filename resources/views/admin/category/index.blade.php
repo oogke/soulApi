@@ -54,7 +54,7 @@ margin-top: 20px;
         {
             const token=localStorage.getItem("token");
             const tableDiv = document.getElementById('table-div');
-fetch('/api/districts',{
+fetch('/api/categories',{
     method: "GET",
     headers:
     {
@@ -67,9 +67,7 @@ let tableData=`
             <thead>
                 <tr>
                     <th scope="col">S.N</th>
-                    <th scope="col">District</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Province</th>
+                    <th scope="col">Category</th>
                     <th scope="col">view</th>
                     <th scope="col">update</th>
                     <th scope="col">delete</th>
@@ -78,13 +76,12 @@ let tableData=`
             <tbody id="TaskTableBody">`;
 
             let n = 1;
-            for( var district of data.data)
+            for( var category of data.data)
             {
                 tableData+=` <tr>
                     <td>${n++}</td>
-                    <td>${district.name}</td>
-                    <td>${district.description}</td>
-                    <td>${district.province}</td>
+                    <td>${category.category}</td>
+                  
                     <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${district.id}">view</a></td>
                     <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${district.id}">Edit</a></td>
                     <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${district.id}">Delete</a></td>

@@ -103,11 +103,11 @@ let tableData=`
       <td>${cafe.phone}</td>
       <td>${cafe.email}</td>
       <td>${cafe.website}</td>
-      <td>${cafe.image1}</td>
-      <td>${cafe.image2}</td>
-      <td>${cafe.image3}</td>
-      <td>${cafe.image4}</td>
-      <td>${cafe.image5}</td>
+   <td><img src="uploads/cafe/${cafe.image1}" alt=""></td>
+    <td><img src="uploads/cafe/${cafe.image2}" alt=""></td>
+    <td><img src="uploads/cafe/${cafe.image3}" alt=""></td>
+    <td><img src="uploads/cafe/${cafe.image4}" alt=""></td>
+    <td><img src="uploads/cafe/${cafe.image5}" alt=""></td>
       <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${cafe.id}">view</a></td>
       <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${cafe.id}">Delete</a></td>
       <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${cafe.id}">Update</a></td>

@@ -67,9 +67,22 @@ let tableData=`
             <thead>
                 <tr>
                     <th scope="col">S.N</th>
-                    <th scope="col">District</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Province</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Date of birth</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">citizenship No</th>
+                    <th scope="col">Experience</th>
+                    <th scope="col">Website</th>
+                    <th scope="col">Languages</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Profile</th>
+                    <th scope="col">Citizenship card(Front)</th>
+                    <th scope="col">Citizenship card(Front)</th>
+                    <th scope="col">Guide Certificate</th>
+                    <th scope="col">Cv</th>
                     <th scope="col">view</th>
                     <th scope="col">update</th>
                     <th scope="col">delete</th>
@@ -78,16 +91,29 @@ let tableData=`
             <tbody id="TaskTableBody">`;
 
             let n = 1;
-            for( var district of data.data)
+            for( var guide of data.data)
             {
                 tableData+=` <tr>
                     <td>${n++}</td>
-                    <td>${district.name}</td>
-                    <td>${district.description}</td>
-                    <td>${district.province}</td>
-                    <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${district.id}">view</a></td>
-                    <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${district.id}">Edit</a></td>
-                    <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${district.id}">Delete</a></td>
+                    <td>${guide.firstname}</td>
+                    <td>${guide.lastname}</td>
+                    <td>${guide.email}</td>
+                    <td>${guide.phone}</td>
+                    <td>${guide.dob}</td>
+                    <td>${guide.country}</td>
+                    <td>${guide.citizenshipNo}</td>
+                    <td>${guide.experience}</td>
+                    <td>${guide.website}</td>
+                    <td>${guide.languages}</td>
+                    <td>${guide.address}</td>
+                    <td><img src="uploads/guide/${guide.profile}" alt=""></td>
+    <td><img src="uploads/guide/${guide.citizenCardFront}" alt=""></td>
+    <td><img src="uploads/guide/${guide.citizenCardBack}" alt=""></td>
+    <td><img src="uploads/guide/${guide.GOVcertificate}" alt=""></td>
+    <td><img src="uploads/guide/${guide.CV}" alt=""></td>
+                    <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${guide.id}">view</a></td>
+                    <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${guide.id}">Edit</a></td>
+                    <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${guide.id}">Delete</a></td>
                 </tr>`;   
             }
             tableData+=`</tbody>

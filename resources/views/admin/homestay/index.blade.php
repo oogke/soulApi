@@ -99,11 +99,11 @@ let tableData=`
       <td>${homestay.phone}</td>
       <td>${homestay.email}</td>
       <td>${homestay.website}</td>
-      <td>${homestay.image1}</td>
-      <td>${homestay.image2}</td>
-      <td>${homestay.image3}</td>
-      <td>${homestay.image4}</td>
-      <td>${homestay.image5}</td>
+      <td><img src="uploads/${advenact.image1}" alt=""></td>
+    <td><img src="uploads/${advenact.image2}" alt=""></td>
+    <td><img src="uploads/${advenact.image3}" alt=""></td>
+    <td><img src="uploads/${advenact.image4}" alt=""></td>
+    <td><img src="uploads/${advenact.image5}" alt=""></td>
       <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${homestay.id}">view</a></td>
       <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${homestay.id}">Delete</a></td>
       <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${homestay.id}">Update</a></td>

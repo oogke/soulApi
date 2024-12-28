@@ -103,11 +103,11 @@ fetch('/api/advenacts',{
     <td>${advenact.price}</td>
     <td>${advenact.duration}</td>
     <td>${advenact.requirements}</td>
-    <td><img src="uploads/${advenact.image1}" alt=""></td>
-    <td><img src="uploads/${advenact.image2}" alt=""></td>
-    <td><img src="uploads/${advenact.image3}" alt=""></td>
-    <td><img src="uploads/${advenact.image4}" alt=""></td>
-    <td><img src="uploads/${advenact.image5}" alt=""></td>
+    <td><img src="uploads/advenact/${advenact.image1}" alt=""></td>
+    <td><img src="uploads/advenact/${advenact.image2}" alt=""></td>
+    <td><img src="uploads/advenact/${advenact.image3}" alt=""></td>
+    <td><img src="uploads/advenact/${advenact.image4}" alt=""></td>
+    <td><img src="uploads/advenact/${advenact.image5}" alt=""></td>
     <td>${advenact.is_seasonal}</td>
     <td>${advenact.best_season}</td>
     <td>${advenact.location}</td>

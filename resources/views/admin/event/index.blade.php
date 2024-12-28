@@ -67,9 +67,24 @@ let tableData=`
             <thead>
                 <tr>
                     <th scope="col">S.N</th>
-                    <th scope="col">District</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Province</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">District</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col">Start Time</th>
+                    <th scope="col">End Time</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Image1</th>
+                    <th scope="col">Image2</th>
+                    <th scope="col">Image3</th>
+                    <th scope="col">Image4</th>
+                    <th scope="col">Image5</th>
+                    <th scope="col">Organier</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Ticket Price</th>
                     <th scope="col">view</th>
                     <th scope="col">update</th>
                     <th scope="col">delete</th>
@@ -84,7 +99,22 @@ let tableData=`
                     <td>${n++}</td>
                     <td>${district.name}</td>
                     <td>${district.description}</td>
-                    <td>${district.province}</td>
+                    <td>${district.location}</td>
+                    <td>${district.district}</td>
+                    <td>${district.start_date}</td>
+                    <td>${district.end_date}</td>
+                    <td>${district.start_time}</td>
+                    <td>${district.end_time}</td>
+                    <td>${district.category}</td>
+                    <td>${district.image1}</td>
+                    <td>${district.image2}</td>
+                    <td>${district.image3}</td>
+                    <td>${district.image4}</td>
+                    <td>${district.image5}</td>
+                    <td>${district.organizer}</td>
+                    <td>${district.phone}</td>
+                    <td>${district.email}</td>
+                    <td>${district.ticket_price}</td>
                     <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${district.id}">view</a></td>
                     <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${district.id}">Edit</a></td>
                     <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${district.id}">Delete</a></td>

@@ -99,11 +99,11 @@ let tableData=`
       <td>${hotel.phone}</td>
       <td>${hotel.email}</td>
       <td>${hotel.website}</td>
-      <td>${hotel.image1}</td>
-      <td>${hotel.image2}</td>
-      <td>${hotel.image3}</td>
-      <td>${hotel.image4}</td>
-      <td>${hotel.image5}</td>
+     <td><img src="uploads/${advenact.image1}" alt=""></td>
+    <td><img src="uploads/${advenact.image2}" alt=""></td>
+    <td><img src="uploads/${advenact.image3}" alt=""></td>
+    <td><img src="uploads/${advenact.image4}" alt=""></td>
+    <td><img src="uploads/${advenact.image5}" alt=""></td>
       <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${hotel.id}">view</a></td>
       <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${hotel.id}">Delete</a></td>
       <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${hotel.id}">Update</a></td>
