@@ -103,6 +103,7 @@ let tableData=`
       <td>${vehiclehub.image3}</td>
       <td>${vehiclehub.image4}</td>
       <td>${vehiclehub.image5}</td>
+      <td>${vehiclehub.vehicles}</td>
       <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${vehiclehub.id}">view</a></td>
       <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${vehiclehub.id}">Delete</a></td>
       <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${vehiclehub.id}">Update</a></td>
