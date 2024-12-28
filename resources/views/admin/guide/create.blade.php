@@ -78,7 +78,7 @@
   </div>
   <div class="mb-3">
     <label for="CitizenshipcardNo" class="form-label">Citizenship Card Number</label>
-    <input type="file" class="form-control" id="CitizenshipcardNo" aria-describedby="emailHelp">
+    <input type="text" class="form-control" id="CitizenshipcardNo" aria-describedby="emailHelp">
   </div>
   <div class="mb-3">
     <label for="CitizenshipcardFront" class="form-label">Citizenship Card(Front)</label>
@@ -100,7 +100,7 @@
   </div>
 
   
-  <button type="submit" class="btn btn-success">Submit</button>
+  <button type="submit" class="btn btn-success" id="submit-btn">Submit</button>
 </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script>
@@ -110,12 +110,44 @@
     const experiences = document.getElementById("experiences");
     addLanguages.addEventListener("click", function (event) {
       event.preventDefault();
-      languagediv.innerHTML +=`<input type="text" class="form-control mb-3" id="languages" aria-describedby="emailHelp">`;
+      languagediv.innerHTML +=`<input type="text" class="form-control mb-3" id="languages[]" aria-describedby="emailHelp">`;
     });
     addExperiences.addEventListener("click", function (event) {
       event.preventDefault();
-      experiences.innerHTML +=`<input type="text" class="form-control mb-3" id="Experiences" aria-describedby="emailHelp">`;
+      experiences.innerHTML +=`<input type="text" class="form-control mb-3" id="Experiences[]" aria-describedby="emailHelp">`;
     });
+    const token=localStorage.getItem("token");
+          const submitBtn= document.getElementById("submit-btn");
+          submitBtn.addEventListener("click",function(event)
+{
+  event.preventDefault();
+  const formData = new FormData();
+        formData.append('first_name', document.getElementById('exampleInputFirstname').value);
+        formData.append('last_name', document.getElementById('exampleInputLastname').value);
+        formData.append('address', document.getElementById('exampleInputAddress').value);
+        formData.append('phone', document.getElementById('exampleInputPhone').value);
+        formData.append('dob', document.getElementById('exampleInputdob').value);
+        formData.append('country', document.getElementById('exampleInputCountry').value);
+        formData.append('email', document.getElementById('exampleInputEmail').value);
+        formData.append('websites', document.getElementById('exampleInputWebsites').value);
+        formData.append('profile', document.getElementById('exampleProfile').files[0]);
+        formData.append('cv', document.getElementById('exampleCV').files[0]);
+        formData.append('citizenship_card_no', document.getElementById('CitizenshipcardNo').value);
+        formData.append('citizenship_card_front', document.getElementById('CitizenshipcardFront').files[0]);
+        formData.append('citizenship_card_back', document.getElementById('Citizenshipcardback').files[0]);
+        formData.append('certificate', document.getElementById('exampleCertificate').files[0]);
+const languagesArray= document.querySelectorAll("#languages");
+const ExperiencesArray= document.querySelectorAll("#Experiences");
+for(let i=0;i<languagesArray.length;i++)
+{
+formdata.append("languages[]",languagesArray.value);
+}
+for(let j=0;j<ExperiencesArray.length;j++)
+{
+  formdata.append("experiences[]",ExperiencesArray.value);
+}
+  console.log(formData);
+});
   </script>
   </body>
 </html>

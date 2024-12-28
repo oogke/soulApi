@@ -42,7 +42,7 @@
     <h1>Insert places</h1>
     <div class="mb-3">
     <label for="exampleInputName" class="form-label">Name</label>
-    <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp">
+    <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" >
   </div>
   <div class="mb-3" >
     <label for="exampleInputDescription" class="form-label">Description</label>
@@ -150,17 +150,18 @@ formData.append("description",descriptionValue);
 formData.append("location",locationValue);
 formData.append("district",DistrictValue);
 console.log(formData);
-fetch('/api/places',{
-  method:"POST",
-  headers:{
-    "Authorization":`Bearer ${token}`,
-  },
-  body:formData
-}).then(response=>{return response.json();})
 
-.then(data=>{
-console.log(data);
-});
+// fetch('/api/places',{
+//   method:"POST",
+//   headers:{
+//     "Authorization":`Bearer ${token}`,
+//   },
+//   body:formData
+// }).then(response=>{return response.json();})
+
+// .then(data=>{
+// console.log(data);
+// });
 });
 
 

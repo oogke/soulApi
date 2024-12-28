@@ -78,8 +78,57 @@
     <label for="exampleImage5" class="form-label">Image5</label>
     <input type="file" class="form-control" id="exampleImage5" aria-describedby="emailHelp" name="image5">
   </div>
-  <button type="submit" class="btn btn-success">Submit</button>
+  <button type="submit" class="btn btn-success" id="submit-btn">Submit</button>
 </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script>
+              const token=localStorage.getItem("token");
+          const submitBtn= document.getElementById("submit-btn");
+          submitBtn.addEventListener("click",function(event)
+{
+  event.preventDefault();
+
+  
+        // Create a FormData object
+        const formData = new FormData();
+
+        // Manually append form data
+        formData.append("name", document.getElementById("exampleInputName").value);
+        formData.append("district", document.getElementById("exampleInputDistrict").value);
+        formData.append("description", document.getElementById("exampleInputDescription").value);
+        formData.append("location", document.getElementById("exampleInputLocation").value);
+        formData.append("phone", document.getElementById("exampleInputPhone").value);
+        formData.append("email", document.getElementById("exampleInputEmail").value);
+        formData.append("website", document.getElementById("exampleInputWebsites").value);
+        formData.append("image1", document.getElementById("exampleImage1").files[0]);
+        formData.append("image2", document.getElementById("exampleImage2").files[0]);
+        formData.append("image3", document.getElementById("exampleImage3").files[0]);
+        formData.append("image4", document.getElementById("exampleImage4").files[0]);
+        formData.append("image5", document.getElementById("exampleImage5").files[0]);
+        console.log(formData);
+
+        // Send POST request with form data and authorization token
+        // fetch('YOUR_API_ENDPOINT', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Authorization': `Bearer ${token}`,
+        //     },
+        //     body: formData
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //     // Handle the response from the server
+        //     if (data.success) {
+        //         alert("Restaurant added successfully!");
+        //     } else {
+        //         alert("Failed to add restaurant.");
+        //     }
+        // })
+        // .catch(error => {
+        //     console.error('Error:', error);
+        //     alert("An error occurred while submitting.");
+        // });
+});
+    </script>
 </body>
 </html>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\District;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
+use Illuminate\Support\Facades\Validator;
 
 
 
@@ -25,7 +26,11 @@ class DistrictController extends BaseController
      */
     public function store(Request $request)
     {
-        
+        $validate = Validator::make($request->all(), [
+            'district' => 'required|string|max:255',
+            'province' => 'required|string|max:255',
+            'description' => 'required|string|max:500',  // Adjust max length as needed
+        ]);
     }
 
     /**

@@ -117,6 +117,7 @@
                 <div class="modal-body" id="modalBody">
                 <div id="codeInput">
       <input type="text" placeholder="Enter here" name="verifcodeUser" id="code">
+      <input type="hidden" value="user" name="role" id="role">
       <button class="btn btn-primary" id="code-submit">Submit</button>
     </div>
                 </div>
@@ -138,11 +139,12 @@ const firstnameValue=document.getElementById('fname').value;
 const lastnameValue=document.getElementById('lname').value;
 const emailValue=document.getElementById('email').value;
 const passwordValue=document.getElementById('password').value;
+const roleValue=document.getElementById('role').value;
 
 const emailVer={
   firstname:firstnameValue,
    lastname:lastnameValue,
-  email:emailValue
+  email:emailValue,
 }
 
 async function sendEmailVerification()
@@ -165,13 +167,12 @@ CodeSubmit.addEventListener("click",function(event){
   const verifcodeUser= document.getElementById('code').value;
 if(verifcode==verifcodeUser)
 {
-
-
     const registerData= {
   firstname:firstnameValue,
   lastname:lastnameValue,
   email:emailValue,
-  password:passwordValue
+  password:passwordValue,
+
 };
 
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends BaseController
 {
@@ -23,7 +24,9 @@ class CategoryController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'category' => 'required|string|max:255',
+        ]);
     }
 
     /**

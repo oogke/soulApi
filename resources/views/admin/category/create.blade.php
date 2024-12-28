@@ -34,8 +34,33 @@
     <label for="exampleInputCategory" class="form-label">Category</label>
     <input type="email" class="form-control" id="exampleInputCategory" aria-describedby="emailHelp" name="category">
   </div>
-  <button type="submit" class="btn btn-success">Submit</button>
+  <button type="submit" class="btn btn-success" id="submit-btn">Submit</button>
 </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script>
+        const token=localStorage.getItem("token");
+          const submitBtn= document.getElementById("submit-btn");
+          submitBtn.addEventListener("click",function(event)
+{
+  event.preventDefault();
+  const category = document.getElementById("exampleInputCategory").value;
+  const formData = new FormData();
+  formData.append('category', category);
+
+//   fetch('/api/cafes', {
+//         method: 'POST',
+//         body: formData
+//     }).then(response => {
+//         if (response.ok) {
+//             alert('Category added successfully!');
+//         } else {
+//             alert('Failed to add category. Please try again.');
+//         }
+//     }).catch(error => {
+//         console.error('Error:', error);
+//         alert('An error occurred. Please try again.');
+//     });
+});
+    </script>
 </body>
 </html>

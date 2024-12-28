@@ -103,8 +103,76 @@
     <label for="exampleImage5" class="form-label">Image5</label>
     <input type="file" class="form-control" id="exampleImage5" aria-describedby="emailHelp" name="image5">
   </div>
-  <button type="submit" class="btn btn-success">Submit</button>
+  <button type="submit" class="btn btn-success" id="submit-btn">Submit</button>
 </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script>
+              const token=localStorage.getItem("token");
+          const submitBtn= document.getElementById("submit-btn");
+          submitBtn.addEventListener("click",function(event)
+{
+  event.preventDefault();
+
+  const name = document.getElementById("exampleInputName").value;
+            const district = document.getElementById("exampleInputDistrict").value;
+            const description = document.getElementById("exampleInputDescription").value;
+            const location = document.getElementById("exampleInputLocation").value;
+            const category = document.getElementById("exampleInputCategory").value;
+            const organizer = document.getElementById("exampleInputOrganizer").value;
+            const ticketPrice = document.getElementById("exampleInputTicketPrice").value;
+            const sdate = document.getElementById("exampleInputSdate").value;
+            const edate = document.getElementById("exampleInputEdate").value;
+            const stime = document.getElementById("exampleInputStime").value;
+            const etime = document.getElementById("exampleInputEtime").value;
+            const phone = document.getElementById("exampleInputPhone").value;
+            const email = document.getElementById("exampleInputEmail").value;
+            const image1 = document.getElementById("exampleImage1").files[0];
+            const image2 = document.getElementById("exampleImage2").files[0];
+            const image3 = document.getElementById("exampleImage3").files[0];
+            const image4 = document.getElementById("exampleImage4").files[0];
+            const image5 = document.getElementById("exampleImage5").files[0];
+
+            // Create FormData and append all fields
+            for()
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('district', district);
+            formData.append('description', description);
+            formData.append('location', location);
+            formData.append('category', category);
+            formData.append('organizer', organizer);
+            formData.append('ticket_price', ticketPrice);
+            formData.append('start_date', sdate);
+            formData.append('end_date', edate);
+            formData.append('start_time', stime);
+            formData.append('end_time', etime);
+            formData.append('phone', phone);
+            formData.append('email', email);
+            formData.append('image1', image1);
+            formData.append('image2', image2);
+            formData.append('image3', image3);
+            formData.append('image4', image4);
+            formData.append('image5', image5);
+            console.log(formData);
+
+            // Send the data to the server using fetch API
+            // fetch('/api/events', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Authorization': 'Bearer ' + token
+            //     },
+            //     body: formData
+            // }).then(response => {
+            //     if (response.ok) {
+            //         alert('Event added successfully!');
+            //     } else {
+            //         alert('Failed to add event. Please try again.');
+            //     }
+            // }).catch(error => {
+            //     console.error('Error:', error);
+            //     alert('An error occurred. Please try again.');
+            // });
+});
+    </script>
 </body>
 </html>

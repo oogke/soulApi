@@ -40,7 +40,8 @@ return $this->sendResponse($verifcode,"The email hasbeen sent");
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'email' => $request->email,
-            'password' => $request->password
+            'password' => $request->password,
+           
         ]);
 
         return $this->sendResponse($user, 'user registered successfully');
