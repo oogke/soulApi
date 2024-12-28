@@ -66,6 +66,27 @@ $img3=time().".".$ext3;
 $img4=time().".".$ext4;
 $img5=time().".".$ext5;
 //images
+$event=Event::create([
+    'name'=>$request->name,
+    'district'=>$request->district,
+    'description'=>$request->description,
+    'location'=>$request->location,
+    'category'=>$request->category,
+    'organizer'=>$request->organizer,
+    'ticket_price'=>$request->ticket_price,
+    'start_date'=>$request->start_date,
+    'end_date'=>$request->end_date,
+    'start_time'=>$request->start_time,
+    'end_time'=>$request->end_time,
+    'phone'=>$request->phone,
+    'email'=>$request->email,
+    'image1'=>$img1,
+    'image2'=>$img2,
+    'image3'=>$img3,
+    'image4'=>$img4,
+    'image5'=>$img5,
+]);
+return $this->sendResponse($event,"Data inserted Successfully");
 
     }
 

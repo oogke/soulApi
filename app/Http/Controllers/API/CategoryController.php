@@ -31,6 +31,11 @@ class CategoryController extends BaseController
         {
             return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
         }
+        $category=Category::create([
+            'category'=>$request->category,
+        ]);
+        return $this->sendResponse($category,"Data inserted Successfully");
+
     }
 
     /**

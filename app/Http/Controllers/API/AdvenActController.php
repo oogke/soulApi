@@ -68,7 +68,26 @@ $img3=time().".".$ext3;
 $img4=time().".".$ext4;
 $img5=time().".".$ext5;
 //image
-$advenActs=AdvenAct::create([]);
+$advenAct=AdvenAct::create([
+    'name'=>$request->name,
+    'district'=>$request->district,
+    'description'=>$request->description,
+    'price'=>$request->price,
+    'duration'=>$request->duration,
+    'requirements'=>json_encode($request->requirements),
+    'image1'=>$img1,
+    'image2'=>$img2,
+    'image3'=>$img3,
+    'image4'=>$img4,
+    'image5'=>$img5,
+    'is_seasonal'=>$request->is_seasonal,
+    'best_season'=>json_encode($request->bestSeason),
+    'location'=>$request->location,
+    'email'=>$request->email,
+    'phone'=>$request->phone,
+    'website'=>$request->website
+]);
+return $this->sendResponse($advenAct,"Data inserted Successfully");
 
 
     }

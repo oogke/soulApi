@@ -66,7 +66,26 @@ $img3=time().".".$ext3;
 $img4=time().".".$ext4;
 $img5=time().".".$ext5;
 //
-
+$guide=Guide::create([
+    'firstname'=>$request->first_name,
+    'lastname'=>$request->last_name,
+    'address'=>$request->address,
+    'phone'=>$request->phone,
+    'dob'=>$request->dob,
+    'country'=>$request->country,
+    'email'=>$request->email,
+    'website'=>$request->websites,
+    'profile'=>$img3,
+    'CV'=>$img2,
+    'citizenshipNo'=>$request->citizenship_card_no,
+    'citizenshipCardFront'=>$img4,
+    'citizenshipCardBack'=>$img5,
+    'GOVcertificate'=>$img1,
+    'languages'=>json_encode($request->languages),
+    'experience'=>json_encode($request->experiences)
+  
+]);
+return $this->sendResponse($guide,"Data inserted Successfully");
 
     }
 

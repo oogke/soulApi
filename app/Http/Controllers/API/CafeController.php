@@ -59,6 +59,21 @@ $img3=time().".".$ext3;
 $img4=time().".".$ext4;
 $img5=time().".".$ext5;
 //images
+$cafe=Cafe::create([
+    'name'=>$request->name,
+    'description'=>$request->description,
+    'location'=>$request->location,
+    'district'=>$request->district,
+    'email'=>$request->email,
+    'phone'=>$request->phone,
+    'website'=>$request->website,
+    'image1'=>$img1,
+    'image2'=>$img2,
+    'image3'=>$img3,
+    'image4'=>$img4,
+    'image5'=>$img5,
+]);
+return $this->sendResponse($cafe,"Data inserted Successfully");
 
     }
 

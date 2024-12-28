@@ -35,6 +35,13 @@ class DistrictController extends BaseController
         {
             return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
         }
+        $district=District::create([
+            'name'=>$request->district,
+            'province'=>$request->province,
+            'description'=>$request->description
+        ]);
+        return $this->sendResponse($district,"Data inserted Successfully");
+
     }
 
     /**
