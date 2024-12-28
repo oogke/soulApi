@@ -49,6 +49,25 @@ class GuideController extends BaseController
         {
             return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
         }
+        //image
+$GOVcertificate=$request->certificate;
+$CV=$request->cv;
+$profile=$request->profile;
+$CcardFront=$request->citizenship_card_front;
+$Ccardback=$request->citizenship_card_back;
+$ext1=$GOVcertificate->getClientOriginalExtension();
+$ext2=$CV->getClientOriginalExtension();
+$ext3=$profile->getClientOriginalExtension();
+$ext4=$CcardFront->getClientOriginalExtension();
+$ext5=$Ccardback->getClientOriginalExtension();
+$img1=time().".".$ext1;
+$img2=time().".".$ext2;
+$img3=time().".".$ext3;
+$img4=time().".".$ext4;
+$img5=time().".".$ext5;
+//
+
+
     }
 
     /**
