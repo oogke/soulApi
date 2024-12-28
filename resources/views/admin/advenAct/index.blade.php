@@ -6,30 +6,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/c5a4938a4c.js" crossorigin="anonymous"></script>  
 
-    <title>manage Districts</title>
+    <title>Manage adventure</title>
     <style>
-  .header {
-            width: 100%;
-            height: 100px;
-text-align: center;
-margin-top: 20px;
-
-        }
-
-        table tbody tr {
-            height: 70px;
-        }
-
-        .a {
-            width: 150px;
-            margin-top: 20px;
-            margin-left: 30px;
-        }
-        #delete-btn {
-            border-left: 1px solid blue;
-            padding: 5px;
-        }
-        #create-btn {
+#tableDiv
+{
+    overflow-x: auto;
+   max-width: 100%;
+   white-space: nowrap;
+}
+#create-btn {
             margin: 10px 20px 50px 30px;
             width: 150px;
             height: 40px;
@@ -37,64 +22,110 @@ margin-top: 20px;
             font-size: 20px;
             text-decoration: none;
         }
+        h1{
+            text-align: center;
+            font-family: cursive;
+           margin-top: 30px;
+           margin-bottom: 20px;
+        
+        }
 
     </style>
 </head>
 <body>
 
 <div class="header">
-        <h1 class="heading mt-2 ">Manage Post</h1>
+        <h1 class="heading mt-2 ">Manage Adventure Activity</h1>
+
+
+
+
     </div>
-    <a href="{{ Route('createAdventureActs')}}"><button class="btn btn-link btn-primary" id="create-btn">Create post</button></a>
-    <div class="table-div" id="table-div">
+    <a href="{{ Route('createAdventureActs')}}" ><button id="create-btn" class="btn btn-link btn-primary" >Create post</button></a>
+    <div id="tableDiv">
+   
+ 
+   
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script>
+        
         function loadData()
         {
+            var tableContent=`<table class="table table-striped table-hover table-bordered align-middle">
+    <thead>
+    <tr>
+      <th scope="col">S.N</th>
+      <th scope="col">Name</th>
+      <th scope="col">District</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col">Duration</th>
+      <th scope="col">Requirements</th>
+      <th scope="col" width="300px">Image1</th>
+      <th scope="col" width="3000px">Image2</th>
+      <th scope="col" width="300px">Image3</th>
+      <th scope="col" width="3000px">Image4</th>
+      <th scope="col" width="300px">Image5</th>
+      <th scope="col">Is seasonal?</th>
+      <th scope="col">Best Season</th>
+      <th scope="col">Location</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Website</th>
+       <th scope="col">view</th>
+      <th scope="col">Delete</th>
+      <th scope="col">update</th>
+    </tr>
+  </thead>
+  <tbody></tbody>`;
             const token=localStorage.getItem("token");
             const tableDiv = document.getElementById('table-div');
-fetch('/api/districts',{
+fetch('/api/advenacts',{
     method: "GET",
     headers:
     {
        'Authorization':`Bearer ${token}`
     }
-}).then(response=>{return response.json()}).then(data=>
+}).then(response=>{return response.json(response)}).then(data=>
 {
-let tableData=`
-    <table class="table table-striped table-hover table-bordered align-middle">
-            <thead>
-                <tr>
-                    <th scope="col">S.N</th>
-                    <th scope="col">District</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Province</th>
-                    <th scope="col">view</th>
-                    <th scope="col">update</th>
-                    <th scope="col">delete</th>
-                </tr>
-            </thead>
-            <tbody id="TaskTableBody">`;
+    const tableDiv=document.getElementById("tableDiv");
+    const advenacts=data.data;
+    const n=0;
+    advenacts.forEach(advenact => {
+        tableContent+=`
+    <tr height="200px">
+      <th scope="row">${n++}</th>
+    <td>${advenact.name}</td>
+    <td>${advenact.district}</td>
+    <td>${advenact.description}</td>
+    <td>${advenact.price}</td>
+    <td>${advenact.duration}</td>
+    <td>${advenact.requirements}</td>
+    <td><img src="uploads/${advenact.image1}" alt=""></td>
+    <td><img src="uploads/${advenact.image2}" alt=""></td>
+    <td><img src="uploads/${advenact.image3}" alt=""></td>
+    <td><img src="uploads/${advenact.image4}" alt=""></td>
+    <td><img src="uploads/${advenact.image5}" alt=""></td>
+    <td>${advenact.is_seasonal}</td>
+    <td>${advenact.best_season}</td>
+    <td>${advenact.location}</td>
+    <td>${advenact.email}</td>
+    <td>${advenact.phone}</td>
+    <td>${advenact.website}</td>
+    <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${advenact.id}">view</a></td>
+      <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${advenact.id}">Delete</a></td>
+      <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${advenact.id}">Update</a></td>
+    </tr>`;
 
-            let n = 1;
-            for( var district of data.data)
-            {
-                tableData+=` <tr>
-                    <td>${n++}</td>
-                    <td>${district.name}</td>
-                    <td>${district.description}</td>
-                    <td>${district.province}</td>
-                    <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${district.id}">view</a></td>
-                    <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${district.id}">Edit</a></td>
-                    <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${district.id}">Delete</a></td>
-                </tr>`;   
-            }
-            tableData+=`</tbody>
-        </table>`;
-        tableDiv.innerHTML = tableData;
-}
-);
+});
+tableContent+=`  </tbody>
+</table>`;
+tableDiv.innerHTML=tableContent;
+    });
+
+
         }
         loadData();
     </script>

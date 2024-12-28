@@ -24,26 +24,31 @@
            margin-bottom: 20px;
         
         }
+      #manage-btn{
+text-decoration: none;
+color: white;
+        }
     </style>
 </head>
 <body>
-    
+<a href="{{ Route('manageDistricts')}}" id="manage-btn"><button class="btn btn-link btn-danger">Manage Districts</button></a>
+
 <form>
     <h1>Insert District</h1>
   <div class="mb-3">
     <label for="exampleInputDistricts" class="form-label">District</label>
-    <input type="email" class="form-control" id="exampleInputDistricts" aria-describedby="emailHelp">
+    <input type="text" class="form-control" id="exampleInputDistricts" aria-describedby="emailHelp" name="district">
   </div>
 
   <div class="mb-3">
     <label for="exampleInputProvince" class="form-label">Province</label>
-    <input type="password" class="form-control" id="exampleInputProvince" name="district">
+    <input type="text" class="form-control" id="exampleInputProvince" name="province">
   </div>
   <div class="mb-3">
     <label for="exampleInputDescription" class="form-label">Description</label>
-    <input type="password" class="form-control" id="exampleInputDescription" name="description">
+    <input type="text" class="form-control" id="exampleInputDescription" name="description">
   </div>
-  <button type="submit" class="btn btn-success" id="submit-btn">Submit</button>
+  <button type="submit" class="btn btn-success" id="submit-btn">Insert</button>
 </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script>
@@ -60,23 +65,23 @@
     formData.append('province', province);
     formData.append('description', description);
     console.log(formData);
-    // fetch('/api/districts', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Authorization': `Bearer ${token}`  // Attach token from localStorage
-    //     },
-    //     body: formData
-    // }).then(response => {
-    //     if (response.ok) {
-    //         alert('District added successfully!');
-    //         window.location.reload();  // Refresh or redirect if needed
-    //     } else {
-    //         alert('Failed to add district. Please try again.');
-    //     }
-    // }).catch(error => {
-    //     console.error('Error:', error);
-    //     alert('An error occurred. Please try again.');
-    // });
+     fetch('/api/districts', {
+         method: "POST",
+     headers: {
+           'Authorization': `Bearer ${token}` 
+       },
+       body: formData
+     }).then(response => {
+     if (response.ok) {
+          alert('District added successfully!');
+         window.location.reload();  
+    } else {
+         console.log(response);
+        }
+    }).catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+     });
   
 });
     </script>

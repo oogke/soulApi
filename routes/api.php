@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->group(function()
 Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 Route::get('/districts/{districtName}',[DistrictController::class,'show']);
 Route::apiResource('/districts',DistrictController::class)->except(['show']);
-Route::apiResource('/category',CategoryController::class)->except(['show']);
+Route::apiResource('/categories',CategoryController::class)->except(['show']);
 Route::apiResource('/places',PlaceController::class)->except(['show']);
 Route::apiResource('/cafes',CafeController::class)->except(['show']);
 Route::apiResource('/restaurants',RestaurantController::class)->except(['show']);

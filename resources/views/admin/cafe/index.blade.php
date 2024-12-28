@@ -47,6 +47,10 @@ margin-top: 20px;
     </div>
     <a href="{{ Route('createCafes')}}"><button class="btn btn-link btn-primary" id="create-btn">Create post</button></a>
     <div class="table-div" id="table-div">
+   
+  
+     
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script>
@@ -54,7 +58,7 @@ margin-top: 20px;
         {
             const token=localStorage.getItem("token");
             const tableDiv = document.getElementById('table-div');
-fetch('/api/districts',{
+fetch('/api/cafes',{
     method: "GET",
     headers:
     {
@@ -63,32 +67,51 @@ fetch('/api/districts',{
 }).then(response=>{return response.json()}).then(data=>
 {
 let tableData=`
-    <table class="table table-striped table-hover table-bordered align-middle">
-            <thead>
-                <tr>
-                    <th scope="col">S.N</th>
-                    <th scope="col">District</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Province</th>
-                    <th scope="col">view</th>
-                    <th scope="col">update</th>
-                    <th scope="col">delete</th>
-                </tr>
-            </thead>
-            <tbody id="TaskTableBody">`;
+    <table class="table table-striped table-bordered align-middle">
+  <thead>
+    <tr>
+      <th scope="col">S.N</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th> 
+      <th scope="col">District</th>
+      <th scope="col">Location</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+      <th scope="col">Website</th>
+      <th scope="col">Image1</th>
+      <th scope="col">Image2</th>
+      <th scope="col">Image3</th>
+      <th scope="col">Image4</th>
+      <th scope="col">Image5</th>
+      <th scope="col">view</th>
+      <th scope="col">Delete</th>
+      <th scope="col">update</th>
+     
+    </tr>
+  </thead>
+  <tbody>`;
 
             let n = 1;
-            for( var district of data.data)
+            for( var cafe of data.data)
             {
-                tableData+=` <tr>
-                    <td>${n++}</td>
-                    <td>${district.name}</td>
-                    <td>${district.description}</td>
-                    <td>${district.province}</td>
-                    <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${district.id}">view</a></td>
-                    <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${district.id}">Edit</a></td>
-                    <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${district.id}">Delete</a></td>
-                </tr>`;   
+                tableData+=`  <tr>
+      <th scope="row">${n++}</th>
+      <td>${cafe.name}</td>
+      <td>${cafe.description}</td>
+      <td>${cafe.district}</td>
+      <td>${cafe.location}</td>
+      <td>${cafe.phone}</td>
+      <td>${cafe.email}</td>
+      <td>${cafe.website}</td>
+      <td>${cafe.image1}</td>
+      <td>${cafe.image2}</td>
+      <td>${cafe.image3}</td>
+      <td>${cafe.image4}</td>
+      <td>${cafe.image5}</td>
+      <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${cafe.id}">view</a></td>
+      <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${cafe.id}">Delete</a></td>
+      <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${cafe.id}">Update</a></td>
+    </tr>`;   
             }
             tableData+=`</tbody>
         </table>`;
