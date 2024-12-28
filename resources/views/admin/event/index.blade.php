@@ -54,7 +54,7 @@ margin-top: 20px;
         {
             const token=localStorage.getItem("token");
             const tableDiv = document.getElementById('table-div');
-fetch('/api/districts',{
+fetch('/api/events',{
     method: "GET",
     headers:
     {
@@ -93,31 +93,31 @@ let tableData=`
             <tbody id="TaskTableBody">`;
 
             let n = 1;
-            for( var district of data.data)
+            for( var event of data.data)
             {
                 tableData+=` <tr>
                     <td>${n++}</td>
-                    <td>${district.name}</td>
-                    <td>${district.description}</td>
-                    <td>${district.location}</td>
-                    <td>${district.district}</td>
-                    <td>${district.start_date}</td>
-                    <td>${district.end_date}</td>
-                    <td>${district.start_time}</td>
-                    <td>${district.end_time}</td>
-                    <td>${district.category}</td>
-                    <td>${district.image1}</td>
-                    <td>${district.image2}</td>
-                    <td>${district.image3}</td>
-                    <td>${district.image4}</td>
-                    <td>${district.image5}</td>
-                    <td>${district.organizer}</td>
-                    <td>${district.phone}</td>
-                    <td>${district.email}</td>
-                    <td>${district.ticket_price}</td>
-                    <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${district.id}">view</a></td>
-                    <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${district.id}">Edit</a></td>
-                    <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${district.id}">Delete</a></td>
+                    <td>${event.name}</td>
+                    <td>${event.description}</td>
+                    <td>${event.location}</td>
+                    <td>${event.district}</td>
+                    <td>${event.start_date}</td>
+                    <td>${event.end_date}</td>
+                    <td>${event.start_time}</td>
+                    <td>${event.end_time}</td>
+                    <td>${event.category}</td>
+           <td><img src="uploads/cafe/${event.image1}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/cafe/${event.image2}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/cafe/${event.image3}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/cafe/${event.image4}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/cafe/${event.image5}" alt="" width="150px" height="150px"></td>
+                    <td>${event.organizer}</td>
+                    <td>${event.phone}</td>
+                    <td>${event.email}</td>
+                    <td>${event.ticket_price}</td>
+                    <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${event.id}">view</a></td>
+                    <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${event.id}">Edit</a></td>
+                    <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${event.id}">Delete</a></td>
                 </tr>`;   
             }
             tableData+=`</tbody>

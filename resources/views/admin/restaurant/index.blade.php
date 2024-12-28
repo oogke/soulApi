@@ -99,11 +99,11 @@ let tableData=`
       <td>${restaurant.phone}</td>
       <td>${restaurant.email}</td>
       <td>${restaurant.website}</td>
-       <td><img src="uploads/restaurant/${restaurant.image1}" alt=""></td>
-    <td><img src="uploads/restaurant/${restaurant.image2}" alt=""></td>
-    <td><img src="uploads/restaurant/${restaurant.image3}" alt=""></td>
-    <td><img src="uploads/restaurant/${restaurant.image4}" alt=""></td>
-    <td><img src="uploads/restaurant/${restaurant.image5}" alt=""></td>
+       <td><img src="uploads/restaurant/${restaurant.image1}" alt=""  width="150px" height="150px"></td>
+    <td><img src="uploads/restaurant/${restaurant.image2}" alt=""  width="150px" height="150px"></td>
+    <td><img src="uploads/restaurant/${restaurant.image3}" alt=""  width="150px" height="150px"></td>
+    <td><img src="uploads/restaurant/${restaurant.image4}" alt=""  width="150px" height="150px"></td>
+    <td><img src="uploads/restaurant/${restaurant.image5}" alt=""  width="150px" height="150px"></td>
       <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${restaurant.id}">view</a></td>
       <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${restaurant.id}">Delete</a></td>
       <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${restaurant.id}">Update</a></td>

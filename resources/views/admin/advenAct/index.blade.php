@@ -92,7 +92,7 @@ fetch('/api/advenacts',{
 {
     const tableDiv=document.getElementById("tableDiv");
     const advenacts=data.data;
-    const n=0;
+    let n=1;
     advenacts.forEach(advenact => {
         tableContent+=`
     <tr height="200px">
@@ -103,11 +103,11 @@ fetch('/api/advenacts',{
     <td>${advenact.price}</td>
     <td>${advenact.duration}</td>
     <td>${advenact.requirements}</td>
-    <td><img src="uploads/advenact/${advenact.image1}" alt=""></td>
-    <td><img src="uploads/advenact/${advenact.image2}" alt=""></td>
-    <td><img src="uploads/advenact/${advenact.image3}" alt=""></td>
-    <td><img src="uploads/advenact/${advenact.image4}" alt=""></td>
-    <td><img src="uploads/advenact/${advenact.image5}" alt=""></td>
+    <td><img src="uploads/advenact/${advenact.image1}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/advenact/${advenact.image2}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/advenact/${advenact.image3}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/advenact/${advenact.image4}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/advenact/${advenact.image5}" alt="" width="150px" height="150px"></td>
     <td>${advenact.is_seasonal}</td>
     <td>${advenact.best_season}</td>
     <td>${advenact.location}</td>

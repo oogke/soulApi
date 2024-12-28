@@ -106,11 +106,11 @@ let tableData=`
                     <td>${guide.website}</td>
                     <td>${guide.languages}</td>
                     <td>${guide.address}</td>
-                    <td><img src="uploads/guide/${guide.profile}" alt=""></td>
-    <td><img src="uploads/guide/${guide.citizenCardFront}" alt=""></td>
-    <td><img src="uploads/guide/${guide.citizenCardBack}" alt=""></td>
-    <td><img src="uploads/guide/${guide.GOVcertificate}" alt=""></td>
-    <td><img src="uploads/guide/${guide.CV}" alt=""></td>
+                    <td><img src="uploads/guide/${guide.profile}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/guide/${guide.citizenCardFront}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/guide/${guide.citizenCardBack}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/guide/${guide.GOVcertificate}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/guide/${guide.CV}" alt="" width="150px" height="150px"></td>
                     <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${guide.id}">view</a></td>
                     <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${guide.id}">Edit</a></td>
                     <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${guide.id}">Delete</a></td>

@@ -98,11 +98,11 @@ let tableData=`
       <td>${vehiclehub.phone}</td>
       <td>${vehiclehub.email}</td>
       <td>${vehiclehub.website}</td>
-       <td><img src="uploads/${vehiclehub.image1}" alt=""></td>
-    <td><img src="uploads/${vehiclehub.image2}" alt=""></td>
-    <td><img src="uploads/${vehiclehub.image3}" alt=""></td>
-    <td><img src="uploads/${vehiclehub.image4}" alt=""></td>
-    <td><img src="uploads/${vehiclehub.image5}" alt=""></td>
+       <td><img src="uploads/${vehiclehub.image1}" alt=""  width="150px" height="150px"></td>
+    <td><img src="uploads/${vehiclehub.image2}" alt=""  width="150px" height="150px"></td>
+    <td><img src="uploads/${vehiclehub.image3}" alt=""  width="150px" height="150px"></td>
+    <td><img src="uploads/${vehiclehub.image4}" alt=""  width="150px" height="150px"></td>
+    <td><img src="uploads/${vehiclehub.image5}" alt=""  width="150px" height="150px"></td>
       <td>${vehiclehub.vehicles}</td>
       <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${vehiclehub.id}">view</a></td>
       <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${vehiclehub.id}">Delete</a></td>
