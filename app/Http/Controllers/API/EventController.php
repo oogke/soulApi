@@ -26,18 +26,18 @@ class EventController extends BaseController
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'district' => 'required|string|max:255',
+            'name' => 'required|string',
+            'district' => 'required|string',
             'description' => 'required|string',
-            'location' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
-            'organizer' => 'required|string|max:255',
-            'ticket_price' => 'required|numeric',
+            'location' => 'required|string',
+            'category' => 'required|string',
+            'organizer' => 'required|string',
+            'ticket_price' => 'required',
             'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|after:start_time',
-            'phone' => 'required|string|max:15',
+            'end_date' => 'required',
+            'start_time' => 'required',
+            'end_time' => 'required',
+            'phone' => 'required|string',
             'email' => 'required|email',
             'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -65,11 +65,11 @@ $img2=time().".".$ext2;
 $img3=time().".".$ext3;
 $img4=time().".".$ext4;
 $img5=time().".".$ext5;
-$image1->move(public_path().'/uploads/event/'.$img1);
-$image2->move(public_path().'/uploads/event/'.$img2);
-$image3->move(public_path().'/uploads/event/'.$img3);
-$image4->move(public_path().'/uploads/event/'.$img4);
-$image5->move(public_path().'/uploads/event/'.$img5);
+$image1->move(public_path('uploads/event'),$img1);
+$image2->move(public_path('uploads/event'),$img2);
+$image3->move(public_path('uploads/event'),$img3);
+$image4->move(public_path('uploads/event'),$img4);
+$image5->move(public_path('uploads/event'),$img5);
 //images
 $event=Event::create([
     'name'=>$request->name,

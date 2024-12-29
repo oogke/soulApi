@@ -25,13 +25,13 @@ class CafeController extends BaseController
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'district' => 'required|string|max:255',
-            'description' => 'required|string|max:1000',
-            'location' => 'required|string|max:255',
-            'phone' => 'required|string|regex:/^([0-9\s\-\+\(\)]*)$/|min:10|max:15', 
-            'email' => 'required|email|max:255',
-            'website' => 'required|url|max:255',
+            'name' => 'required|string',
+            'district' => 'required|string',
+            'description' => 'required|string',
+            'location' => 'required|string',
+            'phone' => 'required|string', 
+            'email' => 'required|email',
+            'website' => 'required|url',
             'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -58,11 +58,11 @@ $img2=time().".".$ext2;
 $img3=time().".".$ext3;
 $img4=time().".".$ext4;
 $img5=time().".".$ext5;
-$image1->move(public_path().'/uploads/cafe/'.$img1);
-$image2->move(public_path().'/uploads/cafe/'.$img2);
-$image3->move(public_path().'/uploads/cafe/'.$img3);
-$image4->move(public_path().'/uploads/cafe/'.$img4);
-$image5->move(public_path().'/uploads/cafe/'.$img5);
+$image1->move(public_path('uploads/cafe'),$img1);
+$image2->move(public_path('uploads/cafe'),$img2);
+$image3->move(public_path('uploads/cafe'),$img3);
+$image4->move(public_path('uploads/cafe'),$img4);
+$image5->move(public_path('uploads/cafe'),$img5);
 //images
 $cafe=Cafe::create([
     'name'=>$request->name,

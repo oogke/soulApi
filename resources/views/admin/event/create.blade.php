@@ -40,7 +40,7 @@
   </div>
   <div class="mb-3">
     <label for="exampleInputDescription" class="form-label">Description</label>
-    <input type="text" class="form-control" id="exampleInputDescription" aria-describedby="emailHelp" name="description">>
+    <input type="text" class="form-control" id="exampleInputDescription" aria-describedby="emailHelp" name="description">
   </div>
   <div class="mb-3">
     <label for="exampleInputLocation" class="form-label">Location</label>
@@ -133,7 +133,7 @@
             const image5 = document.getElementById("exampleImage5").files[0];
 
             // Create FormData and append all fields
-            for()
+           
             const formData = new FormData();
             formData.append('name', name);
             formData.append('district', district);
@@ -155,23 +155,23 @@
             formData.append('image5', image5);
             console.log(formData);
 
-            // Send the data to the server using fetch API
-            // fetch('/api/events', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Authorization': 'Bearer ' + token
-            //     },
-            //     body: formData
-            // }).then(response => {
-            //     if (response.ok) {
-            //         alert('Event added successfully!');
-            //     } else {
-            //         alert('Failed to add event. Please try again.');
-            //     }
-            // }).catch(error => {
-            //     console.error('Error:', error);
-            //     alert('An error occurred. Please try again.');
-            // });
+           
+            fetch('/api/events', {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                },
+                body: formData
+            }).then(response => {
+                if (response.ok) {
+                    alert('Event added successfully!');
+                } else {
+                    alert('Failed to add event. Please try again.');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
 });
     </script>
 </body>

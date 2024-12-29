@@ -65,11 +65,11 @@ $img2=time().".".$ext2;
 $img3=time().".".$ext3;
 $img4=time().".".$ext4;
 $img5=time().".".$ext5;
-$GOVcertificate->move(public_path().'/uploads/guide/'.$img1);
-$CV->move(public_path().'/uploads/guide/'.$img2);
-$profile->move(public_path().'/uploads/guide/'.$img3);
-$CcardFront->move(public_path().'/uploads/guide/'.$img4);
-$Ccardback->move(public_path().'/uploads/guide/'.$img5);
+$GOVcertificate->move(public_path('uploads/guide'),$img1);
+$CV->move(public_path('uploads/guide'),$img2);
+$profile->move(public_path('uploads/guide'),$img3);
+$CcardFront->move(public_path('uploads/guide'),$img4);
+$Ccardback->move(public_path('uploads/guide'),$img5);
 //
 $guide=Guide::create([
     'firstname'=>$request->first_name,

@@ -59,11 +59,11 @@ $img2=time().".".$ext2;
 $img3=time().".".$ext3;
 $img4=time().".".$ext4;
 $img5=time().".".$ext5;
-$image1->move(public_path().'/uploads/hotel/'.$img1);
-$image2->move(public_path().'/uploads/hotel/'.$img2);
-$image3->move(public_path().'/uploads/hotel/'.$img3);
-$image4->move(public_path().'/uploads/hotel/'.$img4);
-$image5->move(public_path().'/uploads/hotel/'.$img5);
+$image1->move(public_path('uploads/hotel'),$img1);
+$image2->move(public_path('uploads/hotel'),$img2);
+$image3->move(public_path('uploads/hotel'),$img3);
+$image4->move(public_path('uploads/hotel'),$img4);
+$image5->move(public_path('uploads/hotel'),$img5);
 //images
 $hotel=Hotel::create([
     'name'=>$request->name,

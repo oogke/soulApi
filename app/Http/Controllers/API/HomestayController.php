@@ -59,11 +59,11 @@ $img2=time().".".$ext2;
 $img3=time().".".$ext3;
 $img4=time().".".$ext4;
 $img5=time().".".$ext5;
-$image1->move(public_path().'/uploads/homestay/'.$img1);
-$image2->move(public_path().'/uploads/homestay/'.$img2);
-$image3->move(public_path().'/uploads/homestay/'.$img3);
-$image4->move(public_path().'/uploads/homestay/'.$img4);
-$image5->move(public_path().'/uploads/homestay/'.$img5);
+$image1->move(public_path('uploads/homestay'),$img1);
+$image2->move(public_path('uploads/homestay'),$img2);
+$image3->move(public_path('uploads/homestay'),$img3);
+$image4->move(public_path('uploads/homestay'),$img4);
+$image5->move(public_path('uploads/homestay'),$img5);
 //images
 $homestay=Homestay::create([
     'name'=>$request->name,

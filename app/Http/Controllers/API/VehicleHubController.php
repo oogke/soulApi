@@ -60,11 +60,11 @@ $img2=time().".".$ext2;
 $img3=time().".".$ext3;
 $img4=time().".".$ext4;
 $img5=time().".".$ext5;
-$image1->move(public_path().'/uploads/vehiclehub/'.$img1);
-$image2->move(public_path().'/uploads/vehiclehub/'.$img2);
-$image3->move(public_path().'/uploads/vehiclehub/'.$img3);
-$image4->move(public_path().'/uploads/vehiclehub/'.$img4);
-$image5->move(public_path().'/uploads/vehiclehub/'.$img5);
+$image1->move(public_path('uploads/vehiclehub'),$img1);
+$image2->move(public_path('uploads/vehiclehub'),$img2);
+$image3->move(public_path('uploads/vehiclehub'),$img3);
+$image4->move(public_path('uploads/vehiclehub'),$img4);
+$image5->move(public_path('uploads/vehiclehub'),$img5);
 //images
 $vehicleHub=VehicleHub::create([
     'name'=>$request->name,

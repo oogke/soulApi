@@ -123,29 +123,13 @@ console.log(formData);
 fetch("/api/cafes",{
   method: "POST",
   headers:{
-    'Authorization':`Bearer ${"token"}`
-  }
-})
-// Submit the form using fetch
-// fetch('/api/cafes', {
-//     method: 'POST',
-//     headers:{
-//       'Authorization':`Bearer ${"token"}`;
-//     }
-//     body: formData
-// }).then(response => {
-//     if (response.ok) {
-//         alert('Cafe added successfully!');
-//     } else {
-//         alert('Failed to add cafe. Please try again.');
-//     }
-// }).catch(error => {
-//     console.error('Error:', error);
-//     alert('An error occurred. Please try again.');
-// });
-
-
-
+    'Authorization':`Bearer ${token}`
+  },body:formData
+}).then(response=>{
+  return response.json();
+}).then(data=>{
+  console.log(data);
+});
 
 });
     </script>
