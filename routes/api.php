@@ -33,7 +33,7 @@ Route::apiResource('/hotels',HotelController::class)->except(['show']);
 Route::apiResource('/events',EventController::class)->except(['show']);
 Route::apiResource('/guides',GuideController::class)->except(['show']);
 Route::apiResource('/vehicleHubs',VehicleHubController::class)->except(['show']);
-Route::apiResource('/advenacts',AdvenActController::class)->except(['show']);
+Route::apiResource( '/advenacts',AdvenActController::class)->except(['show']);
 Route::get('/places/{placename}',[PlaceController::class,'show']);
 Route::get('/cafes/{cafeName}',[CafeController::class,'show']);
 Route::get('/restaurants/{restaurantName}',[RestaurantController::class,'show']);

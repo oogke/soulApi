@@ -28,6 +28,7 @@
 </head>
 <body>
   <form>
+    @csrf
     <h1>Insert adventures</h1>
     <div class="mb-3">
       <label for="exampleInputName" class="form-label">Name</label>
@@ -68,11 +69,11 @@
       <h3>Is seasonal?</h3>
       <label for="exampleInputIs_seasonal" class="form-label">True</label>
       <input type="radio" class="form-radio-input" id="exampleInputIs_seasonal" aria-describedby="emailHelp"
-        name="is_seasonal" value="true">
+        name="is_seasonal" value="1">
 
       <label for="exampleInputIs_seasonal" class="form-label">False</label>
       <input type="radio" class="form-radio-input" id="exampleInputIs_seasonal" aria-describedby="emailHelp"
-        name="is_seasonal" value="false">
+        name="is_seasonal" value="0">
     </div>
     <div class="mb-3">
       <label for="exampleInputBestSeason" class="form-label">Best Season</label><i class="fa-solid fa-circle-plus"
@@ -132,6 +133,7 @@ const submitBtn= document.getElementById("submit-btn");
 const CreateForm= document.getElementById("CreateForm");
 submitBtn.addEventListener("click",function(event)
 {
+  const token = localStorage.getItem("token");
   event.preventDefault();
 const name=document.getElementById("exampleInputName").value;
 const district=document.getElementById("exampleInputDistrict").value;
@@ -175,19 +177,26 @@ if (image2) formData.append('image2', image2);
 if (image3) formData.append('image3', image3);
 if (image4) formData.append('image4', image4);
 if (image5) formData.append('image5', image5);
-console.log(formData);
 
-// fetch("/api/advenacts",{
-//   method: "POST",
-//   headers:{
-//     'Authorization': `Bearer ${token}`
-//   },
-//   body:formData
-// }).then(response=>{
-//   console.log(response);
-// })
-  
-
+ 
+fetch("/api/advenacts",{
+  method:"POST",
+  headers:{
+    'Authorization':`Bearer ${token}`
+  },
+  body:formData
+}).then(response=>
+{
+return response.json();
+}).then(data=>
+{
+  console.log(data);
+  if(data.status==true)
+{
+ window.location.href="/";
+}
+}
+)
 });
 
 

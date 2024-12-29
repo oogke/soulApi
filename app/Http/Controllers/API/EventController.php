@@ -65,6 +65,11 @@ $img2=time().".".$ext2;
 $img3=time().".".$ext3;
 $img4=time().".".$ext4;
 $img5=time().".".$ext5;
+$image1->move(public_path().'/uploads/event/'.$img1);
+$image2->move(public_path().'/uploads/event/'.$img2);
+$image3->move(public_path().'/uploads/event/'.$img3);
+$image4->move(public_path().'/uploads/event/'.$img4);
+$image5->move(public_path().'/uploads/event/'.$img5);
 //images
 $event=Event::create([
     'name'=>$request->name,

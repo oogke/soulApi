@@ -58,6 +58,11 @@ $img2=time().".".$ext2;
 $img3=time().".".$ext3;
 $img4=time().".".$ext4;
 $img5=time().".".$ext5;
+$image1->move(public_path().'/uploads/cafe/'.$img1);
+$image2->move(public_path().'/uploads/cafe/'.$img2);
+$image3->move(public_path().'/uploads/cafe/'.$img3);
+$image4->move(public_path().'/uploads/cafe/'.$img4);
+$image5->move(public_path().'/uploads/cafe/'.$img5);
 //images
 $cafe=Cafe::create([
     'name'=>$request->name,

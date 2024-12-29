@@ -57,16 +57,23 @@ $image2=$request->image2;
 $image3=$request->image3;
 $image4=$request->image4;
 $image5=$request->image5;
+
 $ext1=$image1->getClientOriginalExtension();
 $ext2=$image2->getClientOriginalExtension();
 $ext3=$image3->getClientOriginalExtension();
 $ext4=$image4->getClientOriginalExtension();
 $ext5=$image5->getClientOriginalExtension();
-$img1=time().".".$ext1;
-$img2=time().".".$ext2;
-$img3=time().".".$ext3;
-$img4=time().".".$ext4;
-$img5=time().".".$ext5;
+$img1=time().'_' . uniqid() . ".".$ext1;
+$img2=time().'_' . uniqid() . ".".$ext2;
+$img3=time().'_' . uniqid() . ".".$ext3;
+$img4=time().'_' . uniqid() . ".".$ext4;
+$img5=time().'_' . uniqid() . ".".$ext5;
+$image1->move(public_path('uploads/advenact'),$img1);
+$image2->move(public_path('uploads/advenact'),$img2);
+$image3->move(public_path('uploads/advenact'),$img3);
+$image4->move(public_path('uploads/advenact'),$img4);
+$image5->move(public_path('uploads/advenact'),$img5);
+
 //image
 $advenAct=AdvenAct::create([
     'name'=>$request->name,

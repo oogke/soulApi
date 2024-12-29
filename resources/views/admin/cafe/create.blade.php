@@ -118,6 +118,14 @@ if (image4) formData.append('image4', image4);
 if (image5) formData.append('image5', image5);
 
 console.log(formData);
+
+
+fetch("/api/cafes",{
+  method: "POST",
+  headers:{
+    'Authorization':`Bearer ${"token"}`
+  }
+})
 // Submit the form using fetch
 // fetch('/api/cafes', {
 //     method: 'POST',
