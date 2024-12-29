@@ -107,27 +107,25 @@
         formData.append("image5", document.getElementById("exampleImage5").files[0]);
         console.log(formData);
 
-        // Send POST request with form data and authorization token
-        // fetch('YOUR_API_ENDPOINT', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Authorization': `Bearer ${token}`,
-        //     },
-        //     body: formData
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     // Handle the response from the server
-        //     if (data.success) {
-        //         alert("Restaurant added successfully!");
-        //     } else {
-        //         alert("Failed to add restaurant.");
-        //     }
-        // })
-        // .catch(error => {
-        //     console.error('Error:', error);
-        //     alert("An error occurred while submitting.");
-        // });
+        fetch('/api/restaurants', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Restaurant added successfully!");
+            } else {
+                alert("Failed to add restaurant.");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("An error occurred while submitting.");
+        });
 });
     </script>
 </body>

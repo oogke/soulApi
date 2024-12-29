@@ -116,10 +116,10 @@
       event.preventDefault();
       experiences.innerHTML +=`<input type="text" class="form-control mb-3" id="Experiences[]" aria-describedby="emailHelp">`;
     });
+    const submitBtn= document.getElementById("submit-btn");
     const token=localStorage.getItem("token");
-          const submitBtn= document.getElementById("submit-btn");
-          submitBtn.addEventListener("click",function(event)
-{
+    submitBtn.addEventListener("click",function(event)
+    {
   event.preventDefault();
   const formData = new FormData();
         formData.append('first_name', document.getElementById('exampleInputFirstname').value);
@@ -146,7 +146,26 @@ for(let j=0;j<ExperiencesArray.length;j++)
 {
   formdata.append("experiences[]",ExperiencesArray.value);
 }
-  console.log(formData);
+console.log(formData);
+
+fetch("/api/guides",{
+  method:"POST",
+  headers:{
+    'Authorization':`Bearer ${token}`
+  },
+  body: formData
+}).then(response=>{
+  if (response.ok) {
+                    alert('Event added successfully!');
+                  window.location.href="/";
+                } else {
+                    alert('Failed to add event. Please try again.');
+                }
+}).catch(err=>
+{
+  consoel.log(err);
+}
+);
 });
   </script>
   </body>

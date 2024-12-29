@@ -82,10 +82,10 @@
 </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script>
-              const token=localStorage.getItem("token");
-          const submitBtn= document.getElementById("submit-btn");
-          submitBtn.addEventListener("click",function(event)
-{
+      const submitBtn= document.getElementById("submit-btn");
+      submitBtn.addEventListener("click",function(event)
+      {
+  const token=localStorage.getItem("token");
   event.preventDefault();
  // Create FormData object
  const formData = new FormData();
@@ -107,22 +107,21 @@
         formData.append("image5", document.getElementById("exampleImage5").files[0]);
         console.log(formData);
 
-        // You can now send formData to the server (using fetch, for example)
-        // fetch('your-server-endpoint', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Authorization': `Bearer ${token}`
-        //     },
-        //     body: formData
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     console.log('Success:', data);
-        //     // Handle the response from the server
-        // })
-        // .catch((error) => {
-        //     console.error('Error:', error);
-        // });
+        fetch('/api/hotels', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Handle the response from the server
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
   
 });
     </script>

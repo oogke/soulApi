@@ -127,27 +127,26 @@ const token=localStorage.getItem("token");
     }
     console.log(formData);
 
-    // Send POST request with form data and authorization token
-    // fetch('YOUR_API_ENDPOINT', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Authorization': `Bearer ${token}`,
-    //     },
-    //     body: formData
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     // Handle the response from the server
-    //     if (data.success) {
-    //         alert("VehicleHub added successfully!");
-    //     } else {
-    //         alert("Failed to add VehicleHub.");
-    //     }
-    // })
-    // .catch(error => {
-    //     console.error('Error:', error);
-    //     alert("An error occurred while submitting.");
-    // });
+    fetch('/api/vehiclehubs', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        },
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response from the server
+        if (data.success) {
+            alert("VehicleHub added successfully!");
+        } else {
+            alert("Failed to add VehicleHub.");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("An error occurred while submitting.");
+    });
   
 });
     </script>
