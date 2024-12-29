@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('districts', function (Blueprint $table) {
-            $table->id();
-            $table->string('name',50)->unique();
-            $table->text('description')->nullable();
-            $table->string('province');
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id(); // auto-incrementing ID
+            $table->string('category'); // Category name
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('districts');
+        Schema::dropIfExists('categories');
     }
 };

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table("cafes",function(Blueprint $table)
-        {
-$table->dropForeign(["district_id"]);
-$table->dropColumn("district_id");
-
-$table->foreignId("district")->constrained("districts")->onDelete("cascade")->onUpdate("cascade");
+        Schema::create('districts', function (Blueprint $table) {
+            $table->id(); 
+            $table->string('name'); 
+            $table->string('province'); 
+            $table->string('description');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +25,6 @@ $table->foreignId("district")->constrained("districts")->onDelete("cascade")->on
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('districts');
     }
 };
