@@ -79,6 +79,7 @@ $vehicleHub=VehicleHub::create([
     'image3'=>$img3,
     'image4'=>$img4,
     'image5'=>$img5,
+    'vehicles'=>json_encode($request->vehicles)
 ]);
 return $this->sendResponse($vehicleHub,"Data inserted Successfully");
 

@@ -47,19 +47,19 @@
   const formData = new FormData();
   formData.append('category', category);
 
-//   fetch('/api/cafes', {
-//         method: 'POST',
-//         body: formData
-//     }).then(response => {
-//         if (response.ok) {
-//             alert('Category added successfully!');
-//         } else {
-//             alert('Failed to add category. Please try again.');
-//         }
-//     }).catch(error => {
-//         console.error('Error:', error);
-//         alert('An error occurred. Please try again.');
-//     });
+  fetch('/api/categories', {
+        method: 'POST',
+        body: formData
+    }).then(response => {
+        if (response.ok) {
+            alert('Category added successfully!');
+        } else {
+            alert('Failed to add category. Please try again.');
+        }
+    }).catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+    });
 });
     </script>
 </body>

@@ -60,12 +60,12 @@
    
     
   </div>
-   <div class="mb-3">
+   <!-- <div class="mb-3">
     <label for="exampleImages" class="form-label">Images</label><i class="fa-regular fa-images" id="addImageInput"></i>
     <div  id="imageinput">
     <input type="file" class="form-control mb-3" id="exampleImages" aria-describedby="emailHelp" name="image[]" multiple> 
-    </div>
-    <!-- <div class="mb-3">
+    </div> -->
+    <div class="mb-3">
     <label for="exampleImage1" class="form-label">Image1</label>
     <input type="file" class="form-control" id="exampleImage1" aria-describedby="emailHelp" name="image1">
   </div>
@@ -84,7 +84,7 @@
   <div class="mb-3">
     <label for="exampleImage5" class="form-label">Image5</label>
     <input type="file" class="form-control" id="exampleImage5" aria-describedby="emailHelp" name="image5">
-  </div> -->
+  </div>
   </div>
   <button type="submit" class="btn btn-success" id="submitBtn">Submit</button>
 </form>
@@ -124,26 +124,29 @@ submitBtn.addEventListener("click",function(event)
 {
 const token =localStorage.getItem('token');
 event.preventDefault();
-const checkedBox=document.querySelectorAll('#categoryCheckbox input:checked');
+const checkedBoxArray=document.querySelectorAll('input[name="category[]"]:checked').value;
 const nameValue=document.getElementById("exampleInputName").value;
 const descriptionValue=document.getElementById("exampleInputDescription").value;
 const locationValue=document.getElementById("exampleInputLocation").value;
 const DistrictValue=document.getElementById("exampleInputDistrict").value;
-const files = document.getElementById('exampleImages').files;
-
+formData.append("image1", document.getElementById("exampleImage1").files[0]);
+formData.append("image2", document.getElementById("exampleImage2").files[0]);
+formData.append("image3", document.getElementById("exampleImage3").files[0]);
+formData.append("image4", document.getElementById("exampleImage4").files[0]);
+formData.append("image5", document.getElementById("exampleImage5").files[0]);
 const formData= new FormData();
-if (files.length === 0) {
-    alert('No images selected!');
-    return; // Prevent form submission
-}
+// if (files.length === 0) {
+//     alert('No images selected!');
+//     return; // Prevent form submission
+// }
 
-for (let i = 0; i < files.length; i++) {
-        formData.append('images[]', files[i]); 
-    }
+// for (let i = 0; i < files.length; i++) {
+//         formData.append('images[]', files[i]); 
+//     }
 
-let category= new Array();
-for(input of checkedBox){
-  formData.append("category[]",input.value);
+
+for(input of checkedBoxArray){
+  formData.append("category[]",input);
 }
 formData.append("name",nameValue);
 formData.append("description",descriptionValue);
@@ -151,17 +154,17 @@ formData.append("location",locationValue);
 formData.append("district",DistrictValue);
 console.log(formData);
 
-// fetch('/api/places',{
-//   method:"POST",
-//   headers:{
-//     "Authorization":`Bearer ${token}`,
-//   },
-//   body:formData
-// }).then(response=>{return response.json();})
+fetch('/api/places',{
+  method:"POST",
+  headers:{
+    "Authorization":`Bearer ${token}`,
+  },
+  body:formData
+}).then(response=>{return response.json();})
 
-// .then(data=>{
-// console.log(data);
-// });
+.then(data=>{
+console.log(data);
+});
 });
 
 

@@ -110,11 +110,11 @@
     const experiences = document.getElementById("experiences");
     addLanguages.addEventListener("click", function (event) {
       event.preventDefault();
-      languagediv.innerHTML +=`<input type="text" class="form-control mb-3" id="languages[]" aria-describedby="emailHelp">`;
+      languagediv.innerHTML +=`<input type="text" class="form-control mb-3" name="languages[]" aria-describedby="emailHelp">`;
     });
     addExperiences.addEventListener("click", function (event) {
       event.preventDefault();
-      experiences.innerHTML +=`<input type="text" class="form-control mb-3" id="Experiences[]" aria-describedby="emailHelp">`;
+      experiences.innerHTML +=`<input type="text" class="form-control mb-3" name="experiences[]" aria-describedby="emailHelp">`;
     });
     const submitBtn= document.getElementById("submit-btn");
     const token=localStorage.getItem("token");
@@ -122,29 +122,29 @@
     {
   event.preventDefault();
   const formData = new FormData();
-        formData.append('first_name', document.getElementById('exampleInputFirstname').value);
-        formData.append('last_name', document.getElementById('exampleInputLastname').value);
+        formData.append('firstname', document.getElementById('exampleInputFirstname').value);
+        formData.append('lastname', document.getElementById('exampleInputLastname').value);
         formData.append('address', document.getElementById('exampleInputAddress').value);
         formData.append('phone', document.getElementById('exampleInputPhone').value);
         formData.append('dob', document.getElementById('exampleInputdob').value);
         formData.append('country', document.getElementById('exampleInputCountry').value);
         formData.append('email', document.getElementById('exampleInputEmail').value);
-        formData.append('websites', document.getElementById('exampleInputWebsites').value);
+        formData.append('website', document.getElementById('exampleInputWebsites').value);
         formData.append('profile', document.getElementById('exampleProfile').files[0]);
-        formData.append('cv', document.getElementById('exampleCV').files[0]);
-        formData.append('citizenship_card_no', document.getElementById('CitizenshipcardNo').value);
-        formData.append('citizenship_card_front', document.getElementById('CitizenshipcardFront').files[0]);
-        formData.append('citizenship_card_back', document.getElementById('Citizenshipcardback').files[0]);
-        formData.append('certificate', document.getElementById('exampleCertificate').files[0]);
-const languagesArray= document.querySelectorAll("#languages");
-const ExperiencesArray= document.querySelectorAll("#Experiences");
+        formData.append('CV', document.getElementById('exampleCV').files[0]);
+        formData.append('citizenshipNo', document.getElementById('CitizenshipcardNo').value);
+        formData.append('citizenCardFront', document.getElementById('CitizenshipcardFront').files[0]);
+        formData.append('citizenCardBack', document.getElementById('Citizenshipcardback').files[0]);
+        formData.append('GOVcertificate', document.getElementById('exampleCertificate').files[0]);
+const languagesArray= document.querySelectorAll('input[name="languages[]"]');
+const ExperiencesArray= document.querySelectorAll('input[name="experiences[]"]');
 for(let i=0;i<languagesArray.length;i++)
 {
-formdata.append("languages[]",languagesArray.value);
+formdata.append("languages[]",languagesArray[i].value);
 }
 for(let j=0;j<ExperiencesArray.length;j++)
 {
-  formdata.append("experiences[]",ExperiencesArray.value);
+  formdata.append("experience[]",ExperiencesArray[j].value);
 }
 console.log(formData);
 

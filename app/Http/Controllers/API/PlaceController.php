@@ -32,35 +32,57 @@ class PlaceController extends BaseController
             'location'=>'required',
             'category'=>'required|array',
             'district'=> 'required|required',
-            'image'=> 'array'
-            ,'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image1' => 'nullable|image',
+            'image2' => 'nullable|image',
+            'image3' => 'nullable|image',
+            'image4' => 'nullable|image',
+            'image5' => 'nullable|image',
         ]);
         if($validatePlace->fails())
         {
            
             return $this->sendError("Validation Error",$validatePlace->errors()->all(),);
         }
-        if ($request->hasFile('images')) {
-            $images = $request->file('images'); 
-            $path=public_path('uploads');
-            $newname=[];
-            foreach($images as $image)
-            {
-              $ext=  $image->getClientOriginalExtension();
-              $newname[]=uniqid(time(), true).'.'.$ext;
-              $image->move($path, $newname[count($newname)-1]); 
-            }
-          
-        }
-      $encodedImages=json_encode($newname);
+    
+//image
+$image1=$request->image1;
+$image2=$request->image2;
+$image3=$request->image3;
+$image4=$request->image4;
+$image5=$request->image5;
+
+$ext1=$image1->getClientOriginalExtension();
+$ext2=$image2->getClientOriginalExtension();
+$ext3=$image3->getClientOriginalExtension();
+$ext4=$image4->getClientOriginalExtension();
+$ext5=$image5->getClientOriginalExtension();
+$img1=time().'_' . uniqid() . ".".$ext1;
+$img2=time().'_' . uniqid() . ".".$ext2;
+$img3=time().'_' . uniqid() . ".".$ext3;
+$img4=time().'_' . uniqid() . ".".$ext4;
+$img5=time().'_' . uniqid() . ".".$ext5;
+$image1->move(public_path('uploads/places'),$img1);
+$image2->move(public_path('uploads/places'),$img2);
+$image3->move(public_path('uploads/places'),$img3);
+$image4->move(public_path('uploads/places'),$img4);
+$image5->move(public_path('uploads/places'),$img5);
+
+//image
+    
 $places= Place::create([
 'name' => $request->name,
 'description'=> $request->description,
 'location' => $request->location,
 'category'=> json_encode($request->category),
 'district'=> $request->district,
-'img'=>$encodedImages
-]);
+'image1'=>$img1,
+'image2'=>$img2,
+'image3'=>$img3,
+'image4'=>$img4,
+'image5'=>$img5
+]
+);
+    
 
 return $this->sendResponse($places,"Your logic work");
 

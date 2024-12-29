@@ -27,7 +27,7 @@ class DistrictController extends BaseController
     public function store(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'district' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'province' => 'required|string|max:255',
             'description' => 'required|string|max:500',  // Adjust max length as needed
         ]);
@@ -36,7 +36,7 @@ class DistrictController extends BaseController
             return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
         }
         $district=District::create([
-            'name'=>$request->district,
+            'name'=>$request->name,
             'province'=>$request->province,
             'description'=>$request->description
         ]);

@@ -94,7 +94,7 @@ const vehicles=document.getElementById("vehicles");
 addVehicles.addEventListener("click",function(event)
 {
   event.preventDefault();
-  vehicles.innerHTML+=`<input type="text" class="form-control mb-3" id="exampleInputVehicles" aria-describedby="emailHelp" name="vehicles[]">  
+  vehicles.innerHTML+=`<input type="text" class="form-control mb-3"  aria-describedby="emailHelp" name="vehicles[]">  
 `;
 });
 const token=localStorage.getItem("token");

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-  <script src="https://kit.fontawesome.com/c5a4938a4c.js" crossorigin="anonymous"></script>
+  <scrpt src="https://kit.fontawesome.com/c5a4938a4c.js" crossorigin="anonymous"></script>
   <title>District Create</title>
   <style>
     form {
@@ -68,11 +68,11 @@
     <div class="mb-3">
       <h3>Is seasonal?</h3>
       <label for="exampleInputIs_seasonal" class="form-label">True</label>
-      <input type="radio" class="form-radio-input" id="exampleInputIs_seasonal" aria-describedby="emailHelp"
+      <input type="radio" class="form-radio-input" id="exampleInputIs_seasonalTrue" aria-describedby="emailHelp"
         name="is_seasonal" value="1">
 
       <label for="exampleInputIs_seasonal" class="form-label">False</label>
-      <input type="radio" class="form-radio-input" id="exampleInputIs_seasonal" aria-describedby="emailHelp"
+      <input type="radio" class="form-radio-input" id="exampleInputIs_seasonalFalse" aria-describedby="emailHelp"
         name="is_seasonal" value="0">
     </div>
     <div class="mb-3">
@@ -142,11 +142,11 @@ const description=document.getElementById("exampleInputDescription").value;
 const location=document.getElementById("exampleInputLocation").value;
 const phone=document.getElementById("exampleInputPhone").value;
 const price=document.getElementById("exampleInputPrice").value;
-const seasonalCheck=document.getElementById("exampleInputIs_seasonal").value;
+const seasonalCheck = document.querySelector('input[name="is_seasonal"]:checked').value;
 const email=document.getElementById("exampleInputEmail").value;
 const website=document.getElementById("exampleInputWebsite").value;
-const requirementArray=document.querySelectorAll('#exampleInputRequirements');
-const BestSeasonsArray=document.querySelectorAll('#exampleInputBestSeasons');
+const requirementArray=document.querySelectorAll('input[name="requirements[]"]');
+const BestSeasonsArray=document.querySelectorAll('input[name="BestSeasons[]"]');
  const formData= new FormData();
  formData.append("name",name);
  formData.append("district",district);
@@ -198,8 +198,6 @@ return response.json();
 }
 )
 });
-
-
   </script>
 </body>
 
