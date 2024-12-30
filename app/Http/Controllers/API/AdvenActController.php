@@ -142,7 +142,93 @@ $query->where('location','LIKE',"%{$location}%");
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'name' => 'required',
+            'district' => 'required',
+            'description' => 'required',
+            'location' => 'required',
+            'phone' => 'required',
+            'price' => 'required',
+            'duration' => 'required',
+            'is_seasonal' => 'required', 
+            'email' => 'required|email',
+            'website' => 'required|url',
+            'best_season' => 'required|array',
+            'requirements' => 'required|array',
+            'requirements.*' => 'required|string', 
+            'image1' => 'nullable|image',
+            'image2' => 'nullable|image',
+            'image3' => 'nullable|image',
+            'image4' => 'nullable|image',
+            'image5' => 'nullable|image',
+        ]);
+        if($validate->fails())
+        {
+            return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
+        }
+
+
+        //image
+$advenact= AdvenAct::select('id','image1','image2','image3','image4','image5')->where('id',$id)->first();
+$image1=$advenact->image1;
+$image2=$advenact->image2;
+$image3=$advenact->image3;
+$image4=$advenact->image4;
+$image5=$advenact->image5;
+$images=[];
+foreach(['image1','image2','image3','image4','image5'] as $imgkey)
+{
+    if($request->hasFile($imgkey))
+    {
+$path=public_path('uploads');
+if($advenact->$imgkey!='' && $advenact->$imgkey!=null)
+{
+    $oldfile=$path.'/'.$advenact->$imgkey;
+    if(file_exists($oldfile))
+    {
+        unlink($oldfile);
+    }
+}
+$img=$request->$imgkey;
+$ext=$img->getClientOriginalExtension();
+$imagename=time().'_'.uniqid().'.'.$ext;
+$img->move(public_path('uploads/advenact/'), $imagename);
+$images[$imgkey]=$imagename;
+    }
+    else{
+        $imagename=$advenact->$imgkey;
+        $images[$imgkey]=$imagename;
+    }
+}  
+ //image
+$advenactUpdate=AdvenAct::where('id',$id)->update([
+    'name' => $request->name,
+    'district' => $request->district,
+    'description' => $request->description,
+    'price' => $request->price,
+    'duration' => $request->duration,
+    'requirements' => json_encode($request->requirements),
+    'image1' => $images['image1'] ,
+    'image2' => $images['image2'] ,
+    'image3' => $images['image3'] ,
+    'image4' => $images['image4'],
+    'image5' => $images['image5'] ,
+    'is_seasonal' => $request->is_seasonal,
+    'best_season' => json_encode($request->best_season),
+    'location' => $request->location,
+    'email' => $request->email,
+    'phone' => $request->phone,
+    'website' => $request->website
+]);
+$newadvenact=AdvenAct::where('id',$id)->first();
+if ($advenactUpdate > 0) {
+   return $this->sendResponse($newadvenact,"Data is updated");
+} else {
+    return $this->sendError( "No changes were made",[],402);
+}
+
+
+     
     }
 
     /**
