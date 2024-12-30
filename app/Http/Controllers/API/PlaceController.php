@@ -135,7 +135,65 @@ $query->whereJsonContains('category',$category);
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatePlace=Validator::make($request->all(),[
+            'name' =>'required',
+             'description' =>'required',
+             'location'=>'required',
+             'category'=>'required|array',
+             'district'=> 'required|required',
+             'image1' => 'nullable|image',
+             'image2' => 'nullable|image',
+             'image3' => 'nullable|image',
+             'image4' => 'nullable|image',
+             'image5' => 'nullable|image',
+         ]);
+         if($validatePlace->fails())
+         {
+            
+             return $this->sendError("Validation Error",$validatePlace->errors()->all(),);
+         }
+             //image
+$cafeImage= Place::select('id','image1','image2','image3','image4','image5')->where('id',$id)->first();
+$images=[];
+foreach(['image1','image2','image3','image4','image5'] as $imgkey)
+{
+    if($request->hasFile($imgkey))
+    {
+        $path=public_path('uploads');
+        if($cafeImage->$imgkey!='' && $cafeImage->$imgkey!=null)
+        {
+            $oldfile=$cafeImage->$imgkey;
+            if(file_exists($oldfile))
+            {
+unlink($oldfile);
+            }
+            $img=$request->$imgkey;
+            $ext=$img->getClientOriginalExtension();
+            $imagename=time().'_'.uniqid().'.'.$ext;
+            $img->move(public_path('uploads/cafe/').$imagename);
+$images[$imgkey]=$imagename;
+        }
+    }
+    else{
+       $imagename= $cafeImage->$imgkey;
+       $images[$imgkey]=$imagename;
+    }
+}
+//image
+$placeUpdate=Place::where('id',$id)->update([
+
+
+
+]);
+$place=Place::where('id',$id)->first();
+if($placeUpdate >0)
+{
+    return $this->sendResponse($place,"Data is updated successfully");
+}
+else{
+    return $this->sendError("Data is not submitted",[],);
+
+}
     }
 
     /**
@@ -143,6 +201,26 @@ $query->whereJsonContains('category',$category);
      */
     public function destroy(string $id)
     {
-        //
+        $place=Place::where('id',$id)->first();
+        if(!$place)
+        {
+            return $this->sendError("Place not found", [], 404);
+        }
+        $images=['image1','image2','image3','image4','image5'];
+        foreach($images as $img)
+        {
+            $filepath=public_path('uploads/place/').$place->$img;
+            if(file_exists($filepath))
+            {
+              unlink($filepath);  
+            }  
+        }
+     $query=  $place->delete();
+     if($query)
+     {
+               return $this->sendResponse([],"successfully deleted");
+
+     }
+        
     }
 }

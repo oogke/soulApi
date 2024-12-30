@@ -129,7 +129,66 @@ $query->where('id','LIKE',"%{$id}%");
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'district' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'location' => 'required|string|max:255',
+            'phone' => 'required|string|max:15',  // Adjust max length if needed
+            'email' => 'required|email|max:255',
+            'website' => 'nullable|url|max:255',
+            'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image5' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        if($validate->fails())
+        {
+            return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
+        }
+            //image
+$cafeImage= Homestay::select('id','image1','image2','image3','image4','image5')->where('id',$id)->first();
+$images=[];
+foreach(['image1','image2','image3','image4','image5'] as $imgkey)
+{
+    if($request->hasFile($imgkey))
+    {
+        $path=public_path('uploads');
+        if($cafeImage->$imgkey!='' && $cafeImage->$imgkey!=null)
+        {
+            $oldfile=$cafeImage->$imgkey;
+            if(file_exists($oldfile))
+            {
+unlink($oldfile);
+            }
+            $img=$request->$imgkey;
+            $ext=$img->getClientOriginalExtension();
+            $imagename=time().'_'.uniqid().'.'.$ext;
+            $img->move(public_path('uploads/cafe/').$imagename);
+$images[$imgkey]=$imagename;
+        }
+    }
+    else{
+       $imagename= $cafeImage->$imgkey;
+       $images[$imgkey]=$imagename;
+    }
+}
+//image
+$homestayUpdate=Homestay::where('id',$id)->update([
+
+
+
+]);
+$homestay=Homestay::where('id',$id)->first();
+if($homestayUpdate >0)
+{
+    return $this->sendResponse($homestay,"Data is updated successfully");
+}
+else{
+    return $this->sendError("Data is not submitted",[],);
+
+}
     }
 
     /**
@@ -137,6 +196,25 @@ $query->where('id','LIKE',"%{$id}%");
      */
     public function destroy(string $id)
     {
-        //
+        $homestay=Homestay::where('id',$id)->first();
+        if(!$homestay)
+        {
+            return $this->sendError("homestay not found", [], 404);
+        }
+        $images=['image1','image2','image3','image4','image5'];
+        foreach($images as $img)
+        {
+            $filepath=public_path('uploads/homestay/').$homestay->$img;
+            if(file_exists($filepath))
+            {
+              unlink($filepath);  
+            }  
+        }
+     $query=  $homestay->delete();
+     if($query)
+     {
+               return $this->sendResponse([],"successfully deleted");
+
+     }
     }
 }

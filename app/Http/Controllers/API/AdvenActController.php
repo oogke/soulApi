@@ -168,11 +168,6 @@ $query->where('location','LIKE',"%{$location}%");
         }
         //image
 $advenact= AdvenAct::select('id','image1','image2','image3','image4','image5')->where('id',$id)->first();
-$image1=$advenact->image1;
-$image2=$advenact->image2;
-$image3=$advenact->image3;
-$image4=$advenact->image4;
-$image5=$advenact->image5;
 $images=[];
 foreach(['image1','image2','image3','image4','image5'] as $imgkey)
 {
@@ -234,6 +229,25 @@ if ($advenactUpdate > 0) {
      */
     public function destroy(string $id)
     {
-        //
+        $advenact=AdvenAct::where('id',$id)->first();
+        if(!$advenact)
+        {
+            return $this->sendError("advenact not found", [], 404);
+        }
+        $images=['image1','image2','image3','image4','image5'];
+        foreach($images as $img)
+        {
+            $filepath=public_path('uploads/advenact/').$advenact->$img;
+            if(file_exists($filepath))
+            {
+              unlink($filepath);  
+            }  
+        }
+     $query=  $advenact->delete();
+     if($query)
+     {
+               return $this->sendResponse([],"successfully deleted");
+
+     }
     }
 }

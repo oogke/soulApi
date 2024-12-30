@@ -206,6 +206,25 @@ else{
      */
     public function destroy(string $id)
     {
-        //
+        $cafe=Cafe::where('id',$id)->first();
+        if(!$cafe)
+        {
+            return $this->sendError("cafe not found", [], 404);
+        }
+        $images=['image1','image2','image3','image4','image5'];
+        foreach($images as $img)
+        {
+            $filepath=public_path('uploads/restaurant/').$cafe->$img;
+            if(file_exists($filepath))
+            {
+              unlink($filepath);  
+            }  
+        }
+     $query=  $cafe->delete();
+     if($query)
+     {
+               return $this->sendResponse([],"successfully deleted");
+
+     }
     }
 }

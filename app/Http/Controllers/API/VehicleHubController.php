@@ -131,7 +131,70 @@ $query->where('rating','LIKE',"%{$rating}%");
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'district' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'location' => 'required|string|max:255',
+            'phone' => 'required|string', // phone validation (example format)
+            'email' => 'required|email|max:255',
+            'website' => 'nullable|url|max:255',
+            'image1' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'image2' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'image3' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'image4' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'image5' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+            'vehicles' => 'required|array|min:1', // Ensure at least one vehicle
+            'vehicles.*' => 'required|string|max:255', // Each vehicle should be a string and not empty
+        ]);
+        if($validate->fails())
+        {
+            return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
+        }
+            //image
+$vehiclehubImage= VehicleHub::select('id','image1','image2','image3','image4','image5')->where('id',$id)->first();
+$images=[];
+foreach(['image1','image2','image3','image4','image5'] as $imgkey)
+{
+    if($request->hasFile($imgkey))
+    {
+        $path=public_path('uploads');
+        if($vehiclehubImage->$imgkey!='' && $vehiclehubImage->$imgkey!=null)
+        {
+            $oldfile=$vehiclehubImage->$imgkey;
+            if(file_exists($oldfile))
+            {
+unlink($oldfile);
+            }
+            $img=$request->$imgkey;
+            $ext=$img->getClientOriginalExtension();
+            $imagename=time().'_'.uniqid().'.'.$ext;
+            $img->move(public_path('uploads/cafe/').$imagename);
+$images[$imgkey]=$imagename;
+        }
+    }
+    else{
+       $imagename= $vehiclehubImage->$imgkey;
+       $images[$imgkey]=$imagename;
+    }
+
+$vehiclehubUpdate=VehicleHub::where('id',$id)->update([
+
+
+
+]);
+$vehiclehub=VehicleHub::where('id',$id)->first();
+if($vehiclehubUpdate >0)
+{
+    return $this->sendResponse($vehiclehub,"Data is updated successfully");
+}
+else{
+    return $this->sendError("Data is not submitted",[],);
+
+}
+
+}
+//image
     }
 
     /**
@@ -139,6 +202,25 @@ $query->where('rating','LIKE',"%{$rating}%");
      */
     public function destroy(string $id)
     {
-        //
+        $vehiclehub=VehicleHub::where('id',$id)->first();
+        if(!$vehiclehub)
+        {
+            return $this->sendError("vehiclehub not found", [], 404);
+        }
+        $images=['image1','image2','image3','image4','image5'];
+        foreach($images as $img)
+        {
+            $filepath=public_path('uploads/vehiclehub/').$vehiclehub->$img;
+            if(file_exists($filepath))
+            {
+              unlink($filepath);  
+            }  
+        }
+     $query=  $vehiclehub->delete();
+     if($query)
+     {
+               return $this->sendResponse([],"successfully deleted");
+
+     }
     }
 }

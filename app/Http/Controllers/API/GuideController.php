@@ -137,7 +137,7 @@ return $this->sendResponse($guide,"Data inserted Successfully");
             'phone' => 'required', 
             'dob' => 'required',
             'country' => 'required',
-            'email' => 'required|email|unique:guides,email',
+            'email' => 'required|email',
             'websites' => 'nullable',
             'profile' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'CV' => 'nullable|image',
@@ -219,6 +219,25 @@ else{
      */
     public function destroy(string $id)
     {
-        //
+        $guide=Guide::where('id',$id)->first();
+        if(!$guide)
+        {
+            return $this->sendError("guide not found", [], 404);
+        }
+        $images=['image1','image2','image3','image4','image5'];
+        foreach($images as $img)
+        {
+            $filepath=public_path('uploads/guide/').$guide->$img;
+            if(file_exists($filepath))
+            {
+              unlink($filepath);  
+            }  
+        }
+     $query=  $guide->delete();
+     if($query)
+     {
+               return $this->sendResponse([],"successfully deleted");
+
+     }
     }
 }

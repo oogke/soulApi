@@ -86,7 +86,15 @@ return $this->sendResponse($districts,"Your Result");
      */
     public function update(Request $request, string $id)
     {
-        
+        $validate = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'province' => 'required|string|max:255',
+            'description' => 'required|string|max:500',  // Adjust max length as needed
+        ]);
+        if($validate->fails())
+        {
+            return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
+        } 
     }
 
     /**
@@ -94,6 +102,16 @@ return $this->sendResponse($districts,"Your Result");
      */
     public function destroy(string $id)
     {
-        
+        $district=District::where('id',$id)->first();
+        if(!$district)
+        {
+            return $this->sendError("district not found", [], 404);
+        }
+     $query=  $district->delete();
+     if($query)
+     {
+               return $this->sendResponse([],"successfully deleted");
+
+     }
     }
 }

@@ -52,7 +52,13 @@ class CategoryController extends BaseController
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'category' => 'required|string|max:255',
+        ]);
+        if($validate->fails())
+        {
+            return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
+        }
     }
 
     /**
@@ -60,6 +66,16 @@ class CategoryController extends BaseController
      */
     public function destroy(string $id)
     {
-        //
+        $category=category::where('id',$id)->first();
+        if(!$category)
+        {
+            return $this->sendError("category not found", [], 404);
+        }
+     $query=  $category->delete();
+     if($query)
+     {
+               return $this->sendResponse([],"successfully deleted");
+
+     }
     }
 }
