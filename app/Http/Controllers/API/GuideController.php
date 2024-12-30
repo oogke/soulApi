@@ -101,7 +101,12 @@ return $this->sendResponse($guide,"Data inserted Successfully");
     {
         $query=Guide::query();
        $firstname=$request->query("name");
+       $id=$request->query("id");
       $language=$request->query("language");
+      if($id)
+      {
+   $query->where('id','LIKE',"%{$id}%");
+      }
        if($firstname)
        {
     $query->where('name','LIKE',"%{$firstname}%");
@@ -115,7 +120,6 @@ return $this->sendResponse($guide,"Data inserted Successfully");
       if($guides->isEmpty())
       {
         return $this->sendResponse([],"No data found");
-
       }
       return $this->sendResponse($guides,"Your result");
 

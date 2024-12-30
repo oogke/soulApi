@@ -90,9 +90,14 @@ return $this->sendResponse($hotel,"Data inserted Successfully");
     {
         $query=Hotel::query();
        $name=$request->query("name");
+       $id=$request->query("id");
        $district=$request->query("district");
        $location=$request->query("location");
        $rating=$request->query("rating");
+       if($id)
+       {
+$query->where('id','LIKE',"%{$id}%");
+       }
        if($name)
        {
 $query->where('name','LIKE',"%{$name}%");

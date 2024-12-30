@@ -94,28 +94,39 @@ return $this->sendResponse($places,"Your logic work");
     public function show(Request $request)
     {
         $query=Place::query();
-       $cafename=$request->query("name");
+       $name=$request->query("name");
        $district=$request->query("district");
        $location=$request->query("location");
-       $rating=$request->query("rating");
-       if($cafename)
+       $id=$request->query("id");
+      $category=$request->query('category');
+       if($name)
        {
-$query->where('name','LIKE',"%{$cafename}%");
+$query->where('name','LIKE',"%{$name}%");
        }
        if($district)
        {
-$query->where('name','LIKE',"%{$district}%");
+$query->where('district','LIKE',"%{$district}%");
        }
        if($location)
        {
-$query->where('name','LIKE',"%{$location}%");
+$query->where('location','LIKE',"%{$location}%");
        }
-       if($rating)
+       if($id)
        {
-$query->where('name','LIKE',"%{$rating}%");
+$query->where('id','LIKE',"%{$id}%");
        }
-      $cafes=$query->get();
-      return $this->sendResponse($cafes,"Your result");
+       if($category)
+       {
+$query->whereJsonContains('category',$category);
+       }
+      
+      $places=$query->get();
+      if($places->isEmpty())
+      {
+        return $this->sendResponse([],"No places found");
+
+      }
+      return $this->sendResponse($places,"Your result");
 
     }
 

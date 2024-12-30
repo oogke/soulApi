@@ -94,6 +94,7 @@ return $this->sendResponse($homestay,"Data inserted Successfully");
        $location=$request->query("location");
        $rating=$request->query("rating");
        $id=$request->query("id");
+       
        if($name)
        {
 $query->where('name','LIKE',"%{$name}%");
