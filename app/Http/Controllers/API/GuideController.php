@@ -97,10 +97,32 @@ return $this->sendResponse($guide,"Data inserted Successfully");
     /**
      * Display the specified resource.
      */
-    public function show(string $guide)
+    public function show(Request $request)
     {
-        $guide= Guide::all()->where('firstname',$guide);
-        return $this->sendResponse($guide,"Requested Guide");
+        $query=Guide::query();
+       $cafename=$request->query("name");
+       $district=$request->query("district");
+       $location=$request->query("location");
+       $rating=$request->query("rating");
+       if($cafename)
+       {
+$query->where('name','LIKE',"%{$cafename}%");
+       }
+       if($district)
+       {
+$query->where('name','LIKE',"%{$district}%");
+       }
+       if($location)
+       {
+$query->where('name','LIKE',"%{$location}%");
+       }
+       if($rating)
+       {
+$query->where('name','LIKE',"%{$rating}%");
+       }
+      $cafes=$query->get();
+      return $this->sendResponse($cafes,"Your result");
+
     }
 
     /**

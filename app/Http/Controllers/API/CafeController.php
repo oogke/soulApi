@@ -85,10 +85,38 @@ return $this->sendResponse($cafe,"Data inserted Successfully");
     /**
      * Display the specified resource.
      */
-    public function show(string $cafe)
+    public function show(Request $request)
     {
-        $cafe= Cafe::all()->where('name',$cafe);
-        return $this->sendResponse($cafe,"Requested Cafe");
+        $query=Cafe::query();
+       $cafename=$request->query("name");
+       $district=$request->query("district");
+       $location=$request->query("location");
+       $rating=$request->query("rating");
+       $id=$request->query("id");
+       if($cafename)
+       {
+$query->where('name','LIKE',"%{$cafename}%");
+       }
+       if($district)
+       {
+$query->where('district','LIKE',"%{$district}%");
+       }
+       if($location)
+       {
+$query->where('location','LIKE',"%{$location}%");
+       }
+       if($rating)
+       {
+$query->where('rating','LIKE',"%{$rating}%");
+       }
+       if($id)
+{
+    $query->where('id','LIKE',"%{$id}%");
+
+}
+      $cafes=$query->get();
+      return $this->sendResponse($cafes,"Your result");
+
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\AdvenAct;
+use App\Models\Cafe;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use Illuminate\Support\Facades\Validator;
@@ -101,10 +102,33 @@ return $this->sendResponse($advenAct,"Data inserted Successfully");
     /**
      * Display the specified resource.
      */
-    public function show(string $advenact)
+    public function show(Request $request)
     {
-        $advenact=AdvenAct::all()->where('name',$advenact);
-        return $this->sendResponse($advenact,"Requested data");
+        $query=Cafe::query();
+       $advenactname=$request->query("name");
+       $district=$request->query("district");
+       $location=$request->query("location");
+       $id=$request->query("id");
+       if($advenactname)
+       {
+$query->where('name','LIKE',"%{$advenactname}%");
+       }
+       if($district)
+       {
+$query->where('district','LIKE',"%{$district}%");
+       }
+       if($location)
+       {
+$query->where('location','LIKE',"%{$location}%");
+       }
+       if($id)
+       {
+           $query->where('id','LIKE',"%{$id}%");
+       
+       }
+      $advenacts=$query->get();
+      return $this->sendResponse($advenacts,"Your result");
+
     }
 
     /**

@@ -22,9 +22,8 @@ Route::post('/login',[AuthController::class,'login'])->name('login');
 Route::middleware('auth:sanctum')->group(function()
 {
 Route::post('/logout',[AuthController::class,'logout'])->name('logout');
-Route::get('/districts/{districtName}',[DistrictController::class,'show']);
 Route::apiResource('/districts',DistrictController::class)->except(['show']);
-Route::apiResource('/categories',CategoryController::class)->except(['show']);
+Route::apiResource('/categories',CategoryController::class);
 Route::apiResource('/places',PlaceController::class)->except(['show']);
 Route::apiResource('/cafes',CafeController::class)->except(['show']);
 Route::apiResource('/restaurants',RestaurantController::class)->except(['show']);
@@ -34,14 +33,17 @@ Route::apiResource('/events',EventController::class)->except(['show']);
 Route::apiResource('/guides',GuideController::class)->except(['show']);
 Route::apiResource('/vehicleHubs',VehicleHubController::class)->except(['show']);
 Route::apiResource( '/advenacts',AdvenActController::class)->except(['show']);
-Route::get('/places/{placename}',[PlaceController::class,'show']);
-Route::get('/cafes/{cafeName}',[CafeController::class,'show']);
-Route::get('/restaurants/{restaurantName}',[RestaurantController::class,'show']);
-Route::get('/hotels/{hotelName}',[RestaurantController::class,'show']);
-Route::get('/homestays/{homestayName}',[RestaurantController::class,'show']);
-Route::get('/advenacts/{advenactName}',[RestaurantController::class,'show']);
-Route::get('/events/{eventName}',[RestaurantController::class,'show']);
-Route::get('/guides/{guideName}',[RestaurantController::class,'show']);
-Route::get('/categories/{categoryName}',[RestaurantController::class,'show']);
+
+
+Route::get('/district',[DistrictController::class,'show']);
+Route::get('/advenact',[AdvenActController::class,'show']);
+Route::get('/place',[PlaceController::class,'show']);
+Route::get('/cafe',[CafeController::class,'show']);
+Route::get('/restaurant',[RestaurantController::class,'show']);
+Route::get('/hotel',[HotelController::class,'show']);
+Route::get('/homestay',[HomestayController::class,'show']);
+Route::get('/guide',[GuideController::class,'show']);
+Route::get('/event',[EventController::class,'show']);
+Route::get('/vehiclehub',[VehicleHubController::class,'show']);
 
 });

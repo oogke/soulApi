@@ -7,6 +7,7 @@ use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 
 class EventController extends BaseController
@@ -98,10 +99,54 @@ return $this->sendResponse($event,"Data inserted Successfully");
     /**
      * Display the specified resource.
      */
-    public function show(string $event)
+    public function show(Request $request)
     {
-        $event=Event::all()->where('name',$event);
-        return $this->sendResponse($event,"Requested Event");
+        $query=Event::query();
+       $name=$request->query("name");
+       $district=$request->query("district");
+       $location=$request->query("location");
+       $id=$request->query("id");
+       $category=$request->query("category");
+       $dateincome= $request->query("date");
+$date=Carbon::parse($dateincome);
+       if($name)
+       {
+$query->where('name','LIKE',"%{$name}%");
+       }
+       if($district)
+       {
+$query->where('district','LIKE',"%{$district}%");
+       }
+       if($location)
+       {
+$query->where('location','LIKE',"%{$location}%");
+       }
+       if($id)
+       {
+$query->where('id','LIKE',"%{$id}%");
+       }
+       if($category)
+       {
+        $query->where('category','LIKE',"%{$category}%");
+
+       }
+       if($date)
+       {
+        $query->where(function($query) use ($date)
+        {
+$query->where('start_date','<=', $date)
+->where('end_date','>=',$date);
+        });
+       }
+       
+      $events=$query->get();
+      if($events->isEmpty())
+      {
+        return $this->sendResponse([],"No event found");
+
+      }
+      return $this->sendResponse($events, "Your result");
+
     }
 
     /**

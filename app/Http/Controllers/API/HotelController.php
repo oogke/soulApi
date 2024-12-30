@@ -86,10 +86,32 @@ return $this->sendResponse($hotel,"Data inserted Successfully");
     /**
      * Display the specified resource.
      */
-    public function show(string $hotel)
+    public function show(Request $request)
     {
-        $hotel= Hotel::all()->where('name',$hotel);
-        return $this->sendResponse($hotel,"Requested Hotel");
+        $query=Hotel::query();
+       $cafename=$request->query("name");
+       $district=$request->query("district");
+       $location=$request->query("location");
+       $rating=$request->query("rating");
+       if($cafename)
+       {
+$query->where('name','LIKE',"%{$cafename}%");
+       }
+       if($district)
+       {
+$query->where('name','LIKE',"%{$district}%");
+       }
+       if($location)
+       {
+$query->where('name','LIKE',"%{$location}%");
+       }
+       if($rating)
+       {
+$query->where('name','LIKE',"%{$rating}%");
+       }
+      $cafes=$query->get();
+      return $this->sendResponse($cafes,"Your result");
+
     }
 
     /**

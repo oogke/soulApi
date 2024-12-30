@@ -47,11 +47,32 @@ class DistrictController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(string $district)
+    public function show(Request $request)
     {
-        $district =District::all()->where('name',$district);
-        return $this->sendResponse($district,'Single District');
-    }
+   $districtname=$request->query('name');
+   $province=$request->query('province');
+   $id=$request->query('id');
+   $query=District::query();
+   if($districtname)
+   {
+    $query->where('name','LIKE',"%{$districtname}%");
+   }
+if($province)
+{
+    $query->where('province','LIKE',"%{$province}%");
+
+}
+if($id)
+{
+    $query->where('id','LIKE',"%{$id}%");
+
+}
+ $districts=$query->get(); 
+return $this->sendResponse($districts,"Your Result");
+   }
+        
+      
+ 
 
     /**
      * Update the specified resource in storage.
