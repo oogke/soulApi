@@ -67,7 +67,14 @@ if($id)
     $query->where('id','LIKE',"%{$id}%");
 
 }
+
+
  $districts=$query->get(); 
+
+ if($districts->isEmpty())
+ {
+    return $this->sendResponse([],"No result found");
+ }
 return $this->sendResponse($districts,"Your Result");
    }
         

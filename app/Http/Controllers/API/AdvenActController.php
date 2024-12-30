@@ -126,7 +126,13 @@ $query->where('location','LIKE',"%{$location}%");
            $query->where('id','LIKE',"%{$id}%");
        
        }
-      $advenacts=$query->get();
+       $advenacts=$query->get();
+       if($advenacts->isEmpty())
+       {
+        return $this->sendResponse([],"Your result");
+
+       }
+      
       return $this->sendResponse($advenacts,"Your result");
 
     }

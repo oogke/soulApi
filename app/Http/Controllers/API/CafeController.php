@@ -114,7 +114,14 @@ $query->where('rating','LIKE',"%{$rating}%");
     $query->where('id','LIKE',"%{$id}%");
 
 }
-      $cafes=$query->get();
+
+
+$cafes=$query->get();
+if($cafes->isEmpty())
+{
+    return $this->sendResponse([],"No data found");
+
+}
       return $this->sendResponse($cafes,"Your result");
 
     }

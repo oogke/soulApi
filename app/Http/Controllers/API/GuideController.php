@@ -100,28 +100,24 @@ return $this->sendResponse($guide,"Data inserted Successfully");
     public function show(Request $request)
     {
         $query=Guide::query();
-       $cafename=$request->query("name");
-       $district=$request->query("district");
-       $location=$request->query("location");
-       $rating=$request->query("rating");
-       if($cafename)
+       $firstname=$request->query("name");
+      $language=$request->query("language");
+       if($firstname)
        {
-$query->where('name','LIKE',"%{$cafename}%");
+    $query->where('name','LIKE',"%{$firstname}%");
        }
-       if($district)
+       if($language)
        {
-$query->where('name','LIKE',"%{$district}%");
+        $query->whereJsonContains('languages',$language);
        }
-       if($location)
-       {
-$query->where('name','LIKE',"%{$location}%");
-       }
-       if($rating)
-       {
-$query->where('name','LIKE',"%{$rating}%");
-       }
-      $cafes=$query->get();
-      return $this->sendResponse($cafes,"Your result");
+      
+      $guides=$query->get();
+      if($guides->isEmpty())
+      {
+        return $this->sendResponse([],"No data found");
+
+      }
+      return $this->sendResponse($guides,"Your result");
 
     }
 

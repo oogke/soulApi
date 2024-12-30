@@ -89,28 +89,33 @@ return $this->sendResponse($restaurant,"Data inserted Successfully");
     public function show(Request $request)
     {
         $query=Restaurant::query();
-       $cafename=$request->query("name");
+       $name=$request->query("name");
        $district=$request->query("district");
        $location=$request->query("location");
        $rating=$request->query("rating");
-       if($cafename)
+       if($name)
        {
-$query->where('name','LIKE',"%{$cafename}%");
+$query->where('name','LIKE',"%{$name}%");
        }
        if($district)
        {
-$query->where('name','LIKE',"%{$district}%");
+$query->where('district','LIKE',"%{$district}%");
        }
        if($location)
        {
-$query->where('name','LIKE',"%{$location}%");
+$query->where('location','LIKE',"%{$location}%");
        }
        if($rating)
        {
-$query->where('name','LIKE',"%{$rating}%");
+$query->where('rating','LIKE',"%{$rating}%");
        }
-      $cafes=$query->get();
-      return $this->sendResponse($cafes,"Your result");
+      $restaurant=$query->get();
+      if($restaurant->isEmpty())
+      {
+        return $this->sendResponse([],"No result found");
+
+      }
+      return $this->sendResponse($restaurant,"Your result");
 
     }
     /**
