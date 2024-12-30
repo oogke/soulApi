@@ -166,8 +166,6 @@ $query->where('location','LIKE',"%{$location}%");
         {
             return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
         }
-
-
         //image
 $advenact= AdvenAct::select('id','image1','image2','image3','image4','image5')->where('id',$id)->first();
 $image1=$advenact->image1;

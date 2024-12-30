@@ -126,13 +126,80 @@ if($cafes->isEmpty())
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    
+   public function update(Request $request, string $id)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'name' => 'required|string',
+            'district' => 'required|string',
+            'description' => 'required|string',
+            'location' => 'required|string',
+            'phone' => 'required|string', 
+            'email' => 'required|email',
+            'website' => 'required|url',
+            'image1' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image2' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image3' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image4' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image5' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        if($validate->fails())
+        {
+            return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
+        }
+        //image
+$cafeImage= Cafe::select('id','image1','image2','image3','image4','image5')->where('id',$id)->first();
+$images=[];
+foreach(['image1','image2','image3','image4','image5'] as $imgkey)
+{
+    if($request->hasFile($imgkey))
+    {
+        $path=public_path('uploads');
+        if($cafeImage->$imgkey!='' && $cafeImage->$imgkey!=null)
+        {
+            $oldfile=$cafeImage->$imgkey;
+            if(file_exists($oldfile))
+            {
+unlink($oldfile);
+            }
+            $img=$request->$imgkey;
+            $ext=$img->getClientOriginalExtension();
+            $imagename=time().'_'.uniqid().'.'.$ext;
+            $img->move(public_path('uploads/cafe/').$imagename);
+$images[$imgkey]=$imagename;
+        }
     }
+    else{
+       $imagename= $cafeImage->$imgkey;
+       $images[$imgkey]=$imagename;
+    }
+}
+//image
+
+$cafeUpdate= Cafe::where("id",$id)->update([
+    'name'=>$request->name,
+    'description'=>$request->description,
+    'location'=>$request->location,
+    'district'=>$request->district,
+    'email'=>$request->email,
+    'phone'=>$request->phone,
+    'website'=>$request->website,
+    'image1'=>$images['image1'],
+    'image2'=>$images['image2'],
+    'image3'=>$images['image3'],
+    'image4'=>$images['image4'],
+    'image5'=>$images['image5']
+]);
+$cafe=Cafe::where('id',$id)->first();
+if($cafeUpdate>0)
+{
+return $this->sendResponse($cafe,"Data is updated");
+}
+else{
+    return $this->sendError("Data is not updated try again",[],402);
+}
+
+    } 
 
     /**
      * Remove the specified resource from storage.

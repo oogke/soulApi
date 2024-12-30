@@ -130,7 +130,88 @@ return $this->sendResponse($guide,"Data inserted Successfully");
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'address' => 'required',
+            'phone' => 'required', 
+            'dob' => 'required',
+            'country' => 'required',
+            'email' => 'required|email|unique:guides,email',
+            'websites' => 'nullable',
+            'profile' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'CV' => 'nullable|image',
+            'citizenshipNo' => 'required',
+            'citizenCardFront' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'citizenCardBack' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'GOVcertificate' => 'nullable',
+            'languages' => 'required|array',
+            'languages.*' => 'string',
+            'experience' => 'required|array',
+            'experience.*' => 'string',
+        ]);
+        if($validate->fails())
+        {
+            return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
+        }
+        //images
+$guideimages= Guide::select('id','GOVcertificate','profile','citizenCardFront','citizenCardBack','CV')->where('id',$id)->first();
+$images=[];
+foreach(['GOVcertificate','profile','citizenCardFront','citizenCardBack','CV'] as $imgkey)
+{
+    if($request->hasFile($imgkey))
+    {
+        if($guideimages->$imgkey!='' && $guideimages->$imgkey!=null)
+        {
+            $oldfile=$guideimages->$imgkey;
+            if(file_exists($oldfile))
+            {
+                unlink($oldfile);
+            }
+            $img=$request->$imgkey;
+            $ext=$img->getClientOriginalExtension();
+            $imagename=time().'_'.uniqid().$ext;
+            $img->move(public_path('uploads/guide/').$imagename);
+            $images[$imgkey]=$imagename;
+        }
+    }
+    else{
+        $imagename=$guideimages->$imgkey;
+        $images[$imgkey]=$imagename;
+    }
+} 
+//images
+$guideUpdate= Guide::where('id',$id)->update([
+
+    'firstname'=>$request->firstname,
+    'lastname'=>$request->lastname,
+    'address'=>$request->address,
+    'phone'=>$request->phone,
+    'dob'=>$request->dob,
+    'country'=>$request->country,
+    'email'=>$request->email,
+    'website'=>$request->website,
+    'profile'=>$images['profile'],
+    'CV'=>$images['CV'],
+    'citizenshipNo'=>$request->citizenshipNo,
+    'citizenCardFront'=>$images['citizenCardFront'],
+    'citizenCardBack'=>$images['citizenCardBack'],
+    'GOVcertificate'=>$images['GOVcertificate'],
+    'languages'=>json_encode($request->languages),
+    'experience'=>json_encode($request->experience)
+  
+]);
+$guide= Guide::where('id',$id)->first();
+
+if($guideUpdate >0)
+{
+    return $this->sendResponse($guide,"Data is updated Successfully");
+}
+else{
+    return $this->sendError("Data is not updated",[],402);
+}
+
+       
     }
 
     /**
