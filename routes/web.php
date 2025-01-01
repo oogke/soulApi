@@ -36,4 +36,15 @@ Route::view( '/createAdventureActs','admin.advenAct.create')->name('createAdvent
 Route::view( '/createUsers','admin.user.create')->name('createUsers');
 Route::view( '/createHomestay','admin.homestay.create')->name('createHomestay');
 
-Route::view( '/createAdventureActs','admin.advenAct.create')->name('createAdventureActs');
+Route::view( '/updateDistricts','admin.district.update')->name('updateDistricts');
+Route::view( '/updatePlaces','admin.place.update')->name('updatePlaces');
+Route::view( '/updateHotels','admin.hotel.update')->name('updateHotels');
+Route::view( '/updateRestaurants','admin.restaurant.update')->name('updateRestaurants');
+Route::view( '/updateCafes','admin.cafe.update')->name('updateCafes');
+Route::view( '/updateEvents','admin.event.update')->name('updateEvents');
+Route::view( '/updateGuides','admin.guide.update')->name('updateGuides');
+Route::view( '/updateVehicleHub','admin.vehicleHub.update')->name('updateVehicleHub');
+Route::view( '/createCategories','admin.category.update')->name('updateCategories');
+Route::view( '/updateAdventureActs','admin.advenAct.update')->name('updateAdventureActs');
+Route::view( '/updateUsers','admin.user.update')->name('updateUsers');
+Route::view( '/updateHomestay','admin.homestay.update')->name('updateHomestay');

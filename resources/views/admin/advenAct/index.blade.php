@@ -41,7 +41,7 @@
     <div id="tableDiv">
     </div>
 
-    <!-- Modal -->
+    <!-- view Modal -->
     <div class="modal fade" id="singlePostModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="singlePostLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -59,7 +59,9 @@
             </div>
         </div>
     </div>
-   
+   <!-- view Modal -->
+
+    <!-- delete Modal -->
     <div class="modal fade" id="DeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -69,7 +71,7 @@
       </div>
       <div class="modal-body">
      <div class="single-data" width="100%" height="100%">
-
+Are you sure you want to delete?
      </div>
       </div>
       <div class="modal-footer">
@@ -79,8 +81,9 @@
     </div>
   </div>
 </div>
+<!-- delete Modal -->
    
-  <!-- Modal -->
+  <!-- update Modal -->
   <div class="modal fade" id="updatemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="updateLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -97,11 +100,15 @@
             </div>
         </div>
     </div>
+    <!-- update Modal -->
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script>
         const token=localStorage.getItem("token");
+
+
+        //index data
         function loadData()
         {
             var tableContent=`<table class="table table-striped table-hover table-bordered align-middle">
@@ -131,9 +138,6 @@
     </tr>
   </thead>
   <tbody></tbody>`;
-            
-           
-  const tableDiv = document.getElementById('tableDiv');
   fetch('/api/advenacts',{
     method: "GET",
     headers:
@@ -172,24 +176,22 @@
     </tr>`;
 
 });
-tableContent+=`  </tbody>
+tableContent+=`</tbody>
 </table>`;
 tableDiv.innerHTML=tableContent;
     });
+        }       
+                //index data
 
 
-        }
-      
-
-
-       
+                //view modal
         const singleModal = document.getElementById('singlePostModal');
         if (singleModal) {
             singleModal.addEventListener('show.bs.modal', function (event) {
                 var button = event.relatedTarget;
                 var postid = button.getAttribute('data-bs-postid');
                 const token = localStorage.getItem('token');
-                fetch(`/api/advenacts/${postid}`, {
+                fetch(`/api/advenact?id=${postid}`, {
                     method: "GET",
                     headers:
                     {
@@ -200,39 +202,41 @@ tableDiv.innerHTML=tableContent;
                     return response.json();
                 }
                 ).then(data => {
-                    const advenact = data.data.post[0];
+                    const advenact = data.data[0];
+                    
                    const modalBody = document.querySelector('#singlePostModal .modal-body');
                    modalBody.innerHTML="";
                    modalBody.innerHTML= `
-                 <b>Name:</b> ${advenact} <br>
-                    <b>District:</b> ${advenact.name}<br>
+                 <b>Name:</b> ${advenact.name} <br>
+                    <b>District:</b> ${advenact.district}<br>
                     <b>Description:</b> ${advenact.description}<br>
                     <b>Price:</b> ${advenact.price}<br>
                     <b>Duration:</b> ${advenact.duration}<br>
-                    <b>Requirements:</b> ${advenact.requirements[0]}<br>
-                    
+                    <b>Requirements:</b> ${advenact.requirements}<br>
                    <img width="150px" height="150px" src="uploads/advenact/${advenact.image1}" />
                    <img width="150px" height="150px" src="uploads/advenact/${advenact.image2}" />
                    <img width="150px" height="150px" src="uploads/advenact/${advenact.image3}" />
                    <img width="150px" height="150px" src="uploads/advenact/${advenact.image4}" />
                    <img width="150px" height="150px" src="uploads/advenact/${advenact.image5}" />
-
                     <b>is saesonal?:</b> ${advenact.is_seasonal}<br>
-                    <b>Best season:</b> ${advenact.best_season[0]}<br>
+                    <b>Best season:</b> ${advenact.best_season}<br>
                     <b>location:</b> ${advenact.location}<br>
                     <b>Email:</b> ${advenact.email}<br>
                     <b>phone :</b> ${advenact.phone}<br> 
                     <b>wesite:</b> ${advenact.website}<br>
                    `;
-
                 }
-                ).catch(err => {
+             )
+            .catch(err => {
                     console.log(err);
                 }
             );
         });
     }
+ //view modal
 
+
+//delete modal
     const deleteModal = document.getElementById('DeleteModal'); 
      if (deleteModal) {
         deleteModal.addEventListener('show.bs.modal', function (event) {
@@ -243,7 +247,7 @@ tableDiv.innerHTML=tableContent;
                 deleteBtn.addEventListener('click',function(event)
             {
 event.preventDefault();
- fetch(`/api/posts/${postid}`,{
+ fetch(`/api/advenacts/${postid}`,{
                     method: "DELETE",
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -263,6 +267,8 @@ event.preventDefault();
              });
      }
 
+     //delete modal
+
      //update modal
         const updateModal = document.getElementById('updatemodal');
         if (updateModal) {
@@ -270,7 +276,7 @@ event.preventDefault();
                 var updatebutton = event.relatedTarget;
                 var postid = updatebutton.getAttribute('data-bs-postid');
                 const token = localStorage.getItem('token');
-                fetch(`/api/posts/${postid}`, {
+                fetch(`/api/advenact/${postid}`, {
                     method: "GET",
                     headers:
                     {
@@ -283,32 +289,100 @@ event.preventDefault();
                 }
                 ).then(data => {
                   
-                    const post = data.data.post[0];
+                    const advenact = data.data;
                    
                    const modalBody = document.querySelector('#updatemodal .modal-body');
                    modalBody.innerHTML="";
-            
-
   modalBody.innerHTML= `
     <form action="" method="POST" enctype="multipart/form-data" id="addForm">
-        @csrf
-      <h2 class="reset-heading">
-        <span class="popup-heading">Post Update</span>   
-      </h2>
+    <form>
+    @csrf
+    <h1>Insert adventures</h1> 
+        <input type="hidden" name="postid" id="postid" value="${advenact.id}">
 
-     <input type="hidden" name="postid" id="postid" value="${post.id}">
-     <input type="text" id="title" placeholder="title" name="title">
-     <input type="text" id="description" placeholder="description" name="description">
-     <img src="/uploads/${post.image}" alt="" width="150px" height="150px" id="imagediv">
-     <input type="file" id="image" name="image">
-    
-      <button type="submit" class="registerBtn" name="update" id="update">Update Post</button>
-    </form>
+    <div class="mb-3">
+      <label for="exampleInputName" class="form-label">Name</label>
+      <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" name="name">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputDistrict" class="form-label">District</label>
+      <input type="text" class="form-control" id="exampleInputDistrict" aria-describedby="emailHelp" name="district">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputDescription" class="form-label">Description</label>
+      <input type="text" class="form-control" id="exampleInputDescription" aria-describedby="emailHelp"
+        name="description">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputLocation" class="form-label">Location</label>
+      <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp" name="location">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPhone" class="form-label">Phone</label>
+      <input type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp" name="phone">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPrice" class="form-label">Price</label>
+      <input type="text" class="form-control" id="exampleInputPrice" aria-describedby="emailHelp" name="price">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputDuration" class="form-label">Duration</label>
+      <input type="text" class="form-control" id="exampleInputDuration" aria-describedby="emailHelp" name="duration">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputRequirements" class="form-label">Requirements</label><i class="fa-solid fa-circle-plus"
+        id="addrequirements"></i>
+      <div id="requirements">
+      </div>
+    </div>
+    <div class="mb-3">
+      <h3>Is seasonal?</h3>
+      <label for="exampleInputIs_seasonal" class="form-label">True</label>
+      <input type="radio" class="form-radio-input" id="exampleInputIs_seasonalTrue" aria-describedby="emailHelp"
+        name="is_seasonal" value="1">
+
+      <label for="exampleInputIs_seasonal" class="form-label">False</label>
+      <input type="radio" class="form-radio-input" id="exampleInputIs_seasonalFalse" aria-describedby="emailHelp"
+        name="is_seasonal" value="0">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputBestSeason" class="form-label">Best Season</label><i class="fa-solid fa-circle-plus"
+        id="addSeasons"></i>
+      <div id="BestSeasons">
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail" class="form-label">Email</label>
+      <input type="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" name="email">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputWebsite" class="form-label">Website</label>
+      <input type="url" class="form-control" id="exampleInputWebsite" aria-describedby="emailHelp" name="website">
+    </div>
+    <div class="mb-3">
+      <label for="exampleImage1" class="form-label">Image1</label>
+      <input type="file" class="form-control" id="image1" aria-describedby="emailHelp" name="image1">
+    </div>
+    <div class="mb-3">
+      <label for="exampleImages" class="form-label">Image2</label>
+      <input type="file" class="form-control" id="image2" aria-describedby="emailHelp" name="image2">
+    </div>
+    <div class="mb-3">
+      <label for="exampleImage3" class="form-label">Image3</label>
+      <input type="file" class="form-control" id="image3" aria-describedby="emailHelp" name="image3">
+    </div>
+    <div class="mb-3">
+      <label for="exampleImage4" class="form-label">Image4</label>
+      <input type="file" class="form-control" id="image4" aria-describedby="emailHelp" name="image4">
+    </div>
+    <div class="mb-3">
+      <label for="exampleImage5" class="form-label">Image5</label>
+      <input type="file" class="form-control" id="image5" aria-describedby="emailHelp" name="image5">
+    </div>
+    <button type="submit" class="btn btn-success" id="submit-btn">Submit</button>
+  </form>
   `;
-
-  
   document.getElementById('title').setAttribute('value', `${post.title}`);
-  document.getElementById('description').setAttribute('value', `${post.description}`);
   const form= document.getElementById('addForm');
   form.addEventListener('submit',function(event)
 {

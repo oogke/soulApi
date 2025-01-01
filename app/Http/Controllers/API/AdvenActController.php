@@ -104,7 +104,7 @@ return $this->sendResponse($advenAct,"Data inserted Successfully");
      */
     public function show(Request $request)
     {
-        $query=Cafe::query();
+        $query=AdvenAct::query();
        $advenactname=$request->query("name");
        $district=$request->query("district");
        $location=$request->query("location");
@@ -219,9 +219,7 @@ if ($advenactUpdate > 0) {
 } else {
     return $this->sendError( "No changes were made",[],402);
 }
-
-
-     
+ 
     }
 
     /**
