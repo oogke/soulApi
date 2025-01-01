@@ -137,9 +137,9 @@ let tableData=`
                     <td>${n++}</td>
                     <td>${category.category}</td>
                   
-                    <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${district.id}">view</a></td>
-                    <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${district.id}">Edit</a></td>
-                    <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${district.id}">Delete</a></td>
+                    <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${category.id}">view</a></td>
+                    <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${category.id}">Edit</a></td>
+                    <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${category.id}">Delete</a></td>
                 </tr>`;   
             }
             tableData+=`</tbody>

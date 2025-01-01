@@ -50,14 +50,12 @@ class AdvenActController extends BaseController
         {
             return $this->sendError("Validation Error" ,$validate->errors()->all(),402);
         }
-
 //image
 $image1=$request->image1;
 $image2=$request->image2;
 $image3=$request->image3;
 $image4=$request->image4;
 $image5=$request->image5;
-
 $ext1=$image1->getClientOriginalExtension();
 $ext2=$image2->getClientOriginalExtension();
 $ext3=$image3->getClientOriginalExtension();

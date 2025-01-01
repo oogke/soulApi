@@ -109,7 +109,7 @@ margin-top: 20px;
         {
             const token=localStorage.getItem("token");
             const tableDiv = document.getElementById('table-div');
-fetch('/api/districts',{
+fetch('/api/guides',{
     method: "GET",
     headers:
     {

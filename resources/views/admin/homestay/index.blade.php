@@ -154,11 +154,11 @@ let tableData=`
       <td>${homestay.phone}</td>
       <td>${homestay.email}</td>
       <td>${homestay.website}</td>
-      <td><img src="uploads/${homestay.image1}" alt="" width="150px" height="150px"></td>
-    <td><img src="uploads/${homestay.image2}" alt="" width="150px" height="150px"></td>
-    <td><img src="uploads/${homestay.image3}" alt="" width="150px" height="150px"></td>
-    <td><img src="uploads/${homestay.image4}" alt="" width="150px" height="150px"></td>
-    <td><img src="uploads/${homestay.image5}" alt="" width="150px" height="150px" ></td>
+      <td><img src="uploads/homestay/${homestay.image1}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/homestay/${homestay.image2}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/homestay/${homestay.image3}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/homestay/${homestay.image4}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/homestay/${homestay.image5}" alt="" width="150px" height="150px" ></td>
       <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${homestay.id}">view</a></td>
       <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${homestay.id}">Delete</a></td>
       <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${homestay.id}">Update</a></td>

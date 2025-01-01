@@ -84,7 +84,7 @@ Are you sure you want to delete?
 <!-- delete Modal -->
    
   <!-- update Modal -->
-  <div class="modal fade" id="updatemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  <div class="modal fade" id="" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="updateLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -148,6 +148,7 @@ Are you sure you want to delete?
 {
     const tableDiv=document.getElementById("tableDiv");
     const advenacts=data.data;
+  
     let n=1;
     advenacts.forEach(advenact => {
         tableContent+=`
@@ -170,12 +171,14 @@ Are you sure you want to delete?
     <td>${advenact.email}</td>
     <td>${advenact.phone}</td>
     <td>${advenact.website}</td>
+  
     <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${advenact.id}">view</a></td>
       <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${advenact.id}">Delete</a></td>
-      <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${advenact.id}">Update</a></td>
+      <td><a href="updateAdventureActs/${advenact.id}" id="edit-btn" class="btn btn-warning"  data-bs-postid="${advenact.id}">Update</a></td>
     </tr>`;
 
-});
+}); 
+ // data-bs-toggle="modal" data-bs-target="#updatemodal"
 tableContent+=`</tbody>
 </table>`;
 tableDiv.innerHTML=tableContent;

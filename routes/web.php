@@ -45,6 +45,6 @@ Route::view( '/updateEvents','admin.event.update')->name('updateEvents');
 Route::view( '/updateGuides','admin.guide.update')->name('updateGuides');
 Route::view( '/updateVehicleHub','admin.vehicleHub.update')->name('updateVehicleHub');
 Route::view( '/createCategories','admin.category.update')->name('updateCategories');
-Route::view( '/updateAdventureActs','admin.advenAct.update')->name('updateAdventureActs');
+Route::view( '/updateAdventureActs/{advenactid}','admin.advenAct.update')->name('updateAdventureActs');
 Route::view( '/updateUsers','admin.user.update')->name('updateUsers');
 Route::view( '/updateHomestay','admin.homestay.update')->name('updateHomestay');
