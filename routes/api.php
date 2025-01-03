@@ -46,4 +46,6 @@ Route::get('/guide',[GuideController::class,'show']);
 Route::get('/event',[EventController::class,'show']);
 Route::get('/vehiclehub',[VehicleHubController::class,'show']);
 
+
 });
+Route::get('/updateplace/{placeid}',[PlaceController::class,'updatepage'])->name('updateplaceController');

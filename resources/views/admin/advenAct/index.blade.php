@@ -29,6 +29,10 @@
            margin-bottom: 20px;
         
         }
+#addForm{
+  display: flex;
+  flex-direction: column;
+}
 
     </style>
 </head>
@@ -84,7 +88,7 @@ Are you sure you want to delete?
 <!-- delete Modal -->
    
   <!-- update Modal -->
-  <div class="modal fade" id="" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  <div class="modal fade" id="updatemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="updateLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -148,7 +152,6 @@ Are you sure you want to delete?
 {
     const tableDiv=document.getElementById("tableDiv");
     const advenacts=data.data;
-  
     let n=1;
     advenacts.forEach(advenact => {
         tableContent+=`
@@ -174,11 +177,10 @@ Are you sure you want to delete?
   
     <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${advenact.id}">view</a></td>
       <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${advenact.id}">Delete</a></td>
-      <td><a href="updateAdventureActs/${advenact.id}" id="edit-btn" class="btn btn-warning"  data-bs-postid="${advenact.id}">Update</a></td>
+      <td><a href="" id="edit-btn" class="btn btn-warning"  data-bs-postid="${advenact.id}" data-bs-toggle="modal" data-bs-target="#updatemodal">Update</a></td>
     </tr>`;
 
 }); 
- // data-bs-toggle="modal" data-bs-target="#updatemodal"
 tableContent+=`</tbody>
 </table>`;
 tableDiv.innerHTML=tableContent;
@@ -206,6 +208,7 @@ tableDiv.innerHTML=tableContent;
                 }
                 ).then(data => {
                     const advenact = data.data[0];
+                    console.log(advenact.requirements);
                     
                    const modalBody = document.querySelector('#singlePostModal .modal-body');
                    modalBody.innerHTML="";
@@ -215,13 +218,21 @@ tableDiv.innerHTML=tableContent;
                     <b>Description:</b> ${advenact.description}<br>
                     <b>Price:</b> ${advenact.price}<br>
                     <b>Duration:</b> ${advenact.duration}<br>
-                    <b>Requirements:</b> ${advenact.requirements}<br>
+                    <b>Requirements:</b>`;
+
+                   
+                let requirements = JSON.parse(advenact.requirements);
+
+
+modalBody.innerHTML+=`Age should be ${requirements.age} `;
+modalBody.innerHTML+=`
+                  <br>  
                    <img width="150px" height="150px" src="uploads/advenact/${advenact.image1}" />
                    <img width="150px" height="150px" src="uploads/advenact/${advenact.image2}" />
                    <img width="150px" height="150px" src="uploads/advenact/${advenact.image3}" />
                    <img width="150px" height="150px" src="uploads/advenact/${advenact.image4}" />
                    <img width="150px" height="150px" src="uploads/advenact/${advenact.image5}" />
-                    <b>is saesonal?:</b> ${advenact.is_seasonal}<br>
+                    <b>is seasonal?:</b> ${advenact.is_seasonal}<br>
                     <b>Best season:</b> ${advenact.best_season}<br>
                     <b>location:</b> ${advenact.location}<br>
                     <b>Email:</b> ${advenact.email}<br>
@@ -279,7 +290,7 @@ event.preventDefault();
                 var updatebutton = event.relatedTarget;
                 var postid = updatebutton.getAttribute('data-bs-postid');
                 const token = localStorage.getItem('token');
-                fetch(`/api/advenact/${postid}`, {
+                fetch(`/api/advenact?id=${postid}`, {
                     method: "GET",
                     headers:
                     {
@@ -289,11 +300,13 @@ event.preventDefault();
                 }).then(response => {
 
                     return response.json();
+                    // console.log(response);
                 }
-                ).then(data => {
+                )
+                .then(data => {
                   
-                    const advenact = data.data;
-                   
+                    const advenact = data.data[0];
+                   console.log(advenact);
                    const modalBody = document.querySelector('#updatemodal .modal-body');
                    modalBody.innerHTML="";
   modalBody.innerHTML= `
@@ -305,37 +318,38 @@ event.preventDefault();
 
     <div class="mb-3">
       <label for="exampleInputName" class="form-label">Name</label>
-      <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" name="name">
+      <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp" name="name" value="${advenact.name}">
     </div>
     <div class="mb-3">
       <label for="exampleInputDistrict" class="form-label">District</label>
-      <input type="text" class="form-control" id="exampleInputDistrict" aria-describedby="emailHelp" name="district">
+      <input type="text" class="form-control" id="exampleInputDistrict" aria-describedby="emailHelp" name="district" value="${advenact.district}">
     </div>
     <div class="mb-3">
       <label for="exampleInputDescription" class="form-label">Description</label>
       <input type="text" class="form-control" id="exampleInputDescription" aria-describedby="emailHelp"
-        name="description">
+        name="description" value="${advenact.description}">
     </div>
     <div class="mb-3">
       <label for="exampleInputLocation" class="form-label">Location</label>
-      <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp" name="location">
+      <input type="text" class="form-control" id="exampleInputLocation" aria-describedby="emailHelp" name="location" value="${advenact.location}">
     </div>
     <div class="mb-3">
       <label for="exampleInputPhone" class="form-label">Phone</label>
-      <input type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp" name="phone">
+      <input type="text" class="form-control" id="exampleInputPhone" aria-describedby="emailHelp" name="phone" value="${advenact.phone}">
     </div>
     <div class="mb-3">
       <label for="exampleInputPrice" class="form-label">Price</label>
-      <input type="text" class="form-control" id="exampleInputPrice" aria-describedby="emailHelp" name="price">
+      <input type="text" class="form-control" id="exampleInputPrice" aria-describedby="emailHelp" name="price" value="${advenact.price}">
     </div>
     <div class="mb-3">
       <label for="exampleInputDuration" class="form-label">Duration</label>
-      <input type="text" class="form-control" id="exampleInputDuration" aria-describedby="emailHelp" name="duration">
+      <input type="text" class="form-control" id="exampleInputDuration" aria-describedby="emailHelp" name="duration" value="${advenact.duration}">
     </div>
     <div class="mb-3">
-      <label for="exampleInputRequirements" class="form-label">Requirements</label><i class="fa-solid fa-circle-plus"
-        id="addrequirements"></i>
-      <div id="requirements">
+      <label for="exampleInputRequirements" class="form-label"  data-bs-toggle="tooltip" data-bs-placement="top" title="${advenact.requirements}">Requirements</label>
+       <div id="requirements">
+       
+
       </div>
     </div>
     <div class="mb-3">
@@ -403,7 +417,7 @@ if(!document.getElementById('image').files[0]=="")
     const imageValue= document.getElementById('image').files[0];
     formData.append('image',imageValue); 
 }
-fetch(`/api/posts/${postid}`,{
+fetch(`/api/advenacts/${postid}`,{
     method: "POST",
     headers:{
             'Authorization': `Bearer ${token}`,
@@ -424,7 +438,8 @@ fetch(`/api/posts/${postid}`,{
                 });
 
 });
-}).catch(err => {
+})
+.catch(err => {
                     console.log(err);
                 }
             );
@@ -432,7 +447,7 @@ fetch(`/api/posts/${postid}`,{
     }
 
      //update modal
-
+              
 
   loadData();
     </script>

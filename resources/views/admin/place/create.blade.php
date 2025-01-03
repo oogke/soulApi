@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="placeid" content="{{ $id}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/c5a4938a4c.js" crossorigin="anonymous"></script>  
 
@@ -60,11 +61,7 @@
    
     
   </div>
-   <!-- <div class="mb-3">
-    <label for="exampleImages" class="form-label">Images</label><i class="fa-regular fa-images" id="addImageInput"></i>
-    <div  id="imageinput">
-    <input type="file" class="form-control mb-3" id="exampleImages" aria-describedby="emailHelp" name="image[]" multiple> 
-    </div> -->
+   
     <div class="mb-3">
     <label for="exampleImage1" class="form-label">Image1</label>
     <input type="file" class="form-control" id="exampleImage1" aria-describedby="emailHelp" name="image1">
@@ -90,13 +87,12 @@
 </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script>
-    
-
+    const placeid=document.querySelector('meta[name="placeid"]').content;
+    console.log(placeid);
       let categoryData=` <h4>Category</h4>`;
       const categoryDiv= document.getElementById("categoryCheckbox");
       const submitBtn= document.getElementById("submitBtn");
       const token =localStorage.getItem('token');
-      console.log(token);
       function loadData()
       {
         fetch('/api/category',{
@@ -135,16 +131,6 @@ formData.append("image3", document.getElementById("exampleImage3").files[0]);
 formData.append("image4", document.getElementById("exampleImage4").files[0]);
 formData.append("image5", document.getElementById("exampleImage5").files[0]);
 const formData= new FormData();
-// if (files.length === 0) {
-//     alert('No images selected!');
-//     return; // Prevent form submission
-// }
-
-// for (let i = 0; i < files.length; i++) {
-//         formData.append('images[]', files[i]); 
-//     }
-
-
 for(input of checkedBoxArray){
   formData.append("category[]",input);
 }
@@ -154,7 +140,7 @@ formData.append("location",locationValue);
 formData.append("district",DistrictValue);
 console.log(formData);
 
-fetch('/api/places',{
+fetch(`/api/places/${placeid}`,{
   method:"POST",
   headers:{
     "Authorization":`Bearer ${token}`,

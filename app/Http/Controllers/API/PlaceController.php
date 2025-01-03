@@ -133,6 +133,13 @@ $query->whereJsonContains('category',$category);
     /**
      * Update the specified resource in storage.
      */
+    public function updatepage(string $id)
+    {
+    
+    
+     $place= Place::where('id',$id)->first();
+     return view('admin.place.update', ['place' => $place]);
+    }
     public function update(Request $request, string $id)
     {
         $validatePlace=Validator::make($request->all(),[
@@ -170,7 +177,7 @@ unlink($oldfile);
             $img=$request->$imgkey;
             $ext=$img->getClientOriginalExtension();
             $imagename=time().'_'.uniqid().'.'.$ext;
-            $img->move(public_path('uploads/cafe/').$imagename);
+            $img->move(public_path('uploads/places/'),$imagename);
 $images[$imgkey]=$imagename;
         }
     }
@@ -182,7 +189,16 @@ $images[$imgkey]=$imagename;
 //image
 $placeUpdate=Place::where('id',$id)->update([
 
-
+'name' => $request->name,
+'description'=> $request->description,
+'location' => $request->location,
+'category'=> json_encode($request->category),
+'district'=> $request->district,
+'image1'=> $images['image1'],
+'image2'=>$images['image2'],
+'image3'=>$images['image3'],
+'image4'=>$images['image4'],
+'image5'=>$images['image5'],
 
 ]);
 $place=Place::where('id',$id)->first();

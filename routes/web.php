@@ -37,7 +37,7 @@ Route::view( '/createUsers','admin.user.create')->name('createUsers');
 Route::view( '/createHomestay','admin.homestay.create')->name('createHomestay');
 
 Route::view( '/updateDistricts','admin.district.update')->name('updateDistricts');
-Route::view( '/updatePlaces','admin.place.update')->name('updatePlaces');
+Route::view( '/updatePlaces', 'admin.place.update')->name('updatePlaces');
 Route::view( '/updateHotels','admin.hotel.update')->name('updateHotels');
 Route::view( '/updateRestaurants','admin.restaurant.update')->name('updateRestaurants');
 Route::view( '/updateCafes','admin.cafe.update')->name('updateCafes');

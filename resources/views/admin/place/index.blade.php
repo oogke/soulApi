@@ -49,7 +49,7 @@ margin-top: 20px;
     <div class="table-div" id="table-div">
     </div>
 
-    <!-- Modal -->
+    <!-- view Modal -->
     <div class="modal fade" id="singlePostModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="singlePostLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -67,7 +67,10 @@ margin-top: 20px;
             </div>
         </div>
     </div>
+    <!-- view Modal -->
    
+
+    <!-- Delete Modal -->
     <div class="modal fade" id="DeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -85,8 +88,10 @@ margin-top: 20px;
     </div>
   </div>
 </div>
+    <!-- Delete Modal -->
+
    
-  <!-- Modal -->
+  <!--update Modal -->
   <div class="modal fade" id="updatemodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="updateLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -103,13 +108,17 @@ margin-top: 20px;
             </div>
         </div>
     </div>
+      <!--update Modal -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script>
+
+        //view all data 
         function loadData()
         {
             const token=localStorage.getItem("token");
             const tableDiv = document.getElementById('table-div');
-fetch('/api/districts',{
+fetch('/api/places',{
     method: "GET",
     headers:
     {
@@ -122,9 +131,14 @@ let tableData=`
             <thead>
                 <tr>
                     <th scope="col">S.N</th>
-                    <th scope="col">District</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Province</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">image1</th>
+                    <th scope="col">image2</th>
+                    <th scope="col">image3</th>
+                    <th scope="col">image4</th>
+                    <th scope="col">image5</th>
                     <th scope="col">view</th>
                     <th scope="col">update</th>
                     <th scope="col">delete</th>
@@ -133,16 +147,22 @@ let tableData=`
             <tbody id="TaskTableBody">`;
 
             let n = 1;
-            for( var district of data.data)
+            for( var place of data.data)
             {
                 tableData+=` <tr>
                     <td>${n++}</td>
-                    <td>${district.name}</td>
-                    <td>${district.description}</td>
-                    <td>${district.province}</td>
-                    <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${district.id}">view</a></td>
-                    <td><a href="" id="edit-btn" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updatemodal" data-bs-postid="${district.id}">Edit</a></td>
-                    <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${district.id}">Delete</a></td>
+                    <td>${place.name}</td>
+                    <td>${place.description}</td>
+                    <td>${place.category}</td>
+    <td><img src="uploads/places/${place.image1}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/places/${place.image2}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/places/${place.image3}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/places/${place.image4}" alt="" width="150px" height="150px"></td>
+    <td><img src="uploads/places/${place.image5}" alt="" width="150px" height="150px"></td>
+                    
+                    <td><a href="" id="view-btn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#singlePostModal" data-bs-postid="${place.id}">view</a></td>
+                    <td><a href="/api/updateplace/${place.id}" id="edit-btn" class="btn btn-warning"  >Edit</a></td>
+                    <td><a href="" id="delete-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal" data-bs-postid="${place.id}">Delete</a></td>
                 </tr>`;   
             }
             tableData+=`</tbody>
@@ -152,6 +172,71 @@ let tableData=`
 );
         }
         loadData();
+//view all data 
+
+
+//view single data
+const singleModal = document.getElementById('singlePostModal');
+        if (singleModal) {
+            singleModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget;
+                var postid = button.getAttribute('data-bs-postid');
+                const token = localStorage.getItem('token');
+                fetch(`/api/place?id=${postid}`, {
+                    method: "GET",
+                    headers:
+                    {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                }).then(response => {
+                    return response.json();
+                }
+                ).then(data => {
+                    const place = data.data[0];
+                  
+
+
+                   const modalBody = document.querySelector('#singlePostModal .modal-body');
+                   modalBody.innerHTML="";
+                   modalBody.innerHTML= `
+                 <b>Name:</b> ${place.name} <br>
+                 <b>Description:</b> ${place.description}<br>
+                  <b>Category:</b> `;
+            
+let categories = '';
+for (let item of JSON.parse(place.category)) {
+    categories += `<span>${item}</span><br>`;
+}
+
+modalBody.innerHTML += categories; 
+modalBody.innerHTML += 
+                  `<br>
+                  <h5>Images</h5>
+                    <img width="150px" height="150px" src="uploads/advenact/${place.image1}" />
+                    <img width="150px" height="150px" src="uploads/advenact/${place.image2}" />
+                    <img width="150px" height="150px" src="uploads/advenact/${place.image3}" />
+                   <img width="150px" height="150px" src="uploads/advenact/${place.image4}" />
+                   <img width="150px" height="150px" src="uploads/advenact/${place.image5}" /><br>
+                    <b>location:</b> ${place.location}<br>   
+              `;
+                }
+             )
+            .catch(err => {
+                    console.log(err);
+                }
+            );
+        });
+    }
+
+
+//view single data
+
+
+
+
+
+
     </script>
 </body>
 </html>
