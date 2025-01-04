@@ -171,7 +171,7 @@ let tableData=`
 }
 );
         }
-        loadData();
+     
 //view all data 
 
 
@@ -201,24 +201,24 @@ const singleModal = document.getElementById('singlePostModal');
                    modalBody.innerHTML="";
                    modalBody.innerHTML= `
                  <b>Name:</b> ${place.name} <br>
-                 <b>Description:</b> ${place.description}<br>
+                 <b>Description:</b> ${place.description}<br> 
+                 <b>location:</b> ${place.location}<br> 
                   <b>Category:</b> `;
             
 let categories = '';
 for (let item of JSON.parse(place.category)) {
     categories += `<span>${item}</span><br>`;
 }
-
 modalBody.innerHTML += categories; 
 modalBody.innerHTML += 
                   `<br>
                   <h5>Images</h5>
-                    <img width="150px" height="150px" src="uploads/advenact/${place.image1}" />
-                    <img width="150px" height="150px" src="uploads/advenact/${place.image2}" />
-                    <img width="150px" height="150px" src="uploads/advenact/${place.image3}" />
-                   <img width="150px" height="150px" src="uploads/advenact/${place.image4}" />
-                   <img width="150px" height="150px" src="uploads/advenact/${place.image5}" /><br>
-                    <b>location:</b> ${place.location}<br>   
+                    <img width="150px" height="150px" src="uploads/places/${place.image1}" />
+                    <img width="150px" height="150px" src="uploads/places/${place.image2}" />
+                    <img width="150px" height="150px" src="uploads/places/${place.image3}" />
+                   <img width="150px" height="150px" src="uploads/places/${place.image4}" />
+                   <img width="150px" height="150px" src="uploads/places/${place.image5}" /><br>
+                     
               `;
                 }
              )
@@ -231,11 +231,42 @@ modalBody.innerHTML +=
 
 
 //view single data
+//delete model
+
+const deleteModal = document.getElementById('DeleteModal'); 
+     if (deleteModal) {
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+                var Deletebutton = event.relatedTarget;
+                var postid = Deletebutton.getAttribute('data-bs-postid');
+                const token = localStorage.getItem('token');
+                var deleteBtn= document.getElementById("deleteBtn");
+                deleteBtn.addEventListener('click',function(event)
+            {
+event.preventDefault();
+ fetch(`/api/places/${postid}`,{
+                    method: "DELETE",
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                    }
+                }).then(response=>
+                {
+                    return response.json();
+                }
+                ).then(data=>{
+                    console.log(data);
+                    if(data.message=="successfully deleted")
+                {
+                  window.location.href="/";
+                }
+                 });
+            })
+                
+             });
+     }
+//delete model
 
 
-
-
-
+   loadData();
 
     </script>
 </body>
