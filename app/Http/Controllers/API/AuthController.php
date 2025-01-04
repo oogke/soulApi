@@ -20,10 +20,7 @@ $verifcode=rand(100000,999999);
 $footer="Please Do not share this email";
 Mail::to($toEmail)->send(new EmailVerification($fname,$msg,$verifcode,$footer));
 return $this->sendResponse($verifcode,"The email hasbeen sent");
-    }
-
-
-    
+    }    
     public function signup(Request $request)
     {
         $validateData = Validator::make(

@@ -115,8 +115,7 @@
                 const token = data.token;
                 localStorage.setItem('token', token);
                 if (localStorage.getItem('token')) {
-                   
-        window.location.href = "/";  
+window.location.href="/";    
     } else {
         console.log("User is not logged in.");
     }
@@ -124,8 +123,6 @@
                 console.log(err);
             }
             );
-
-
         });
 
     </script>

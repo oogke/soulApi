@@ -9,6 +9,7 @@ use App\Http\Controllers\API\EventController;
 use App\Http\Controllers\API\GuideController;
 use App\Http\Controllers\API\HomestayController;
 use App\Http\Controllers\API\HotelController;
+use App\Http\Controllers\API\notifController;
 use App\Http\Controllers\API\PlaceController;
 use App\Http\Controllers\API\RestaurantController;
 use App\Http\Controllers\API\VehicleHubController;
@@ -49,3 +50,4 @@ Route::get('/vehiclehub',[VehicleHubController::class,'show']);
 
 });
 Route::get('/updateplace/{placeid}',[PlaceController::class,'updatepage'])->name('updateplaceController');
+Route::post('/notifPermission',[notifController::class,'notifpermission']);
