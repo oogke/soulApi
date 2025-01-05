@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmailverifyController;
+use App\Http\Controllers\PushnotificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -48,3 +49,7 @@ Route::view( '/createCategories','admin.category.update')->name('updateCategorie
 Route::view( '/updateAdventureActs/{advenactid}','admin.advenAct.update')->name('updateAdventureActs');
 Route::view( '/updateUsers','admin.user.update')->name('updateUsers');
 Route::view( '/updateHomestay','admin.homestay.update')->name('updateHomestay');
+
+
+Route::post('/saveSubscription',[PushnotificationController::class,'saveSubscription']);
+Route::post('/send-push-notification',[PushnotificationController::class,'sendNotification']);

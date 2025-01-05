@@ -69,6 +69,7 @@ return $this->sendResponse($verifcode,"The email hasbeen sent");
                 [
                     'status' => true,
                     'message' => 'Login successful',
+                    'data' => $authuser,
                     'token' => $authuser->createToken("api_token")->plainTextToken,
                     'token_type' => 'bearer'
                 ],

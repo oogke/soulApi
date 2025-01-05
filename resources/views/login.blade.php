@@ -112,13 +112,21 @@
             }).then(response => {
                 return response.json();
             }).then(data => {
-                const token = data.token;
+               if(data.status==true)
+               {
+                      const token = data.token;
                 localStorage.setItem('token', token);
                 if (localStorage.getItem('token')) {
+ localStorage.setItem('isLoggedIn', 'true');
 window.location.href="/";    
     } else {
         console.log("User is not logged in.");
     }
+               }
+               else{
+                alert(data.message);
+               }
+          
             }).catch(err => {
                 console.log(err);
             }

@@ -1,0 +1,19 @@
+self.addEventListener("push",(event)=>
+{
+const notification=event.data.json();
+event.waitUntil(
+    self.registration.showNotification(notification.title,
+        {
+            body:notification.body,
+data:{
+    url:notification.url
+}
+        })
+)
+});
+self.addEventListener("notificationclick",(event)=>
+{
+    event.waitUntil(
+        clients.openwindow(event.notification.data.url)
+    )
+});

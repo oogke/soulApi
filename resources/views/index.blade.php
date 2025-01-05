@@ -3,11 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Jaro:opsz@6..72&family=Pacifico&family=Yuji+Mai&display=swap" rel="stylesheet">  <title>Home Page</title>
-    <style>
+<script src="https://kit.fontawesome.com/c5a4938a4c.js" crossorigin="anonymous"></script>  
+
+   <style>
         *
         {
             margin: 0;
@@ -16,7 +19,8 @@
         }
         .navbar{
             height: 90px;
-            background-color: #E4DFDA;
+            /* background-color: #E4DFDA; */
+            width: 100%;
          
         }
         #logo
@@ -41,11 +45,14 @@
      /* font-family: "Jaro", serif; */
      /* font-family: "Pacifico", cursive; */
      font-family: "Hachi Maru Pop", serif;
+     font-size: 17px;
    
 }
 #search-bar{
     font-family: "Hachi Maru Pop", serif; 
-    width: 280px;
+    width: 350px;
+    height: 50px;
+   margin-left: 30px;
 }
 #search-input::placeholder
 {
@@ -115,7 +122,20 @@ margin: 30px 0 10px 30px;
       height: 200px;
       border: 1px solid black;
      }
-     
+     #sendNotification
+     {
+      width: 150px;
+     border: 0.1px solid black;
+     border-radius: 10px;
+  display: inline-block;
+     font-family: "Hachi Maru Pop", serif;
+   margin-left: 20px;
+
+     }
+
+     #loggedinBtn{
+      /* display: none; */
+     }
     </style>
 </head>
 <body>
@@ -126,65 +146,67 @@ margin: 30px 0 10px 30px;
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
+          <a class="nav-link active border-bottom" aria-current="page" href="{{route('home')}}">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{route('managePlaces')}}">Places</a>
+       <li class="nav-item">
+          <a class="nav-link border-bottom" href="{{route('managePlaces')}}">Places</a>
         </li>
        
         <li class="nav-item">
-          <a class="nav-link" href="{{route('manageAdventureActs')}}">Advenact</a>
+          <a class="nav-link border-bottom" href="{{route('manageAdventureActs')}}">Advenact</a>
         </li>   
    
-   
-        <li class="nav-item">
-          <a class="nav-link" href="{{route('manageVehicleHub')}}">Vehiclehub</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{route('manageRestaurants')}}">Restaurants</a>
-        </li>
-       
-       
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle border-bottom" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Available Services
           </a>
           <ul class="dropdown-menu">
-
-
      <li class="nav-item">
-          <a class="nav-link" href="{{route('manageHotels')}}">Hotels</a>
+          <a class="nav-link border-bottom" href="{{route('manageHotels')}}">Hotels</a>
         </li>
-     
-
-              <li class="nav-item">
-          <a class="nav-link" href="{{route('manageEvents')}}">Events</a>
+              <li class="nav-item ">
+          <a class="nav-link border-bottom" href="{{route('manageEvents')}}">Events</a>
         </li> 
-     <li class="nav-item">
-          <a class="nav-link" href="{{route('manageGuides')}}">Guides</a>
+        <li class="nav-item">
+          <a class="nav-link border-bottom" href="{{route('manageVehicleHub')}}">Vehiclehub</a>
         </li>
-          <li class="nav-item">
-          <a class="nav-link" href="{{route('manageHomestay')}}">Homestay</a>
+        <li class="nav-item">
+          <a class="nav-link border-bottom" href="{{route('manageRestaurants')}}">Restaurants</a>
+          </li>
+     <li class="nav-item ">
+          <a class="nav-link border-bottom" href="{{route('manageGuides')}}">Guides</a>
+        </li>
+          <li class="nav-item ">
+          <a class="nav-link border-bottom" href="{{route('manageHomestay')}}">Homestay</a>
         </li> 
  <li class="nav-item">
-          <a class="nav-link" href="{{route('manageCafes')}}">Cafe</a>
+          <a class="nav-link border-bottom" href="{{route('manageCafes')}}">Cafe</a>
         </li>
            <li class="nav-item">
-          <a class="nav-link" href="{{route('manageCategories')}}">Category</a>
+          <a class="nav-link border-bottom" href="{{route('manageCategories')}}">Category</a>
         </li>
             <li><a class="dropdown-item border-bottom" href="#">Currency Conversion</a></li>
             <li><a class="dropdown-item border-bottom" href="#">Map</a></li> 
             <li><a class="dropdown-item border-bottom" href="#">Weather</a></li>
             <li><a class="dropdown-item border-bottom" href="{{ route('loginView')}}">login</a></li>
             <li><a class="dropdown-item border-bottom" href="{{ route('registerView')}}">register</a></li>
-            <li><a class="dropdown-item" href="">Dashboard</a></li> 
+            <li><a class="dropdown-item border-bottom" href="">Dashboard</a></li> 
             <li class="nav-item">
           <a class="nav-link" href="{{route('manageDistricts')}}">District</a>
-        </li>
-          </ul>
-        </li>
-       
-      </ul>
+        </li></ul>
+     
+       <li class="nav-item dropdown" id="loggedinBtn">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fa-solid fa-user"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item border-bottom" href="#">Dashboard</a></li>
+          <li><a class="dropdown-item border-bottom" href="#">Log Out</a></li>
+  </ul>
+         </li>
+  <button id="sendNotification"> 
+        Send Notification
+       </button>
       <form class="d-flex" role="search" id="search-bar">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
         <button class="btn btn-outline-dark" type="submit" id="search-btn">Search</button>
@@ -195,13 +217,13 @@ margin: 30px 0 10px 30px;
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="{{asset('images/hote19.jpg')}}" class="d-block w-100 img-cover" alt="...">
+      <img src="{{asset('images/veh9.jpg')}}" class="d-block w-100 img-cover" alt="...">
     </div>
     <div class="carousel-item">
       <img src="{{asset('images/vah3.jpg')}}" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="{{asset('images/veh9.jpg')}}" class="d-block w-100" alt="...">
+      <img src="{{asset('images/hote19.jpg')}}" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
       <img src="{{asset('images/veh6.jpg')}}" class="d-block w-100" alt="...">
@@ -424,5 +446,103 @@ margin: 30px 0 10px 30px;
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
    
+   <script>
+    // if (Notification.permission === 'granted') {
+    //             new Notification("Notifications enabled for this account!");
+    //         } else {
+    //             console.log("Permission denied.");
+    //         }
+
+    //register the service wordker
+     navigator.serviceWorker.register("{{URL::asset('serviceWorker.js')}}");
+     let csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    const sendNotificationBtn = document.getElementById("sendNotification");
+    sendNotificationBtn.addEventListener("click",function(event)
+  {
+    event.preventDefault();
+    Notification.requestPermission().then((permission)=>
+{
+    if(permission==="granted")
+{
+    navigator.serviceWorker.ready.then((sw)=>
+{
+
+    sw.pushManager.subscribe({
+        userVisibleOnly:true,
+        applicationServerKey: "BOmVmyyKSWyCgGno4I7lMzghrLPUmXSSyyG2qwflnMGCUpgio4RC5En5jPhVZI2gOLAKv18JvVUkuGIq7K2NAPQ"  
+        }).then((subscription)=>
+    {
+      console.log(subscription);
+     saveSub(JSON.stringify(subscription));
+    })
+});
+
+
+
+
+//saveSub
+function saveSub(sub)
+ {
+    fetch('/saveSubscription',{
+        method: "POST",
+        headers:
+        {
+          'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': csrfToken
+        },
+        body:sub,
+
+    }).then(response=>
+    {
+return response.json();
+   
+    }
+     )
+    .then(data=>{
+      console.log(data);
+    });
+ }
+//saveSub
+
+const obj={
+  title:"Notification",
+  description:"This is notification",
+  url:"https://www.google.com/"
+}
+fetch("/send-push-notification",{
+    method:"POST",
+    headers:{
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': csrfToken
+    },
+    body:JSON.stringify(obj)
+  }).then(response=>
+  {
+    return response.json();
+  }
+  ).then(data=>{
+    console.log(data);
+  }).catch(err=>
+  {
+console.log(err);
+  }
+  );
+
+}
+});
+  });
+
+// if(localStorage.getItem("isLoggedIn")==true)
+// {
+//  const loggedinBtn=document.getElementById("loggedinBtn"); 
+//  loggedinBtn.style.display="flex";
+// }
+
+
+
+
+   </script>
 </body>
 </html>
+<!-- {"publicKey":"BOmVmyyKSWyCgGno4I7lMzghrLPUmXSSyyG2qwflnMGCUpgio4RC5En5jPhVZI2gOLAKv18JvVUkuGIq7K2NAPQ","privateKey":"5S_yXFFg_vEoE3Gtuc6RdQ45HsSMCIU3StHOa8vi1Lw"} -->
