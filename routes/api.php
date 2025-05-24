@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register',[AuthController::class,'signup'])->name('register');
-Route::post('/emailverify',action: [AuthController::class,'emailVerify'])->name('registerVerify');
+Route::post('/emailverify', [AuthController::class,'emailVerify'])->name('registerVerify');
 Route::post('/login',[AuthController::class,'login'])->name('login');
 
 Route::middleware('auth:sanctum')->group(function()
